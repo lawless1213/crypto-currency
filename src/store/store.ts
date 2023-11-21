@@ -1,16 +1,14 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import  userReducer  from "./reducers/UserSlice";
-import { PostAPI } from "../services/PostService";
+import { CoinAPI } from "../services/CoinService";
 
 const rootReducer = combineReducers({
-	userReducer,
-	[PostAPI.reducerPath]: PostAPI.reducer
+	[CoinAPI.reducerPath]: CoinAPI.reducer
 })
 
 export const setupStore = () => {
 	return configureStore({
 		reducer: rootReducer,
-		middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(PostAPI.middleware)
+		middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(CoinAPI.middleware)
 	})
 }
 
