@@ -1,9 +1,11 @@
 import CoinsList from './components/CoinsList';
+import PostContainer from './components/PostContainer';
 
 function App() {
   return (
     <div className="App">
-      {/* <CoinsList/> */}
+      <CoinsList/>
+      {/* <PostContainer/> */}
     </div>
     
   );

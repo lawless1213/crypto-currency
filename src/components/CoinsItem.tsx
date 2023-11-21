@@ -8,7 +8,7 @@ interface CoinsItemProps {
 const CoinsItem: FC<CoinsItemProps> = ({coin}) => {
 	return (
 		<div className="coin">
-			{coin.name}. {coin.price}
+			{coin.name}: {coin.price}USDT({coin.change})
 		</div>
 	)
 }

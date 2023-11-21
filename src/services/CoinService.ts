@@ -1,15 +1,15 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
-import { ICoin } from "../models/ICoin";
+import { ApiResponse } from "../models/ICoin";
 
 export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',
 	baseQuery: fetchBaseQuery({baseUrl: 'https://coinranking1.p.rapidapi.com/'}),
 	endpoints: (build) => ({
-		fetchAllCoins: build.query<ICoin[], number>({
+		fetchAllCoins: build.query<ApiResponse, number>({
 			query: (limit: number = 5) => ({
 				url: '/coins',
 				params: {
-					_limit: limit,
+					limit: limit,
 					// referenceCurrencyUuid: 'yhjMzLPhuIDl',
 					// timePeriod: '24h',
 					// 'tiers[0]': '1',
