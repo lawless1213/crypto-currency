@@ -1,7 +1,9 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { CoinAPI } from "../services/CoinService";
+import ThemeModeReducer from "./reducers/themeSlice";
 
 const rootReducer = combineReducers({
+	ThemeModeReducer,
 	[CoinAPI.reducerPath]: CoinAPI.reducer,
 })
 
