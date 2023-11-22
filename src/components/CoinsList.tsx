@@ -6,9 +6,9 @@ import { ICoin } from "../models/ICoin";
 
 const CoinsList = () => {
 	const [limit, setLimit] = useState(5);
-	const { data: ApiResponse, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
+	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
 
-	const coins: ICoin[] | undefined = ApiResponse?.data.coins;
+	const coins: ICoin[] | undefined = dataCoins?.data.coins;
 
 	return (
 		<div>

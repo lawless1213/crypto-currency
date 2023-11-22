@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
-import { ApiResponse } from "../models/ICoin";
+import { ApiResponse } from "../models/IAPIResponses";
 
 export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',
