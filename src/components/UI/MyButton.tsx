@@ -2,14 +2,10 @@ interface Props {
 	classes?: string,
 	text?: string,
 	icon?: JSX.Element,
-	type?: string,
-	colorStyle?: string,
-	form?: string,
-	size?: string,
 }
 
-const MyButton = ({text, icon, type, colorStyle, form, size, classes}: Props) => {
-	const classNames = `button ${colorStyle ?? ''} ${type ?? ''} ${size ?? ''} ${form ?? ''} ${classes ?? ''}`
+const MyButton = ({text, icon, classes}: Props) => {
+	const classNames = `button ${classes}`
 
 	return (
 		<div className={classNames}>
