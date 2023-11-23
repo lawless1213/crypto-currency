@@ -17,7 +17,11 @@ const ButtonsGrid = () => {
 								<div className={s.Block}>
 									{
 										sizes.map(size => 
-											<MyButton text={style ? style : 'default'} colorStyle={style} type={type} size={size} icon={<FaPlus/>}/>
+											<div className={s.formBlock}>
+												<MyButton colorStyle={style} type={type} size={size} icon={<FaPlus/>} classes='compact'/>
+												<MyButton text={style ? style : 'default'} colorStyle={style} type={type} size={size} classes='rounded'/>
+												<MyButton text={style ? style : 'default'} colorStyle={style} type={type} size={size} icon={<FaPlus/>}/>
+											</div>											
 										)
 									}
 								</div>
