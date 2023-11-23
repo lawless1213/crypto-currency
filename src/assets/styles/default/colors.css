@@ -76,10 +76,12 @@
 	--g-color-info-800: #052426;
 }
 
-/* .lightMode {
-
+.lightMode {
+	--g-color-background: var(--g-color-grey-300);
+	--g-color-panel: var(--g-color-grey-100);
 }
 
 .darkMode {
-
-} */
+	--g-color-background: var(--g-color-grey-1000);
+	--g-color-panel: var(--g-color-grey-900);
+}

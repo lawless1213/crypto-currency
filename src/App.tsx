@@ -1,20 +1,16 @@
 import { useAppSelector } from './hooks/redux';
+import { Route, Routes } from 'react-router-dom';
 
-// import CoinsList from './components/CoinsList';
-import ButtonsGrid from './components/Test/ButtonsGrid';
-import LinksGrid from './components/Test/LinksGrid';
-
-// import ThemeToggler from './components/ThemeToggler/ThemeToggler';
+import UI from './pages/UI/UI';
 
 function App() {
 	let { mode } = useAppSelector(state => state.ThemeModeReducer);
 
   return (
     <div className={`App ${mode}Mode`}>
-      {/* <CoinsList/> */}
-      {/* <ThemeToggler/> */}
-      <LinksGrid/>
-      <ButtonsGrid/>
+      <Routes>
+        <Route path='/ui' element={<UI/>}></Route>
+      </Routes>
     </div>
     
   );
