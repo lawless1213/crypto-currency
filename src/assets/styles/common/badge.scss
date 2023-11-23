@@ -1,0 +1,38 @@
+.badge {
+	--badge-color: var(--g-color-light);
+	--badge-bg: var(--g-color-grey-600);
+	--badge-border-color: var(--badge-bg);
+	--badge-border-size: 0px;
+
+	--button-soft-color: var(--g-color-grey-700);
+	--button-soft-bg: var(--g-color-grey-100);
+
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+	padding: 4px;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	color: var(--badge-color);
+	background: var(--badge-bg);
+	border: none;
+	border-radius: 10px;
+
+	span {
+		font-size: 12px;
+	}
+
+	.icon {
+		font-size: 12px;
+
+		svg {
+			display: block;
+		}
+	}
+
+	&.primary {
+		
+	}
+}
