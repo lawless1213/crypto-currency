@@ -1,0 +1,85 @@
+:root {
+	--g-color-light: #ffffff;
+	--g-color-dark: #000000;
+
+	--g-color-grey-100: #EEF0F4;
+	--g-color-grey-200: #DDE1E8;
+	--g-color-grey-300: #CBD3DD;
+	--g-color-grey-400: #BAC4D1;
+	--g-color-grey-500: #A9B5C6;
+	--g-color-grey-600: #7D8FA9;
+	--g-color-grey-700: #586A84;
+	--g-color-grey-800: #3B4758;
+	--g-color-grey-900: #1D232C;
+	--g-color-grey-1000: #161B21;
+	--g-color-grey-1100: #0F1216;
+	--g-color-grey-1200: #07090B;
+
+	--g-color-primary-100: #E5F3FF;
+	--g-color-primary-200: #CBE6FF;
+	--g-color-primary-300: #B1DAFF;
+	--g-color-primary-400: #97CDFF;
+	--g-color-primary-500: #7DC1FF;
+	--g-color-primary-600: #319DFF;
+	--g-color-primary-700: #0077E4;
+	--g-color-primary-800: #005098;
+	--g-color-primary-800: #161B21;
+
+	--g-color-purple-100: #ECD0FD;
+	--g-color-purple-200: #D8A1FA;
+	--g-color-purple-300: #C571F8;
+	--g-color-purple-400: #B142F5;
+	--g-color-purple-500: #9E13F3;
+	--g-color-purple-600: #800AC7;
+	--g-color-purple-700: #600896;
+	--g-color-purple-800: #400564;
+	--g-color-purple-800: #200332;
+
+	--g-color-success-100: #CAFBEC;
+	--g-color-success-200: #95F7D9;
+	--g-color-success-300: #60F3C6;
+	--g-color-success-400: #2BEFB3;
+	--g-color-success-500: #10D096;
+	--g-color-success-600: #0DA678;
+	--g-color-success-700: #0A7D5A;
+	--g-color-success-800: #06533C;
+	--g-color-success-800: #032A1E;
+
+	--g-color-danger-100: #FFE5EC;
+	--g-color-danger-200: #FFCBD9;
+	--g-color-danger-300: #FFB1C7;
+	--g-color-danger-400: #FF97B4;
+	--g-color-danger-500: #FF7DA1;
+	--g-color-danger-600: #FF316A;
+	--g-color-danger-700: #E4003F;
+	--g-color-danger-800: #98002A;
+	--g-color-danger-800: #4C0015;
+
+	--g-color-warning-100: #FFF2DA;
+	--g-color-warning-200: #FFE6B5;
+	--g-color-warning-300: #FFD98F;
+	--g-color-warning-400: #FFCD6A;
+	--g-color-warning-500: #FFC045;
+	--g-color-warning-600: #FFAA04;
+	--g-color-warning-700: #C28100;
+	--g-color-warning-800: #825600;
+	--g-color-warning-800: #412B00;
+
+	--g-color-info-100: #CAF6F9;
+	--g-color-info-200: #95EDF2;
+	--g-color-info-300: #60E4EC;
+	--g-color-info-400: #2CDAE6;
+	--g-color-info-500: #17B5BF;
+	--g-color-info-600: #129199;
+	--g-color-info-700: #0E6D73;
+	--g-color-info-800: #09484C;
+	--g-color-info-800: #052426;
+}
+
+/* .lightMode {
+
+}
+
+.darkMode {
+
+} */

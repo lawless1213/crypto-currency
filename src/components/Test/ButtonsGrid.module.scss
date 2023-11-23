@@ -1,0 +1,20 @@
+.ButtonsGrid {
+	--buttons-grid-space: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--buttons-grid-space);
+	padding: var(--buttons-grid-space);
+
+	.Column	 {
+		display: flex;
+		flex-direction: column;
+		gap: var(--buttons-grid-space);
+		flex-basis: 1 1 140px;
+
+		.Block	 {
+			display: flex;
+			flex-direction: column;
+			gap: var(--buttons-grid-space);
+		}
+	}
+}

@@ -1,12 +1,17 @@
-import CoinsList from './components/CoinsList';
-import ThemeToggler from './components/ThemeToggler/ThemeToggler';
+import { useAppSelector } from './hooks/redux';
 
+// import CoinsList from './components/CoinsList';
+import ButtonsGrid from './components/Test/ButtonsGrid';
+// import ThemeToggler from './components/ThemeToggler/ThemeToggler';
 
 function App() {
+	let { mode } = useAppSelector(state => state.ThemeModeReducer);
+
   return (
-    <div className="App">
+    <div className={`App ${mode}Mode`}>
       {/* <CoinsList/> */}
-      <ThemeToggler/>
+      {/* <ThemeToggler/> */}
+      <ButtonsGrid/>
     </div>
     
   );
