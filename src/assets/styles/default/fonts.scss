@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap');
+
+$fonts: (
+  h1: (fs: 36px, fw: 700),
+  h2: (fs: 24px, fw: 700),
+  h3: (fs: 18px, fw: 700),
+  h4: (fs: 16px, fw: 700),
+  h5: (fs: 14px, fw: 700),
+  h6: (fs: 12px, fw: 700),
+  lead: (fs: 16px, fw: 400),
+  body: (fs: 14px, fw: 400),
+  caption: (fs: 12px, fw: 400),
+  small: (fs: 10px, fw: 400),
+);
+
+@each $font, $keys in $fonts {
+  .t-#{$font} {
+    font-size: map-get($keys, fs);
+		font-weight: map-get($keys, fw);
+  }
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
