@@ -1,0 +1,94 @@
+.link {
+	--link-text-color: var(--g-color-grey-700);
+	--link-hover-color: var(--g-color-grey-900);
+
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+	text-decoration: none;
+	white-space: nowrap;
+	color: var(--link-text-color-state, var(--link-text-color));
+	transition: 0.2s;
+	cursor: pointer;
+
+	span {
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	.icon {
+		font-size: 20px;
+
+		svg {
+			display: block;
+		}
+	}
+
+	&:hover,
+	&:active {
+		--link-text-color-state: var(--link-hover-color);
+	}
+
+	&.primary {
+		--link-text-color: var(--g-color-primary-600);
+		--link-hover-color: var(--g-color-primary-700);
+	}
+
+	&.success {
+		--link-text-color: var(--g-color-success-500);
+		--link-hover-color: var(--g-color-success-700);
+	}
+
+	&.danger {
+		--link-text-color: var(--g-color-danger-600);
+		--link-hover-color: var(--g-color-danger-700);
+	}
+
+	&.warning {
+		--link-text-color: var(--g-color-warning-500);
+		--link-hover-color: var(--g-color-warning-700);
+	}
+
+	&.info {
+		--link-text-color: var(--g-color-info-500);
+		--link-hover-color: var(--g-color-info-700);
+	}
+
+	&.light {
+		--link-text-color: var(--g-color-grey-600);
+		--link-hover-color: var(--g-color-grey-800);
+	}
+
+	&.dark {
+		--link-text-color: var(--g-color-grey-800);
+		--link-hover-color: var(--g-color-grey-900);
+	}
+
+	&.small {
+		span {
+			font-size: 14px;
+			font-weight: 400;
+		}
+	
+		.icon {
+			font-size: 16px;
+		}
+	}
+
+	&.big {
+		span {
+			font-size: 18px;
+		}
+	
+		.icon {
+			font-size: 24px;
+		}
+	}
+
+	&.text_first {
+		.icon {
+			order: 1;
+		}
+	}
+}

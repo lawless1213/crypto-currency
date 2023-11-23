@@ -1,4 +1,4 @@
-import MyButton from "../UI/MyButton/MyButton";
+import MyButton from "../UI/MyButton";
 import s from './ButtonsGrid.module.scss';
 import { FaPlus } from "react-icons/fa6";
 

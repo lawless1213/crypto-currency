@@ -2,6 +2,8 @@ import { useAppSelector } from './hooks/redux';
 
 // import CoinsList from './components/CoinsList';
 import ButtonsGrid from './components/Test/ButtonsGrid';
+import LinksGrid from './components/Test/LinksGrid';
+
 // import ThemeToggler from './components/ThemeToggler/ThemeToggler';
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
     <div className={`App ${mode}Mode`}>
       {/* <CoinsList/> */}
       {/* <ThemeToggler/> */}
+      <LinksGrid/>
       <ButtonsGrid/>
     </div>
     

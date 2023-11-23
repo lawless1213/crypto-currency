@@ -1,0 +1,14 @@
+.LinksGrid {
+	--buttons-grid-space: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	padding: var(--buttons-grid-space);
+	gap: var(--buttons-grid-space);
+
+	.Column	 {
+		display: flex;
+		flex-direction: column;
+		gap: var(--buttons-grid-space);
+		align-items: start;
+	}
+}
