@@ -1,7 +1,8 @@
 @use 'scss-reset/reset';
-@use './default/fonts';
+@use './default/fonts.scss';
 @use './default/colors.css';
-@use './default/default';
+@use './default/default.scss';
+@use './default/scrollbar.scss';
 @use './common/select.scss';
 @use './common/button.scss';
 @use './common/link.scss';
