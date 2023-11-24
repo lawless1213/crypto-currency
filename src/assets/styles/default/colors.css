@@ -78,7 +78,7 @@
 
 .lightMode {
 	--g-color-background: var(--g-color-grey-100);
-	--g-color-panel: var(--g-color-grey-300);
+	--g-color-panel: var(--g-color-grey-200);
 	--g-color-fill: var(--g-color-dark);
 }
 

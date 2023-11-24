@@ -7,20 +7,27 @@ const BadgesGrid = () => {
 	const types = ['', 'soft', 'border'];
 
 	return (
-		<div className={s.BadgesGrid}>
-			{
-				colorStyle.map(style => 
-					<div className={s.Column}>
-						{
-							types.map(type => 
-								<div className={s.Block}>
-									<MyBadge text={style ? style : 'default'} icon={<FaPlus/>} classes={`${style} ${type}`}/>
-								</div>
-							)
-						}
-					</div>
-				)
-			}
+		<div className="panel_section">
+			<div className="header">
+				<div className="t-h2">BADGES</div>
+			</div>
+			<div className="content">
+				<div className={s.BadgesGrid}>
+					{
+						colorStyle.map(style => 
+							<div className={s.Column}>
+								{
+									types.map(type => 
+										<div className={s.Block}>
+											<MyBadge text={style ? style : 'default'} icon={<FaPlus/>} classes={`${style} ${type}`}/>
+										</div>
+									)
+								}
+							</div>
+						)
+					}
+				</div>
+			</div>
 		</div>
 	)
 }

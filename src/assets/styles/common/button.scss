@@ -48,11 +48,7 @@
 		}
 	}
 
-	&:hover {
-		--button-bg: var(--button-hover-bg) !important;
-		--button-text-color: var(--button-hover-color) !important;
-	}
-
+	&:hover,
 	&:active {
 		--button-bg: var(--button-hover-bg) !important;
 		--button-text-color: var(--button-hover-color) !important;
