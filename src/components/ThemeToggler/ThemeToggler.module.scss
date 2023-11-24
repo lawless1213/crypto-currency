@@ -1,7 +1,7 @@
 .TogglerTheme {
 	--toggler-width: 80px;
 	--toggler-height: calc(var(--toggler-width) / 2);
-	--toggler-padding: 5px;
+	--toggler-padding: 2px;
 	--toggler-indicator-size: calc(var(--toggler-height) - 2 * var(--toggler-padding));
 
   position: relative;
