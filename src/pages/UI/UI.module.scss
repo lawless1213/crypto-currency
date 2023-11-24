@@ -1,13 +1,15 @@
 .UI {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	text-align: center;
 	gap: 24px;
 
 	.SectionTitle {
 		padding: 20px;
 		text-align: center;
 		width: 100%;
-		background: var(--g-color-grey-900);
-		color: var(--g-color-light);
+		background: var(--g-color-panel);
+		color: var(--g-color-fill);
 	}
 }

@@ -4,25 +4,21 @@
 	--badge-border-color: var(--badge-bg);
 	--badge-border-size: 0px;
 
-	--button-soft-color: var(--g-color-grey-700);
-	--button-soft-bg: var(--g-color-grey-100);
+	--badge-soft-color: var(--g-color-grey-700);
+	--badge-soft-bg: var(--g-color-grey-100);
 
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	gap: 4px;
-	padding: 4px;
+	padding: 4px 6px;
 	text-align: center;
 	text-decoration: none;
 	white-space: nowrap;
-	color: var(--badge-color);
-	background: var(--badge-bg);
+	color: var(--badge-color-state, var(--badge-color));
+	background: var(--badge-bg-state, var(--badge-bg));
 	border: none;
 	border-radius: 10px;
-
-	span {
-		font-size: 12px;
-	}
 
 	.icon {
 		font-size: 12px;
@@ -33,6 +29,71 @@
 	}
 
 	&.primary {
+		--badge-color: var(--g-color-light);
+		--badge-bg: var(--g-color-primary-600);
+
+		--badge-soft-color: var(--g-color-primary-600);
+		--badge-soft-bg: var(--g-color-primary-100);
+	}
+
+	&.success {
+		--badge-color: var(--g-color-light);
+		--badge-bg: var(--g-color-success-600);
+
+		--badge-soft-color: var(--g-color-success-600);
+		--badge-soft-bg: var(--g-color-success-100);
+	}
+
+	&.danger {
+		--badge-color: var(--g-color-light);
+		--badge-bg: var(--g-color-danger-600);
+
+		--badge-soft-color: var(--g-color-danger-600);
+		--badge-soft-bg: var(--g-color-danger-100);
+	}
+
+	&.warning {
+		--badge-color: var(--g-color-light);
+		--badge-bg: var(--g-color-warning-600);
+
+		--badge-soft-color: var(--g-color-warning-600);
+		--badge-soft-bg: var(--g-color-warning-100);
+	}
+
+	&.info {
+		--badge-color: var(--g-color-light);
+		--badge-bg: var(--g-color-info-600);
+
+		--badge-soft-color: var(--g-color-info-600);
+		--badge-soft-bg: var(--g-color-info-100);
+	}
+
+	&.light {
+		--badge-color: var(--g-color-grey-700);
+		--badge-bg: var(--g-color-grey-100);
+
+		--badge-soft-color: var(--g-color-grey-600);
+		--badge-soft-bg: var(--g-color-grey-100);
+	}
+
+	&.dark {
+		--badge-color: var(--g-color-light);
+		--badge-bg: var(--g-color-grey-800);
+
+		--badge-soft-color: var(--g-color-grey-800);
+		--badge-soft-bg: var(--g-color-grey-600);
+	}
+
+	&.soft {
+		--badge-color-state: var(--badge-soft-color);
+		--badge-bg: var(--badge-soft-bg);
+	}
+
+	&.border {
+		--badge-color-state: var(--badge-bg);
+		--badge-bg-state: transparent;
+		--badge-border-size: 1px;
 		
+		box-shadow: inset 0 0 0 var(--badge-border-size) var(--badge-bg);
 	}
 }
