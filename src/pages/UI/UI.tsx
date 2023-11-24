@@ -18,7 +18,7 @@ const UI = () => {
           <ThemeToggler/>
         </div>
       </div>
-      {/* <div className="panel_section">
+      <div className="panel_section">
         <div className="header">
           <div className="t-h2">TYPOGRAPHY</div>
         </div>
@@ -37,7 +37,7 @@ const UI = () => {
       </div>
       <BadgesGrid/>
       <LinksGrid/>
-      <ButtonsGrid/> */}
+      <ButtonsGrid/>
     </div>
   )
 }

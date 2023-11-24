@@ -1,0 +1,32 @@
+.Aside {
+	.Menu {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		.Item {
+			display: flex;
+			align-items: center;
+			min-width: 168px;
+			padding: 16px;
+			text-decoration: none;
+			white-space: nowrap;
+			color: var(--aside-menu-item-color, var(--g-color-grey-700));
+			background: var(--aside-menu-item-bg, transparent);;
+			border-radius: 6px;
+			transition: 0.2s;
+			gap: 10px;
+			cursor: pointer;
+
+			&.Active {
+				--aside-menu-item-color: var(--g-color-light);
+				--aside-menu-item-bg: var(--g-color-primary-700);
+				pointer-events: none;
+			}
+
+			&:hover {
+				--aside-menu-item-color: var(--g-color-fill);
+			}
+		}
+	}
+}
