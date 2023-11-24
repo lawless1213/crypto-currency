@@ -1,7 +1,4 @@
 .TogglerTheme {
-  --toggler-dark-icon-color: #fff;
-  --toggler-light-icon-color: #FFDE59;
-	--toggler-background: var(--g-color-background);
 	--toggler-width: 80px;
 	--toggler-height: calc(var(--toggler-width) / 2);
 	--toggler-padding: 5px;
@@ -13,12 +10,8 @@
   width: var(--toggler-width);
   height: var(--toggler-height);
   padding: var(--toggler-padding);
-	background-color: var(--toggler-background);
+	background: var(--toggler-bg, var(--g-color-warning-200));
   border-radius: var(--toggler-height);
-
-  box-shadow: inset 0 var(--toggler-padding) calc(var(--toggler-padding) * 6) var(--g-color-panel),
-              inset 0 var(--toggler-padding) var(--toggler-padding) var(--g-color-panel),
-              inset 0 calc(-1 * var(--toggler-padding)) var(--toggler-padding) var(--g-color-panel);
   cursor: pointer;
 
 	.Indicator {
@@ -28,24 +21,23 @@
 		align-items: center;
 		width: var(--toggler-indicator-size);
 		height: var(--toggler-indicator-size);
-		background-color: var(--toggler-background);
+		background: var(--toggler-indicator-bg, var(--g-color-warning-600));
 		border-radius: 50%;
 		box-shadow: 0 var(--toggler-padding) calc(var(--toggler-padding) * 4) rgba(0,0,0, .2);
 		transition: transform .3s ease;
 
 		.Icon{
 			font-size: calc(var(--toggler-width)/4);
-			color: var(--toggler-light-icon-color);
+			color: var(--g-color-light);
 		}
 	}
 
 	&.DarkMode {
+		--toggler-bg: var(--g-color-grey-600);
+		--toggler-indicator-bg: var(--g-color-grey-800);
+
 		.Indicator{
 			transform: translateX(var(--toggler-height)) rotate(360deg);
-
-			.Icon{
-				color: var(--toggler-dark-icon-color);
-			}
 		}
 	}
 }
