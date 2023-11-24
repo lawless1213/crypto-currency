@@ -1,4 +1,8 @@
 .Aside {
+	position: sticky;
+	top: 16px;
+	min-height: 500px;
+
 	.Menu {
 		display: flex;
 		flex-direction: column;
