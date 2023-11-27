@@ -1,23 +1,24 @@
 .App {
 	position: relative;
 	display: grid;
-	grid-template-columns: auto 1fr;
 	grid-template-areas: 'aside header' 'aside main';
-	background: var(--g-color-background);
-	color: var(--g-color-fill);
-	padding: var(--g-page-padding);
-	min-height: 100dvh;
-	gap: 16px;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
 	align-items: start;
+	min-height: 100dvh;
+	padding: var(--g-page-padding);
+	color: var(--g-color-fill);
+	background: var(--g-color-background);
+	gap: 16px;
 
 	aside {
-		animation: 0.6s ease show;
 		grid-area: aside;
+		animation: 0.6s ease show;
 	}
 
 	header {
-		animation: 0.6s ease show;
 		grid-area: header;
+		animation: 0.6s ease show;
 	}
 
 	main {

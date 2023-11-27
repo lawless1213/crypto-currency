@@ -10,6 +10,11 @@ export const menu: IAsideMenuItem[] = [
 		icon: MdSpaceDashboard
 	},
 	{
+		title: 'Market',
+		url: '/market',
+		icon: TbAppsFilled
+	},
+	{
 		title: 'UI Components',
 		url: '/ui-components',
 		icon: TbAppsFilled

@@ -1,6 +1,6 @@
 import { ICoin } from "./ICoin";
 
-export interface ApiResponse {
+export interface CoinsListResponse {
   status: string;
   data: {
     stats: {
@@ -10,7 +10,6 @@ export interface ApiResponse {
       totalExchanges: number;
       totalMarketCap: string;
       total24hVolume: string;
-      // Інші властивості stats, якщо вони є
     };
     coins: ICoin[];
   };
