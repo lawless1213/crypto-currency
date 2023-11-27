@@ -3,6 +3,14 @@
 	top: 16px;
 	min-height: 500px;
 
+	&.compact {
+		.Menu {
+			.Item {
+				width: 48px;
+			}
+		}
+	}
+
 	.Menu {
 		display: flex;
 		flex-direction: column;
@@ -11,16 +19,29 @@
 		.Item {
 			display: flex;
 			align-items: center;
-			min-width: 168px;
+			width: 168px;
 			padding: 16px;
+			line-height: 1;
 			text-decoration: none;
 			white-space: nowrap;
 			color: var(--aside-menu-item-color, var(--g-color-grey-700));
 			background: var(--aside-menu-item-bg, transparent);;
 			border-radius: 6px;
-			transition: 0.2s;
+			transition: color 0.2s, background 0.2s, width 0.2s;
 			gap: 10px;
 			cursor: pointer;
+
+			.Caption {
+				animation: 0.6s ease show;
+			}
+
+			.Icon {
+				animation: 0.6s ease show;
+				
+				svg {
+					display: block;
+				}
+			}
 
 			&.Active {
 				--aside-menu-item-color: var(--g-color-light);
@@ -33,4 +54,13 @@
 			}
 		}
 	}
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

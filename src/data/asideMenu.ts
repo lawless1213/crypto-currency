@@ -1,14 +1,9 @@
-import { IconType } from "react-icons";
 import { MdSpaceDashboard } from "react-icons/md";
 import { TbAppsFilled } from "react-icons/tb";
 
-interface IMenuItem {
-	title: string,
-	url: string,
-	icon: IconType,
-}
+import { IAsideMenuItem } from "../models/IAside";
 
-export const menu: IMenuItem[] = [
+export const menu: IAsideMenuItem[] = [
 	{
 		title: 'Main',
 		url: '/',

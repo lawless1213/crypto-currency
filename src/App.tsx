@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import Layout from './pages/Layout';
 
 function App() {
-	let { themeMode } = useAppSelector(state => state.ThemeModeReducer);
+	let { themeMode } = useAppSelector(state => state.SettingsReducer);
 
   return (
     <div className={`App ${themeMode}Mode`}>

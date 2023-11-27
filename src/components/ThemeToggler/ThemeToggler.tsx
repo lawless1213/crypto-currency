@@ -10,7 +10,7 @@ interface ThemeTogglerProps {
 
 const ThemeToggler = ({width}: ThemeTogglerProps) => {
 	const dispatch = useDispatch();
-	let { themeMode } = useAppSelector(state => state.ThemeModeReducer);
+	let { themeMode } = useAppSelector(state => state.SettingsReducer);
 	const style = { "--custom-toggler-width": width } as React.CSSProperties;
 
   const toggleThemeHandler = () => {

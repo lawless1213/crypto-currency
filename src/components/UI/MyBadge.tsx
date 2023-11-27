@@ -9,8 +9,8 @@ const MyBadge = ({text, icon, classes}: Props) => {
 
 	return (
 		<div className={classNames}>
-			{icon ? <i className="icon">{icon}</i> : ''}
-			{text ? <span className="caption t-caption">{text}</span> : ''}
+			{icon && <i className="icon">{icon}</i>}
+			{text && <span className="caption t-caption">{text}</span>}
 		</div>
 	)
 }

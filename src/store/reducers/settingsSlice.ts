@@ -1,11 +1,7 @@
 import { createSlice} from "@reduxjs/toolkit";
+import { ThemeModes, THEME_MODE_KEY } from "../../models/IThemeMode";
+import { AsideModes } from "../../models/IAside";
 
-enum ThemeModes {
-	DARK_MODE = 'dark',
-	LIGHT_MODE = 'light'
-}
-
-const THEME_MODE_KEY: string = 'themeMode';
 
 function getStorageTheme(): ThemeModes.DARK_MODE | ThemeModes.LIGHT_MODE | null {
   const mode: string | null = localStorage.getItem(THEME_MODE_KEY);
@@ -14,7 +10,7 @@ function getStorageTheme(): ThemeModes.DARK_MODE | ThemeModes.LIGHT_MODE | null 
 
 const initialState = {
 	themeMode: getStorageTheme() || ThemeModes.DARK_MODE,
-	shortAsideMode: true,
+	asideMode: AsideModes.FULL_MODE,
 }
 
 export const settingsSlice = createSlice({
@@ -27,9 +23,14 @@ export const settingsSlice = createSlice({
 
 			return {...state, themeMode: newTheme}
 		},
+		toggleAsideMode(state) {
+			const newAsideMode = state.asideMode === AsideModes.FULL_MODE ? AsideModes.SMALL_MODE : AsideModes.FULL_MODE;
+
+			return {...state, asideMode: newAsideMode}
+		},
 	}
 })
 
-export const { toggleTheme } = settingsSlice.actions;
+export const { toggleTheme, toggleAsideMode } = settingsSlice.actions;
 export default settingsSlice.reducer;
 
