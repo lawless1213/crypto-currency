@@ -15,7 +15,7 @@ const UI = () => {
           <div className="t-h2">THEME TOGGLER</div>
         </div>
         <div className="content">
-          <ThemeToggler/>
+          <ThemeToggler width="60px"/>
         </div>
       </div>
       <div className="panel_section">

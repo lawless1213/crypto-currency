@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 
 const ButtonsGrid = () => {
 	const colorStyle = ['', 'primary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
-	const types = ['', 'soft', 'border', 'white', 'disabled'];
+	const types = ['', 'soft', 'border', 'transparent', 'white', 'disabled'];
 	const sizes = ['small', '', 'big'];
 
 	return (

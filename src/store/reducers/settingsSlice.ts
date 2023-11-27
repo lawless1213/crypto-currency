@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
 
 enum ThemeModes {
 	DARK_MODE = 'dark',
@@ -13,22 +13,23 @@ function getStorageTheme(): ThemeModes.DARK_MODE | ThemeModes.LIGHT_MODE | null 
 }
 
 const initialState = {
-	mode: getStorageTheme() || ThemeModes.DARK_MODE,
+	themeMode: getStorageTheme() || ThemeModes.DARK_MODE,
+	shortAsideMode: true,
 }
 
-export const themeSlice = createSlice({
-	name: 'themeMode',
+export const settingsSlice = createSlice({
+	name: 'settings',
 	initialState,
 	reducers: {
 		toggleTheme(state) {
-			let newTheme = state.mode === ThemeModes.LIGHT_MODE ? ThemeModes.DARK_MODE : ThemeModes.LIGHT_MODE;
+			let newTheme = state.themeMode === ThemeModes.LIGHT_MODE ? ThemeModes.DARK_MODE : ThemeModes.LIGHT_MODE;
 			localStorage.setItem(THEME_MODE_KEY, JSON.stringify(newTheme));
 
-			return {...state, mode: newTheme}
+			return {...state, themeMode: newTheme}
 		},
 	}
 })
 
-export const { toggleTheme } = themeSlice.actions;
-export default themeSlice.reducer;
+export const { toggleTheme } = settingsSlice.actions;
+export default settingsSlice.reducer;
 

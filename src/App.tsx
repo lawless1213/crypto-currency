@@ -1,14 +1,16 @@
 import { useAppSelector } from './hooks/redux';
 
 import Aside from './components/Aside/Aside';
+import Header from './components/Header/Header';
 import Layout from './pages/Layout';
 
 function App() {
-	let { mode } = useAppSelector(state => state.ThemeModeReducer);
+	let { themeMode } = useAppSelector(state => state.ThemeModeReducer);
 
   return (
-    <div className={`App ${mode}Mode`}>
+    <div className={`App ${themeMode}Mode`}>
       <Aside/>
+      <Header/>
       <Layout/>
     </div>
     

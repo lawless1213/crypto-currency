@@ -2,10 +2,23 @@
 	position: relative;
 	display: grid;
 	grid-template-columns: auto 1fr;
+	grid-template-areas: 'aside header' 'aside main';
 	background: var(--g-color-background);
 	color: var(--g-color-fill);
 	padding: var(--g-page-padding);
 	min-height: 100dvh;
 	gap: 16px;
 	align-items: start;
+
+	aside {
+		grid-area: aside;
+	}
+
+	header {
+		grid-area: header;
+	}
+
+	main {
+		grid-area: main;
+	}
 }

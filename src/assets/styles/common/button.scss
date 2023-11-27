@@ -191,6 +191,19 @@
 		}
 	}
 
+	&.transparent {
+		--button-text-color-state: var(--button-border-color);
+		--button-bg: transparent;
+		
+			&:hover {
+				--button-text-color-state: var(--button-text-color);
+			}
+	
+			&:active {
+				--button-text-color-state: var(--button-active-border-color);
+			}
+		}
+
 	&.white {
 		--button-text-color-state: var(--button-border-color);
 		--button-bg: var(--g-color-light);

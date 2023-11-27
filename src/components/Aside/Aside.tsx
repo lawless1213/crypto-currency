@@ -7,7 +7,7 @@ const Aside = () => {
 	const items = menu;
 	
 	return (
-		<div className={`${s.Aside} panel_section`}>
+		<aside className={`${s.Aside} aside panel_section`}>
 			<div className="content">
 				<div className={s.Menu}>
 					{
@@ -28,7 +28,7 @@ const Aside = () => {
 					}
 				</div>
 			</div>
-		</div>
+		</aside>
 	)
 }
 
