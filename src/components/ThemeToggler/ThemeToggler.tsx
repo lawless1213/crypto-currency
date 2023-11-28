@@ -5,7 +5,7 @@ import { MdLightMode, MdDarkMode  } from "react-icons/md";
 import s from './ThemeToggler.module.scss';
 
 interface ThemeTogglerProps {
-	width: string;
+	width?: string;
 }
 
 const ThemeToggler = ({width}: ThemeTogglerProps) => {

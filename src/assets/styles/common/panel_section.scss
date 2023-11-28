@@ -7,6 +7,10 @@
 	background: var(--g-color-panel);
 	width: 100%;
 
+	&.no_padding {
+		padding: 0;
+	}
+
 	> .header {
 		display: flex;
 		justify-content: space-between;

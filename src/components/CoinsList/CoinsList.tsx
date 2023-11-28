@@ -1,16 +1,10 @@
 import { useState } from "react";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
+import { coinsTable } from "../../data/coins";
 
-import { makeStyles } from '@mui/styles';
 import {
-  Container,
-  createTheme,
   TableCell,
-  LinearProgress,
-  ThemeProvider,
-  Typography,
-  TextField,
   TableBody,
   TableRow,
   TableHead,
@@ -18,6 +12,8 @@ import {
   Table,
   Paper,
 } from "@mui/material";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 
 import s from './CoinsList.module.scss';
 
@@ -27,37 +23,24 @@ const CoinsList = () => {
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
-
-	const useStyles = makeStyles({
-    row: {
-      backgroundColor: "#16171a",
-      cursor: "pointer",
-      "&:hover": {
-        backgroundColor: "#131111",
-      },
-      fontFamily: "Montserrat",
-    },
-    pagination: {
-      "& .MuiPaginationItem-root": {
-        color: "gold",
-      },
-    },
-  });
-
-  const classes = useStyles();
+	
+	const isIncrementalChange = (coin: ICoin): boolean => {
+    return coin.change.charAt(0) !== '-';
+};
 
 	return (
-		<section className={`${s.CoinsList} panel_section`}>
+		<section className={`${s.CoinsList} panel_section no_padding`}>
 			<div className="content no_padding">
 				{isLoading && <h1>Loading...</h1>}
 				{error && <h1>Error...</h1>}
 				{coins && 
-					<TableContainer className={s.Table} component={Paper}>
-						<Table aria-label="simple table">
-							<TableHead>
-								<TableRow>
-									{["Coin", "Price", "24h Change"].map((head) => (
+					<TableContainer className={s.TableWrap} component={Paper}>
+						<Table className={s.Table} aria-label="simple table">
+							<TableHead className={s.TableHead}>
+								<TableRow className={s.TableRow}>
+									{coinsTable.columns.map((head) => (
 										<TableCell
+											className={s.TableCell}
 											key={head}
 										>
 											{head}
@@ -66,31 +49,59 @@ const CoinsList = () => {
 								</TableRow>
 							</TableHead>
 
-							<TableBody>
+							<TableBody className={s.TableBody}>
 								{coins.map (coin => {
+									const status = '';
+
 									return (
-										<TableRow>
+										<TableRow className={s.TableRow}>
 										<TableCell
+											className={s.TableCell}
 											component="th"
 											scope="row"
 										>
-											<img
-												src={coin.iconUrl}
-												alt=""
-											/>
-											<span>{coin.name}</span>
+											<FaRegStar className={s.Icon} />
+											<div className={s.Image}>
+												<img
+													src={coin.iconUrl}
+													alt=""
+												/>
+											</div>
+											<div className="title">
+												<div className={s.Name}>{coin.name}</div>
+												<div className={s.Symbol}>{coin.symbol}</div>
+											</div>
 										</TableCell>
 										<TableCell
+											className={s.TableCell}
 											component="th"
 											scope="row"
 										>
-											<span>{coin.price}</span>
+											<span>{Number(coin.price).toLocaleString()}</span>
 										</TableCell>
 										<TableCell
+											className={s.TableCell}
 											component="th"
 											scope="row"
 										>
-											<span>{coin.change}</span>
+											<div className={`${s.Change} ${isIncrementalChange(coin) ? s.Incremental : s.Falling}}`}>
+												<span>{Math.abs(Number(coin.change))}%</span>
+												{isIncrementalChange(coin) ?<FaArrowTrendUp/>:<FaArrowTrendDown/>}
+											</div>
+										</TableCell>
+										<TableCell
+											className={s.TableCell}
+											component="th"
+											scope="row"
+										>
+											<span>{Number(coin["24hVolume"]).toLocaleString()}</span>
+										</TableCell>
+										<TableCell
+											className={s.TableCell}
+											component="th"
+											scope="row"
+										>
+											<span>{Number(coin.marketCap).toLocaleString()}</span>
 										</TableCell>
 									</TableRow>
 									)

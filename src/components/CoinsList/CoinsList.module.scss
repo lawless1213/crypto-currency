@@ -1,3 +1,49 @@
 .CoinsList {
-	
+	.TableWrap {
+		background: none;
+		border-radius: 0;
+		box-shadow: none;
+		
+		.Table {
+			.TableHead {
+				.TableCell {
+					color: var(--g-color-grey-600);
+					padding: 10px;
+				}
+			}
+
+			.TableBody {
+				.TableCell {
+					color: var(--g-color-fill);
+					padding: 8px;
+					border-top: 0.5px solid var(--g-color-divider);
+				}
+			}
+
+			.TableCell {
+				border-bottom: none;
+				
+
+				&:first-child {
+					padding-left: 24px;
+				}
+
+				&:last-child {
+					padding-right: 24px;
+				}
+			}
+		}
+
+		.Image	{
+			width: 40px;
+			height: 40px;
+
+			img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+	}
 }

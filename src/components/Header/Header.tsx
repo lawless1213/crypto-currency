@@ -7,6 +7,7 @@ import MyButton from '../UI/MyButton';
 import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
 
 import s from './Header.module.scss';
+import ThemeToggler from '../ThemeToggler/ThemeToggler';
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Header = () => {
 		<header className={`${s.Header} header panel_section`}>
 			<div className="content">
 				<MyButton onclick={toggleAsideHandler} classes='transparent compact' icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
+				<ThemeToggler width="60px"/>
 			</div>
 		</header>
 	)
