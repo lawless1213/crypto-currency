@@ -20,7 +20,7 @@ import s from './CoinsList.module.scss';
 
 
 const CoinsList = () => {
-	const [limit, setLimit] = useState(5);
+	const [limit, setLimit] = useState(10);
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
@@ -52,8 +52,6 @@ const CoinsList = () => {
 
 							<TableBody className={s.TableBody}>
 								{coins.map (coin => {
-									const status = '';
-
 									return (
 										<TableRow className={s.TableRow}>
 										<TableCell
@@ -61,16 +59,18 @@ const CoinsList = () => {
 											component="th"
 											scope="row"
 										>
-											<FaRegStar className={s.Icon} />
-											<div className={s.Image}>
-												<img
-													src={coin.iconUrl}
-													alt=""
-												/>
-											</div>
-											<div className="title">
-												<div className={s.Name}>{coin.name}</div>
-												<div className={s.Symbol}>{coin.symbol}</div>
+											<div className={s.MainCell}>
+												<FaRegStar className={s.Favorite} />
+												<div className={s.Image}>
+													<img
+														src={coin.iconUrl}
+														alt=""
+													/>
+												</div>
+												<div className="title">
+													<div className={`${s.Name} t-h3`}>{coin.name}</div>
+													<div className={`${s.Symbol} t-caption`}>{coin.symbol}</div>
+												</div>
 											</div>
 										</TableCell>
 										<TableCell
@@ -85,9 +85,9 @@ const CoinsList = () => {
 											component="th"
 											scope="row"
 										>
-											<div className={`${s.Change} ${isIncrementalChange(coin) ? s.Incremental : s.Falling}}`}>
+											<div className={`${s.ChangeCell} ${Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? s.Incremental : s.Falling)}`}>
 												<span>{Math.abs(Number(coin.change))}%</span>
-												{isIncrementalChange(coin) ?<FaArrowTrendUp/>:<FaArrowTrendDown/>}
+												{Math.abs(Number(coin.change)) !== 0 && (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)}
 											</div>
 										</TableCell>
 										<TableCell
