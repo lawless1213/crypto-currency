@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { coinsTable } from "../../data/coins";
+import { setCurrency } from "../../services/Currency";
 
 import {
   TableCell,
@@ -77,7 +78,7 @@ const CoinsList = () => {
 											component="th"
 											scope="row"
 										>
-											<span>{Number(coin.price).toLocaleString()}</span>
+											<span>{setCurrency(coin.price)}</span>
 										</TableCell>
 										<TableCell
 											className={s.TableCell}
@@ -94,14 +95,14 @@ const CoinsList = () => {
 											component="th"
 											scope="row"
 										>
-											<span>{Number(coin["24hVolume"]).toLocaleString()}</span>
+											<span>{setCurrency(coin["24hVolume"])}</span>
 										</TableCell>
 										<TableCell
 											className={s.TableCell}
 											component="th"
 											scope="row"
 										>
-											<span>{Number(coin.marketCap).toLocaleString()}</span>
+											<span>{setCurrency(coin.marketCap)}</span>
 										</TableCell>
 									</TableRow>
 									)
