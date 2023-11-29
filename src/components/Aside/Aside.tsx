@@ -5,12 +5,17 @@ import { menu } from '../../data/asideMenu';
 
 import s from './Aside.module.scss'
 
+import MyLogo from '../UI/MyLogo/MyLogo';
+
 const Aside = () => {
 	const items = menu;
 	let { asideMode } = useAppSelector(state => state.SettingsReducer);
 	
 	return (
 		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section`}>
+			<div className="header">
+				<MyLogo compact={asideMode === AsideModes.SMALL_MODE}/>
+			</div>
 			<div className="content">
 				<div className={s.Menu}>
 					{

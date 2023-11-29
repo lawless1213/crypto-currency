@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
+
+.Logo {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	color: var(--g-color-fill);
+	text-decoration: none;
+
+	.Image {
+		min-width: 48px;
+		width: 48px;
+		height: 48px;
+		
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	.Caption {
+		font-family: 'Nova Square', sans-serif;
+	}
+
+	.Image,
+	.Caption {
+		animation: 0.6s ease show;
+	}
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
