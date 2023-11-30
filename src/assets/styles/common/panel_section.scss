@@ -1,11 +1,12 @@
 .panel_section {
-	padding: 20px 0;
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	border-radius: 12px;
-	background: var(--g-color-panel);
 	width: 100%;
+	padding: 20px 0;
+	background: var(--g-color-panel);
+	border-radius: 12px;
+	gap: 20px;
 
 	&.no_padding {
 		padding: 0;
@@ -30,4 +31,45 @@
 			padding: 0;
 		}
 	}
+
+	&.loading {
+		overflow: hidden;
+
+		&:after,
+		&:before {
+			content: '';
+			position: absolute;
+			top: -50%;
+			height: calc(100% * 2);
+			width: 0;
+			box-shadow: 0px 0px 60px 30px var(--g-color-loader);
+			transform: rotate(30deg);
+		}
+
+		&::after {
+			animation: 2s cubic-bezier(.91,.15,.46,.98) 0.5s infinite loading;
+		}
+
+		&::before {
+			animation: 2s cubic-bezier(.91,.15,.46,.98) 1.5s infinite loading;
+		}
+	}
+
+	&.error {
+		.content {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+	}
+}
+
+@keyframes loading {
+  from {
+    left: -100px;
+  }
+  to {
+    left: calc(100% + 100px);
+  }
 }

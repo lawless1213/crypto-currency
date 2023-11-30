@@ -20,7 +20,7 @@ import s from './CoinsList.module.scss';
 
 
 const CoinsList = () => {
-	const [limit, setLimit] = useState(10);
+	const limit = 5;
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
@@ -30,9 +30,8 @@ const CoinsList = () => {
 };
 
 	return (
-		<section className={`${s.CoinsList} panel_section no_padding`}>
-			<div className="content no_padding">
-				{isLoading && <h1>Loading...</h1>}
+		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : 'no_padding'} panel_section`}>
+			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
 				{coins && 
 					<TableContainer className={s.TableWrap} component={Paper}>

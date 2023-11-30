@@ -17,6 +17,7 @@ $fonts: (
   .t-#{$font} {
     font-size: map-get($keys, fs);
 		font-weight: map-get($keys, fw);
+    line-height: 1;
   }
 }
 

@@ -10,6 +10,10 @@ import s from './UI.module.scss';
 const UI = () => {
   return (
     <div className={s.UI}>
+      <div className="panel_section loading">
+        <div className="header"></div>
+        <div className="content"></div>
+      </div>
       <div className="panel_section">
         <div className="header">
           <div className="t-h2">THEME TOGGLER</div>

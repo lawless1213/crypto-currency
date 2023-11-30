@@ -5,6 +5,7 @@
 		box-shadow: none;
 		
 		.Table {
+
 			.TableHead {
 				.TableCell {
 					color: var(--g-color-grey-600);
@@ -14,15 +15,26 @@
 
 			.TableBody {
 				.TableCell {
+					position: relative;
 					color: var(--g-color-fill);
 					padding: 8px;
-					border-top: 0.5px solid var(--g-color-divider);
+
+					&::after {
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 0;
+						right: 0;
+						height: 0.5px;
+						background: var(--g-color-divider);;
+					}
 				}
 			}
 
 			.TableCell {
 				border-bottom: none;
-				
+				font-size: 14px;
+				line-height: 1;
 
 				&:first-child {
 					padding-left: 24px;
