@@ -2,6 +2,7 @@ import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
 
+
 import {
   TableCell,
   TableBody,
@@ -11,6 +12,7 @@ import {
   Paper,
 } from "@mui/material";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import MyBadge from "../UI/MyBadge";
 
 import s from './CoinsListCompact.module.scss';
 
@@ -67,10 +69,11 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 											>
 												<div className={s.Content}>
 													<span>{setCurrency(coin.price)}</span>
-													<div className={`${s.ChangeCell} ${Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? s.Incremental : s.Falling)}`}>
-														<span>{Math.abs(Number(coin.change))}%</span>
-														{Math.abs(Number(coin.change)) !== 0 && (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)}
-													</div>
+													<MyBadge 
+														text={`${Math.abs(Number(coin.change))}%`} 
+														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+														classes={Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+													/>
 												</div>
 											</TableCell>
 										</TableRow>

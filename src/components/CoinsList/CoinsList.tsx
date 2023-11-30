@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import MyBadge from "../UI/MyBadge";
 
 import s from './CoinsList.module.scss';
 
@@ -83,10 +84,11 @@ const CoinsList = () => {
 												scope="row"
 											>
 												<div className={s.Content}>
-													<div className={`${s.ChangeCell} ${Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? s.Incremental : s.Falling)}`}>
-														<span>{Math.abs(Number(coin.change))}%</span>
-														{Math.abs(Number(coin.change)) !== 0 && (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)}
-													</div>
+													<MyBadge 
+														text={`${Math.abs(Number(coin.change))}%`} 
+														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+														classes={Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+													/>
 												</div>
 											</TableCell>
 											<TableCell

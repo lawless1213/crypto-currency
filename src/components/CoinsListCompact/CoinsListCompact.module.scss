@@ -63,19 +63,5 @@
 			flex-direction: column;
 			gap: 2px;
 		}
-
-		.ChangeCell {
-			display: flex;
-			gap: 4px;
-			align-items: center;
-
-			&.Incremental {
-				color: var(--g-color-success-500);
-			}
-
-			&.Falling {
-				color: var(--g-color-danger-600);
-			}
-		}
 	}
 }

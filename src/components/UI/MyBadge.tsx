@@ -1,7 +1,7 @@
 interface Props {
 	classes?: string,
 	text?: string,
-	icon?: JSX.Element,
+	icon: JSX.Element | null | undefined,
 }
 
 const MyBadge = ({text, icon, classes}: Props) => {
