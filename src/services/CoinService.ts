@@ -6,23 +6,29 @@ export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',
 	baseQuery: fetchBaseQuery({baseUrl: 'https://coinranking1.p.rapidapi.com/'}),
 	endpoints: (build) => ({
-		fetchAllCoins: build.query<CoinsListResponse, number>({
-			query: (limit: number = 5) => ({
-				url: '/coins',
-				params: {
-					limit: limit,
-					// referenceCurrencyUuid: 'yhjMzLPhuIDl',
-					// timePeriod: '24h',
-					// 'tiers[0]': '1',
-					// orderBy: 'price',
-					// orderDirection: 'desc',
-					// offset: '0'
-				},
-				headers: {
-					'X-RapidAPI-Key': '8f3327a863mshf1d76badd7b8c7cp1f13b4jsn4dc544205eb9',
-    			'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
-				}
-			})
+		fetchAllCoins: build.query<CoinsListResponse, { limit?: number, referenceCurrencyUuid?: string, timePeriod?: string, tiers?: string[], orderBy?: string, orderDirection?: string, offset?: string }>({
+			query: (params) => {
+				const defaultParams = {
+					limit: 5,
+					referenceCurrencyUuid: 'yhjMzLPhuIDl',
+					timePeriod: '24h',
+					'tiers[0]': '1',
+					orderBy: 'marketCap',
+					orderDirection: 'desc',
+					offset: '0'
+				};
+
+				const mergedParams = { ...defaultParams, ...params };
+
+				return {
+					url: '/coins',
+					params: mergedParams,
+					headers: {
+							'X-RapidAPI-Key': '8f3327a863mshf1d76badd7b8c7cp1f13b4jsn4dc544205eb9',
+							'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+					}
+				};
+			}
 		})
 	})
 })
