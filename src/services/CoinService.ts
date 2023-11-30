@@ -14,7 +14,7 @@ export const CoinAPI = createApi({
 					// referenceCurrencyUuid: 'yhjMzLPhuIDl',
 					// timePeriod: '24h',
 					// 'tiers[0]': '1',
-					// orderBy: 'marketCap',
+					// orderBy: 'price',
 					// orderDirection: 'desc',
 					// offset: '0'
 				},

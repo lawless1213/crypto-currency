@@ -16,7 +16,7 @@ import s from './CoinsListCompact.module.scss';
 
 
 const CoinsListCompact = () => {
-	const limit = 5;
+	const limit = 4;
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
