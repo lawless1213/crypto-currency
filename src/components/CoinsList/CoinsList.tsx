@@ -21,8 +21,11 @@ import s from './CoinsList.module.scss';
 
 
 const CoinsList = () => {
-	const limit = 5;
-	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery({limit});
+	const params = {
+		limit: 10,
+	};
+
+	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
 
@@ -87,7 +90,7 @@ const CoinsList = () => {
 													<MyBadge 
 														text={`${Math.abs(Number(coin.change))}%`} 
 														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-														classes={Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+														classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
 													/>
 												</div>
 											</TableCell>

@@ -15,9 +15,10 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import MyBadge from "../UI/MyBadge";
 
 import s from './CoinsListCompact.module.scss';
+import Params from "../../data/params";
 
 interface Props {
-	sortType?: 'price' | 'change' | 'listedAt'
+	sortType: 'price' | 'change' | 'listedAt'
 }
 
 const CoinsListCompact: React.FC<Props> = ({sortType}) => {
@@ -33,7 +34,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 	return (
 		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''} panel_section`}>
 			<div className="header">
-				<span className="t-lead">Sort by {sortType}</span>
+				<span className="t-lead">{Params.sortedByTitle[sortType]}</span>
 			</div>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
@@ -72,7 +73,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 													<MyBadge 
 														text={`${Math.abs(Number(coin.change))}%`} 
 														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-														classes={Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+														classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
 													/>
 												</div>
 											</TableCell>
