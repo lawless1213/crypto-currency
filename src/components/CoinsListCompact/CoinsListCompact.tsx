@@ -14,17 +14,24 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 
 import s from './CoinsListCompact.module.scss';
 
+interface Props {
+	sortType?: 'price' | 'change' | 'listedAt'
+}
 
-const CoinsListCompact = () => {
-	const limit = 4;
-	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery({limit});
+const CoinsListCompact: React.FC<Props> = ({sortType}) => {
+	const params = {
+		limit: 4,
+		orderBy: sortType,
+	};
+
+	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
 
 	return (
 		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''} panel_section`}>
 			<div className="header">
-				<span className="t-lead">Compact</span>
+				<span className="t-lead">Sort by {sortType}</span>
 			</div>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}

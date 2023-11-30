@@ -7,9 +7,9 @@ const Market = () => {
 	return (
 		<div className={s.Market}>
 			<div className="grid">
-				<CoinsListCompact/>
-				<CoinsListCompact/>
-				<CoinsListCompact/>
+				<CoinsListCompact sortType="price"/>
+				<CoinsListCompact sortType="change"/>
+				<CoinsListCompact sortType="listedAt"/>
 			</div>
 			<CoinsList/>
 		</div>
