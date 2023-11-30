@@ -1,5 +1,6 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { CoinsListResponse } from "../models/IAPIResponses";
+import { ICoin } from "../models/ICoin";
 
 export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',
@@ -25,3 +26,12 @@ export const CoinAPI = createApi({
 		})
 	})
 })
+
+export const isIncrementalChange = (coin: ICoin): boolean => {
+	return coin.change.charAt(0) !== '-';
+};
+
+export const setCurrency = (value: string | number): string => {
+	let res = '$' + Number(value).toLocaleString();
+	return res;
+}

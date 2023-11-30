@@ -5,18 +5,21 @@
 		box-shadow: none;
 		
 		.Table {
-
-			.TableHead {
-				.TableCell {
-					color: var(--g-color-grey-600);
-					padding: 10px;
-				}
-			}
-
 			.TableBody {
-				.TableCell {
-					color: var(--g-color-fill);
-					padding: 8px;
+				.TableRow {
+					.TableCell {
+						position: relative;
+						color: var(--g-color-fill);
+						padding: 8px;
+
+						&:not(:first-child) {
+							text-align: right;
+
+							.Content {
+								align-items: flex-end;
+							}
+						}
+					}
 				}
 			}
 
@@ -31,14 +34,6 @@
 
 				&:last-child {
 					padding-right: 24px;
-				}
-
-				&:not(:first-child) {
-					text-align: right;
-
-					.Content {
-						align-items: flex-end;
-					}
 				}
 			}
 		}

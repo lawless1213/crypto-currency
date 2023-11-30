@@ -1,50 +1,36 @@
-import { useState } from "react";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
-import { coinsTable } from "../../data/coins";
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
 
 import {
   TableCell,
   TableBody,
   TableRow,
-  TableHead,
   TableContainer,
   Table,
   Paper,
 } from "@mui/material";
-import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 
-import s from './CoinsList.module.scss';
+import s from './CoinsListCompact.module.scss';
 
 
-const CoinsList = () => {
+const CoinsListCompact = () => {
 	const limit = 5;
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(limit);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
 
 	return (
-		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
+		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''} panel_section`}>
+			<div className="header">
+				<span className="t-lead">Compact</span>
+			</div>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
 				{coins && 
 					<TableContainer className={s.TableWrap} component={Paper}>
 						<Table className={s.Table} aria-label="simple table">
-							<TableHead className={s.TableHead}>
-								<TableRow className={s.TableRow}>
-									{coinsTable.columns.map((head) => (
-										<TableCell
-											className={s.TableCell}
-											key={head}
-										>
-											{head}
-										</TableCell>
-									))}
-								</TableRow>
-							</TableHead>
-
 							<TableBody className={s.TableBody}>
 								{coins.map (coin => {
 									return (
@@ -55,7 +41,6 @@ const CoinsList = () => {
 												scope="row"
 											>
 												<div className={s.MainCell}>
-													<FaRegStar className={s.Favorite} />
 													<div className={s.Image}>
 														<img
 															src={coin.iconUrl}
@@ -69,42 +54,16 @@ const CoinsList = () => {
 												</div>
 											</TableCell>
 											<TableCell
-												className={s.TableCell}
+												className={`${s.TableCell}`}
 												component="th"
 												scope="row"
 											>
 												<div className={s.Content}>
 													<span>{setCurrency(coin.price)}</span>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
 													<div className={`${s.ChangeCell} ${Math.abs(Number(coin.change)) === 0 ? '' : (isIncrementalChange(coin) ? s.Incremental : s.Falling)}`}>
 														<span>{Math.abs(Number(coin.change))}%</span>
 														{Math.abs(Number(coin.change)) !== 0 && (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)}
 													</div>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin["24hVolume"])}</span>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin.marketCap)}</span>
 												</div>
 											</TableCell>
 										</TableRow>
@@ -119,4 +78,4 @@ const CoinsList = () => {
 	)
 }
 
-export default CoinsList;
+export default CoinsListCompact;
