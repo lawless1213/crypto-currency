@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
+import { IStats } from "../../models/IStats";
 import { coinsTable } from "../../data/coins";
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
+import { ApiParams } from "../../models/IAPI";
 
 import {
   TableCell,
@@ -12,6 +14,7 @@ import {
   TableContainer,
   Table,
   Paper,
+	Pagination
 } from "@mui/material";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
@@ -21,14 +24,28 @@ import s from './CoinsList.module.scss';
 
 
 const CoinsList = () => {
-	const params = {
-		limit: 10,
+	const countRow: number = 10;
+	const [page, setPage] = useState(1);
+
+	console.log(page);
+
+	let params: ApiParams = {
+		limit: countRow,
+		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 	};
+
+	const pageHandler = (value: number) => {
+		setPage(value);
+	}
 
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
 
 	const coins: ICoin[] | undefined = dataCoins?.data.coins;
+	const stats: IStats | undefined = dataCoins?.data.stats;
 
+	const pagesTotal:number = stats?.total ? Math.ceil(stats?.total / params.limit)  : 0;
+	
+	
 	return (
 		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
@@ -119,6 +136,15 @@ const CoinsList = () => {
 						</Table>
 				</TableContainer>
 			}
+			{ pagesTotal 
+			&& pagesTotal > 1 
+			&& <Pagination 
+				count={pagesTotal} 
+				color="primary"
+				onChange={(_, value) => {
+					pageHandler(value);
+				}}
+			/>}
 			</div>
 		</section>
 	)

@@ -1,14 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { CoinsListResponse } from "../models/IAPIResponses";
+import { CoinsListResponse } from "../models/IAPI";
 import { ICoin } from "../models/ICoin";
+import { ApiParams } from "../models/IAPI"
 
 export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',
 	baseQuery: fetchBaseQuery({baseUrl: 'https://coinranking1.p.rapidapi.com/'}),
 	endpoints: (build) => ({
-		fetchAllCoins: build.query<CoinsListResponse, { limit?: number, referenceCurrencyUuid?: string, timePeriod?: string, tiers?: string[], orderBy?: string, orderDirection?: string, offset?: string }>({
+		fetchAllCoins: build.query<CoinsListResponse, { limit: number, referenceCurrencyUuid?: string, timePeriod?: string, tiers?: string[], orderBy?: string, orderDirection?: string, offset?: string }>({
 			query: (params) => {
-				const defaultParams = {
+				const defaultParams: ApiParams = {
 					limit: 5,
 					referenceCurrencyUuid: 'yhjMzLPhuIDl',
 					timePeriod: '24h',
