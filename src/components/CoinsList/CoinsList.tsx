@@ -14,29 +14,24 @@ import {
   TableContainer,
   Table,
   Paper,
-	Pagination
+	List
 } from "@mui/material";
+
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import MyBadge from "../UI/MyBadge";
+import MyPagination from "../UI/MyPagination";
 
 import s from './CoinsList.module.scss';
-
 
 const CoinsList = () => {
 	const countRow: number = 10;
 	const [page, setPage] = useState(1);
 
-	console.log(page);
-
 	let params: ApiParams = {
 		limit: countRow,
 		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 	};
-
-	const pageHandler = (value: number) => {
-		setPage(value);
-	}
 
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
 
@@ -44,8 +39,9 @@ const CoinsList = () => {
 	const stats: IStats | undefined = dataCoins?.data.stats;
 
 	const pagesTotal:number = stats?.total ? Math.ceil(stats?.total / params.limit)  : 0;
-	
-	
+	const pageHandler = (value: number) => {
+		setPage(value);
+	}
 	return (
 		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
@@ -134,18 +130,14 @@ const CoinsList = () => {
 								})}
 							</TableBody>
 						</Table>
-				</TableContainer>
-			}
-			{ pagesTotal 
-			&& pagesTotal > 1 
-			&& <Pagination 
-				count={pagesTotal} 
-				color="primary"
-				onChange={(_, value) => {
-					pageHandler(value);
-				}}
-			/>}
+					</TableContainer>
+				}
 			</div>
+			{ coins && pagesTotal && pagesTotal > 1 && 
+				<div className="content">
+					<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
+				</div> 
+			}
 		</section>
 	)
 }

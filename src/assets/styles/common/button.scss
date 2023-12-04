@@ -16,7 +16,7 @@
 	--button-hover-border-color: var(--g-color-grey-700);
 	--button-hover-border-size: 0px;
 
-	display: inline-flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 4px;
@@ -48,7 +48,8 @@
 	}
 
 	&:hover,
-	&:active {
+	&:active,
+	&.active {
 		--button-bg: var(--button-hover-bg) !important;
 		--button-text-color: var(--button-hover-color) !important;
 	}
@@ -194,6 +195,7 @@
 	&.transparent {
 		--button-text-color-state: var(--button-border-color);
 		--button-bg: transparent;
+		--button-border-size: 0;
 		
 			&:hover {
 				--button-text-color-state: var(--button-text-color);

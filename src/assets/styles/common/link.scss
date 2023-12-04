@@ -2,7 +2,7 @@
 	--link-text-color: var(--g-color-grey-700);
 	--link-hover-color: var(--g-color-grey-900);
 
-	display: inline-flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 4px;
@@ -26,9 +26,17 @@
 	}
 
 	&:hover,
-	&:active {
+	&:active,
+	&.active {
 		--link-text-color-state: var(--link-hover-color);
 	}
+
+	&:disabled,
+	&.disabled,
+	&[disabled] {
+		pointer-events: none;
+		opacity: 0.4;
+	}	
 
 	&.primary {
 		--link-text-color: var(--g-color-primary-600);

@@ -7,22 +7,22 @@
 		.Table {
 			.TableHead {
 				.TableCell {
-					color: var(--g-color-grey-600);
 					padding: 10px;
+					color: var(--g-color-grey-600);
 				}
 			}
 
 			.TableBody {
 				.TableCell {
-					color: var(--g-color-fill);
 					padding: 8px;
+					color: var(--g-color-fill);
 				}
 			}
 
 			.TableCell {
-				border-bottom: none;
-				font-size: 14px;
 				line-height: 1;
+				font-size: 14px;
+				border-bottom: none;
 
 				&:first-child {
 					padding-left: 24px;
@@ -44,8 +44,8 @@
 
 		.MainCell {
 			display: flex;
-			gap: 10px;
 			align-items: center;
+			gap: 10px;
 
 			.Favorite {
 				font-size: 16px;
@@ -54,6 +54,7 @@
 			
 			.Image	{
 				width: 40px;
+				min-width: 40px;
 				height: 40px;
 	
 				img {
