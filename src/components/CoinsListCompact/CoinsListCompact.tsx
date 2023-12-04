@@ -34,7 +34,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 	return (
 		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''} panel_section`}>
 			<div className="header">
-				<span className="t-lead">{Params.sortedByTitle[sortType]}</span>
+				<span className="t-lead">{Params.coinsSections.sortedByTitle[sortType]}</span>
 			</div>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}

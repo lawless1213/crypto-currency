@@ -6,11 +6,12 @@ type changeHandler = (value:any) => void;
 interface Props {
 	value: number,
 	items: string[],
+	label?: string,
 	classes?: string,
 	onchange: changeHandler,
 }
 
-const MySelect: React.FC<Props> = ({value, items, classes, onchange}) => {
+const MySelect: React.FC<Props> = ({value, items, classes, label, onchange}) => {
 	const classNames = `testtt}`
 
 	const handleChange = (event: SelectChangeEvent) => {
@@ -19,7 +20,7 @@ const MySelect: React.FC<Props> = ({value, items, classes, onchange}) => {
 
 	return (
 		<FormControl variant="standard" className={classNames} sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Rows</InputLabel>
+				{label && <InputLabel id="demo-simple-select-standard-label">{label}</InputLabel>}
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"

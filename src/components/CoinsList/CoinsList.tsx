@@ -140,7 +140,7 @@ const CoinsList = () => {
 				{ coins && pagesTotal && pagesTotal > 1 && 
 						<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
 				}
-				<MySelect onchange = {setCountRows} value={countRow} items = {coinsTable.rowsValues} />
+				<MySelect  onchange = {setCountRows} value={countRow} items = {coinsTable.rowsValues} />
 			</div> 
 		</section>
 	)
