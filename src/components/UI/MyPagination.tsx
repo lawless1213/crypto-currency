@@ -1,6 +1,4 @@
 import usePagination from '@mui/material/usePagination';
-import { useAppSelector } from '../../hooks/redux';
-
 import { MdKeyboardDoubleArrowLeft, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 type changeHandler = (value:number) => void;
@@ -12,8 +10,6 @@ interface Props {
 }
 
 const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
-	let { themeMode } = useAppSelector(state => state.SettingsReducer);
-
 	const ArrowComponents = {
 		first:  <MdKeyboardDoubleArrowLeft/>,
 		previous:  <MdKeyboardArrowLeft/>,
@@ -27,9 +23,6 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
     count: countPages,
 		onChange: (e, value) => onchange(value),
   });
-
-	console.log(items);
-	
 
 	const listItems = items.map(({ page, type, selected, ...item }, index) => {
 		let children = null;
@@ -69,7 +62,6 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
 
 		return <li key={index}>{children}</li>;
 	});
-
 
 	return (
 		<ul className='pagination'>{listItems}</ul>

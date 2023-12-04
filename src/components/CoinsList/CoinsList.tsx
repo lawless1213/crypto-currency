@@ -21,11 +21,12 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import MyBadge from "../UI/MyBadge";
 import MyPagination from "../UI/MyPagination";
+import MySelect from "../UI/MySelect";
 
 import s from './CoinsList.module.scss';
 
 const CoinsList = () => {
-	const countRow: number = 10;
+	const [countRow, setCountRows] = useState(Number(coinsTable.rowsValues[1]));
 	const [page, setPage] = useState(1);
 
 	let params: ApiParams = {
@@ -39,9 +40,11 @@ const CoinsList = () => {
 	const stats: IStats | undefined = dataCoins?.data.stats;
 
 	const pagesTotal:number = stats?.total ? Math.ceil(stats?.total / params.limit)  : 0;
+	
 	const pageHandler = (value: number) => {
 		setPage(value);
 	}
+
 	return (
 		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
 			<div className={`content ${error ? '' : 'no_padding'}`}>
@@ -133,11 +136,12 @@ const CoinsList = () => {
 					</TableContainer>
 				}
 			</div>
-			{ coins && pagesTotal && pagesTotal > 1 && 
-				<div className="content">
-					<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
-				</div> 
-			}
+			<div className="footer">
+				{ coins && pagesTotal && pagesTotal > 1 && 
+						<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
+				}
+				<MySelect onchange = {setCountRows} value={countRow} items = {coinsTable.rowsValues} />
+			</div> 
 		</section>
 	)
 }
