@@ -18,6 +18,8 @@ const MySelect: React.FC<Props> = ({value, items, classes, label, onchange}) => 
     onchange(event.target.value);
   };
 
+	const listItems = items.map(item => <MenuItem key={item} value={Number(item)}>{item}</MenuItem>);
+
 	return (
 		<FormControl variant="standard" className={classNames} sx={{ m: 1, minWidth: 120 }}>
 				{label && <InputLabel id="demo-simple-select-standard-label">{label}</InputLabel>}
@@ -28,7 +30,7 @@ const MySelect: React.FC<Props> = ({value, items, classes, label, onchange}) => 
           onChange={handleChange}
           label="Age"
         >
-          {items.map(item => <MenuItem value={Number(item)}>{item}</MenuItem>)}
+          {listItems}
         </Select>
       </FormControl>
 	)
