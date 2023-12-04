@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 type UseDelayedDataProps<T> = {
   data: T | null;
+	delay?: number; 
 };
 
 type UseDelayedDataResult<T> = {
@@ -9,16 +10,17 @@ type UseDelayedDataResult<T> = {
   loading: boolean;
 };
 
-export const useDelayedData = <T>({ data }: UseDelayedDataProps<T>): UseDelayedDataResult<T> => {
+export const useDelayedData = <T>({ data, delay }: UseDelayedDataProps<T>): UseDelayedDataResult<T> => {
   const [displayData, setDisplayData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (data) {
+			setLoading(true);
       const timeout = setTimeout(() => {
         setDisplayData(data);
         setLoading(false);
-      }, 1000);
+      }, delay ?? 500);
 
       return () => clearTimeout(timeout);
     }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDelayedData } from "../../hooks/delay";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { IStats } from "../../models/IStats";
@@ -36,8 +37,10 @@ const CoinsList = () => {
 
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
 
-	const coins: ICoin[] | undefined = dataCoins?.data.coins;
-	const stats: IStats | undefined = dataCoins?.data.stats;
+	const { displayData, loading } = useDelayedData({ data: dataCoins });
+	
+	const coins: ICoin[] | undefined = displayData?.data.coins;
+	const stats: IStats | undefined = displayData?.data.stats;
 
 	const pagesTotal:number = stats?.total ? Math.ceil(stats?.total / params.limit)  : 0;
 	
@@ -45,103 +48,108 @@ const CoinsList = () => {
 		setPage(value);
 	}
 
-	return (
-		<section className={`${s.CoinsList} ${isLoading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
-			<div className={`content ${error ? '' : 'no_padding'}`}>
-				{error && <h1>Error...</h1>}
-				{coins && 
-					<TableContainer className={s.TableWrap} component={Paper}>
-						<Table className={s.Table} aria-label="simple table">
-							<TableHead className={s.TableHead}>
-								<TableRow className={s.TableRow}>
-									{coinsTable.columns.map((head) => (
-										<TableCell
-											className={s.TableCell}
-											key={head}
-										>
-											{head}
-										</TableCell>
-									))}
-								</TableRow>
-							</TableHead>
 
-							<TableBody className={s.TableBody}>
-								{coins.map (coin => {
-									return (
-										<TableRow key={coin.uuid} className={s.TableRow}>
+	return (
+		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
+			{
+				!loading && 
+				<div className={`content ${error ? '' : 'no_padding'}`}>
+					{error && <h1>Error...</h1>}
+					{coins && 
+						<TableContainer className={s.TableWrap} component={Paper}>
+							<Table className={s.Table} aria-label="simple table">
+								<TableHead className={s.TableHead}>
+									<TableRow className={s.TableRow}>
+										{coinsTable.columns.map((head) => (
 											<TableCell
 												className={s.TableCell}
-												component="th"
-												scope="row"
+												key={head}
 											>
-												<div className={s.MainCell}>
-													<FaRegStar className={s.Favorite} />
-													<div className={s.Image}>
-														<img
-															src={coin.iconUrl}
-															alt=""
+												{head}
+											</TableCell>
+										))}
+									</TableRow>
+								</TableHead>
+
+								<TableBody className={s.TableBody}>
+									{coins.map (coin => {
+										return (
+											<TableRow key={coin.uuid} className={s.TableRow}>
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.MainCell}>
+														<FaRegStar className={s.Favorite} />
+														<div className={s.Image}>
+															<img
+																src={coin.iconUrl}
+																alt=""
+															/>
+														</div>
+														<div className="title">
+															<div className={`${s.Name} t-h3`}>{coin.name}</div>
+															<div className={`${s.Symbol} t-caption`}>{coin.symbol}</div>
+														</div>
+													</div>
+												</TableCell>
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span>{setCurrency(coin.price)}</span>
+													</div>
+												</TableCell>
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<MyBadge 
+															text={`${Math.abs(Number(coin.change))}%`} 
+															icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+															classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
 														/>
 													</div>
-													<div className="title">
-														<div className={`${s.Name} t-h3`}>{coin.name}</div>
-														<div className={`${s.Symbol} t-caption`}>{coin.symbol}</div>
+												</TableCell>
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span>{setCurrency(coin["24hVolume"])}</span>
 													</div>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin.price)}</span>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<MyBadge 
-														text={`${Math.abs(Number(coin.change))}%`} 
-														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-														classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
-													/>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin["24hVolume"])}</span>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin.marketCap)}</span>
-												</div>
-											</TableCell>
-										</TableRow>
-									)
-								})}
-							</TableBody>
-						</Table>
-					</TableContainer>
-				}
-			</div>
-			<div className="footer">
-				{ coins && pagesTotal && pagesTotal > 1 && 
-						<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
-				}
-				<MySelect  onchange = {setCountRows} value={countRow} items = {coinsTable.rowsValues} />
-			</div> 
+												</TableCell>
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span>{setCurrency(coin.marketCap)}</span>
+													</div>
+												</TableCell>
+											</TableRow>
+										)
+									})}
+								</TableBody>
+							</Table>
+						</TableContainer>
+					}
+				</div> 
+			}
+			{
+				!loading && pagesTotal && pagesTotal > 1 && 
+				<div className="footer">
+					<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
+					<MySelect  onchange = {setCountRows} value={countRow} items = {coinsTable.rowsValues} />
+				</div>
+			}
 		</section>
 	)
 }

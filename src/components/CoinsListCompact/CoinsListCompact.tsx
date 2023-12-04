@@ -1,7 +1,7 @@
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
-
+import { useDelayedData } from "../../hooks/delay";
 
 import {
   TableCell,
@@ -16,7 +16,6 @@ import MyBadge from "../UI/MyBadge";
 
 import s from './CoinsListCompact.module.scss';
 import Params from "../../data/params";
-import { useDelayedData } from "../../hooks/delay";
 
 interface Props {
 	sortType: 'price' | 'change' | 'listedAt'
@@ -31,7 +30,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 	const { data: dataCoins, error } = CoinAPI.useFetchAllCoinsQuery(params);
 	const { displayData, loading } = useDelayedData({ data: dataCoins });
 
-	const coins: ICoin[] | undefined = dataCoins?.data.coins;
+	const coins: ICoin[] | undefined = displayData?.data.coins;
 
 	return (
 		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''} panel_section`}>
