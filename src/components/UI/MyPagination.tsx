@@ -23,13 +23,8 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes, classesBt
 
 	const { items } = usePagination({
     count: countPages,
-		onChange: (e, value) => {
-			console.log(value);
-			onchange(value);
-		},
+		onChange: (e, value) => onchange(value),
   });
-
-	console.log(items);
 	
 
 	const listItems = items.map(({ page, type, selected, ...item }, index) => {
