@@ -1,7 +1,7 @@
 import { InputLabel , MenuItem, FormControl, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 
-type changeHandler = (value:any) => void;
+type changeHandler = (value:number) => void;
 
 interface Props {
 	value: number,
@@ -12,10 +12,10 @@ interface Props {
 }
 
 const MySelect: React.FC<Props> = ({value, items, classes, label, onchange}) => {
-	const classNames = `testtt}`
+	const classNames = ``;
 
 	const handleChange = (event: SelectChangeEvent) => {
-    onchange(event.target.value);
+    onchange(Number(event.target.value));
   };
 
 	const listItems = items.map(item => <MenuItem key={item} value={Number(item)}>{item}</MenuItem>);

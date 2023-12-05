@@ -1,0 +1,37 @@
+.loading {
+	overflow: hidden;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: var(--g-color-background);
+		opacity: 0.7;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		height: calc(100% * 2);
+		width: 0;
+		box-shadow: 0px 0px 60px 30px var(--g-color-loader);
+		transform: rotate(30deg);
+	}
+
+	&::before {
+		animation: loading 1.5s ease 0s infinite normal running;
+	}
+}
+
+@keyframes loading {
+  from {
+    left: -100%;
+  }
+  to {
+    left: calc(200%);
+  }
+}

@@ -43,29 +43,6 @@
 		margin-top: auto;
 	}
 
-	&.loading {
-		overflow: hidden;
-
-		&:after,
-		&::before {
-			content: '';
-			position: absolute;
-			top: -50%;
-			height: calc(100% * 2);
-			width: 0;
-			box-shadow: 0px 0px 60px 30px var(--g-color-loader);
-			transform: rotate(30deg);
-		}
-
-		&::after {
-			animation: loading 1.5s ease 0s infinite normal running;
-		}
-
-		&::before {
-			animation: loading 1.5s ease 0.25s infinite normal running;
-		}
-	}
-
 	&.error {
 		.content {
 			display: flex;
@@ -74,15 +51,6 @@
 			text-align: center;
 		}
 	}
-}
-
-@keyframes loading {
-  from {
-    left: -100%;
-  }
-  to {
-    left: calc(200%);
-  }
 }
 
 @keyframes show {

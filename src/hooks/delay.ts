@@ -20,7 +20,7 @@ export const useDelayedData = <T>({ data, delay }: UseDelayedDataProps<T>): UseD
       const timeout = setTimeout(() => {
         setDisplayData(data);
         setLoading(false);
-      }, delay ?? 500);
+      }, delay ?? 1000);
 
       return () => clearTimeout(timeout);
     }

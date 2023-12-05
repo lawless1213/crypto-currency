@@ -6,11 +6,12 @@ type ChangeHandler = ( value: number) => void;
 interface Props {
 	countPages: number,
 	onchange: ChangeHandler,
+	page: number,
 	classes? : string,
 	classesBtn?: string,
 }
 
-const MyPagination: React.FC<Props> = ({countPages, onchange, classes, classesBtn}) => {
+const MyPagination: React.FC<Props> = ({countPages, onchange, page, classes, classesBtn}) => {
 	const ArrowComponents = {
 		first:  <MdKeyboardDoubleArrowLeft/>,
 		previous:  <MdKeyboardArrowLeft/>,
@@ -23,6 +24,7 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes, classesBt
 
 	const { items } = usePagination({
     count: countPages,
+		page: page,
 		onChange: (e, value) => onchange(value),
   });
 	
