@@ -1,15 +1,16 @@
 import usePagination from '@mui/material/usePagination';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
-type changeHandler = (value:number) => void;
+type ChangeHandler = ( value: number) => void;
 
 interface Props {
 	countPages: number,
-	onchange: changeHandler,
-	classes?: string,
+	onchange: ChangeHandler,
+	classes? : string,
+	classesBtn?: string,
 }
 
-const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
+const MyPagination: React.FC<Props> = ({countPages, onchange, classes, classesBtn}) => {
 	const ArrowComponents = {
 		first:  <MdKeyboardDoubleArrowLeft/>,
 		previous:  <MdKeyboardArrowLeft/>,
@@ -17,12 +18,19 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
 		last:  <MdKeyboardDoubleArrowRight/>,
 	}
 
-	const classNames = classes ?? 'link light';
+	const classNames = `pagination ${classes}`;
+	const classBtnNames = classesBtn ?? 'link light';
 
 	const { items } = usePagination({
     count: countPages,
-		onChange: (e, value) => onchange(value),
+		onChange: (e, value) => {
+			console.log(value);
+			onchange(value);
+		},
   });
+
+	console.log(items);
+	
 
 	const listItems = items.map(({ page, type, selected, ...item }, index) => {
 		let children = null;
@@ -30,7 +38,7 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
 		if (type === 'start-ellipsis' || type === 'end-ellipsis') {
 			children = (
 				<button
-					className={`${classNames} transparent disabled`}
+					className={`${classBtnNames} transparent disabled`}
 					type="button"
 				>
 					<span className="caption">...</span>
@@ -39,7 +47,7 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
 		} else if (type === 'page') {
 			children = (
 				<button
-					className={`${classNames} ${selected ? 'active' : ''}`}
+					className={`${classBtnNames} ${selected && 'active'}`}
 					type="button"
 					{...item}
 				>
@@ -49,7 +57,7 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
 		} else {
 			children = (
 				<button 
-					className={classNames}
+					className={classBtnNames}
 					type="button" 
 					{...item}
 				>
@@ -64,7 +72,7 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, classes}) => {
 	});
 
 	return (
-		<ul className='pagination'>{listItems}</ul>
+		<ul className={classNames}>{listItems}</ul>
 	)
 }
 

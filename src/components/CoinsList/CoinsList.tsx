@@ -44,8 +44,13 @@ const CoinsList = () => {
 
 	const pagesTotal:number = stats?.total ? Math.ceil(stats?.total / params.limit)  : 0;
 	
-	const pageHandler = (value: number) => {
+	const pageHandler = ( value: number) => {
 		setPage(value);
+	}
+
+	const rowsHandler = ( value: number) => {
+		setCountRows(value);
+		pageHandler(1);
 	}
 
 
@@ -144,10 +149,10 @@ const CoinsList = () => {
 				</div> 
 			}
 			{
-				!loading && pagesTotal && pagesTotal > 1 && 
+				pagesTotal && pagesTotal > 1 && 
 				<div className="footer">
-					<MyPagination countPages={pagesTotal} onchange={pageHandler}/>
-					<MySelect  onchange = {setCountRows} value={countRow} items = {coinsTable.rowsValues} />
+					<MyPagination countPages={pagesTotal} onchange={ pageHandler }/>
+					<MySelect  onchange = { rowsHandler } value={countRow} items = {coinsTable.rowsValues} />
 				</div>
 			}
 		</section>
