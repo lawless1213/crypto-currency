@@ -1,21 +1,21 @@
-interface PortfolioItem {
-	coin: string,
-	value: number,
-}
-
 interface User {
 	firstName: string,
 	lastName: string,
-	portfolio: PortfolioItem[]
+	portfolio: {
+		list: string[],
+		counts: {
+			[key: string]: number;
+		}
+	}
 }
 
-export const User: User = {
-	firstName: "Andrew",
+export const user: User = {
+	firstName: "Andrii",
 	lastName: "Lototskyi",
-	portfolio: [
-		{
-			coin: 'BTC',
-			value: 0.293579
+	portfolio: {
+		list: ['BTC'],
+		counts: {
+			'BTC': 0.293579,
 		}
-	]
+	}
 }

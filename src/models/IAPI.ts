@@ -6,6 +6,7 @@ export interface ApiParams {
   referenceCurrencyUuid?: string,
   timePeriod?: string,
   'tiers[0]'?: string,
+  'symbols[0]'?: string,
   orderBy?: string,
   orderDirection?: string,
   offset?: string

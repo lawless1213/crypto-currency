@@ -10,7 +10,7 @@ interface Props {
 }
 
 const MyTabs: React.FC<Props> = ({value, items, classes, onchange}) => {
-	const listItems = items.map(item => <Tab className='button soft' key={item} value={item} label={item}></Tab>);
+	const listItems = items.map(item => <Tab disableRipple className='button soft' key={item} value={item} label={item}></Tab>);
 	const handleTabChange = (event: React.ChangeEvent<{}>, newValue: string) => {
 		onchange(newValue);
 	};

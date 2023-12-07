@@ -24,18 +24,22 @@ import MyPagination from "../UI/MyPagination";
 import MySelect from "../UI/MySelect";
 import MyTabs from "../UI/MyTabs";
 
-
 import s from './CoinsList.module.scss';
 
-const CoinsList = () => {
+interface Props {
+	requiredCoins?: string[],
+}
+
+const CoinsList: React.FC<Props> = ({requiredCoins}: Props) => {
 	const [countRow, setCountRows] = useState(Number(coinsTableParams.defaultValues.rows));
 	const [page, setPage] = useState(1);
-	const [period, setPeriod] = useState(coinsTableParams.defaultValues.period);
+	const [period, setPeriod] = useState(coinsTableParams.defaultValues && coinsTableParams.defaultValues.period);
 
 	let params: ApiParams = {
 		limit: countRow,
 		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 		timePeriod: period,
+		'symbols[0]': requiredCoins ? requiredCoins.join() : undefined,
 	};
 
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
@@ -43,7 +47,9 @@ const CoinsList = () => {
 	
 	const coins: ICoin[] | undefined = displayData?.data.coins;
 	const stats: IStats | undefined = displayData?.data.stats;
-	const pagesTotal:number = stats?.total ? Math.ceil(stats?.total / params.limit)  : 0;
+	const pagesTotal: number = stats?.total && coins ? Math.ceil(stats?.total / params.limit)  : 0;
+	const periodVariants: string[] = coinsTableParams.periodValues;
+	const rowsVariants: string[] | undefined = coinsTableParams.rowsValues;
 	
 	const periodHandler = ( value: string) => {
 		setPeriod(value);
@@ -58,11 +64,20 @@ const CoinsList = () => {
 		pageHandler(1);
 	}
 
+	let tableColumns: string[] = [];
+	for (var key in coinsTableParams.columns) {
+		tableColumns.push(coinsTableParams.columns[key]);
+	}
+	const tableColumnsHead = tableColumns.map(item => <TableCell className={s.TableCell} key={item}>{item}</TableCell>)
+
 	return (
 		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
-			<div className="header">
-				<MyTabs onchange = { periodHandler } value={period} items = {coinsTableParams.periodValues} />
-			</div>
+			{
+				periodVariants &&
+				<div className="header">
+					<MyTabs onchange = { periodHandler } value={period} items = {coinsTableParams.periodValues} />
+				</div>
+			}
 			
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
@@ -70,16 +85,7 @@ const CoinsList = () => {
 					<TableContainer className={s.TableWrap} component={Paper}>
 						<Table className={s.Table} aria-label="simple table">
 							<TableHead className={s.TableHead}>
-								<TableRow className={s.TableRow}>
-									{coinsTableParams.columns.map((head) => (
-										<TableCell
-											className={s.TableCell}
-											key={head}
-										>
-											{head}
-										</TableCell>
-									))}
-								</TableRow>
+								<TableRow className={s.TableRow}>{tableColumnsHead}</TableRow>
 							</TableHead>
 
 							<TableBody className={s.TableBody}>
@@ -153,14 +159,18 @@ const CoinsList = () => {
 					</TableContainer>
 				}
 			</div> 
-			
-			{
-				coins && pagesTotal > 1 && 
-				<div className="footer">
+			<div className="footer">
+				{
+					pagesTotal && pagesTotal > 1 && 
 					<MyPagination page={page} countPages={pagesTotal} onchange={ pageHandler }/>
-					<MySelect onchange = { rowsHandler } value={countRow} items = {coinsTableParams.rowsValues} />
-				</div>
-			}
+				}
+				{
+					rowsVariants  && 
+					<MySelect onchange = { rowsHandler } value={countRow} items = {rowsVariants} />
+				}
+			</div>
+
+			
 		</section>
 	)
 }

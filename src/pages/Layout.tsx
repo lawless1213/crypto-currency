@@ -1,15 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 
-import UI from './UI/UI';
+import Home from './Home/Home';
 import Market from './Market/Market';
 import AllMarkets from './AllMarkets/AllMarkets';
+import UI from './UI/UI';
 
 const Layout = () => {
 	
 	return (
 		<main className="main">
 			<Routes>
-        <Route path='/' element={<p className='t-h1'>Crypto currency</p>}></Route>
+				<Route path='/' element={<Home/>}></Route>
         <Route path='/market' element={<Market/>}></Route>
         <Route path='/allmarkets' element={<AllMarkets/>}></Route>
         <Route path='/ui-components' element={<UI/>}></Route>
