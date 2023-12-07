@@ -19,8 +19,8 @@ const Header = () => {
 
 	return (
 		<header className={`${s.Header} header panel_section`}>
-			<div className="content">
-				<MyButton onclick={toggleAsideHandler} classes='transparent compact' icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
+			<div className={`${s.Content} content`}>
+				<MyButton onclick={toggleAsideHandler} classes='border compact' icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
 				<ThemeToggler width="60px"/>
 			</div>
 		</header>
