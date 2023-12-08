@@ -24,5 +24,6 @@ export interface ICoinsTable {
 	defaultValues: {
 		rows: string,
 		period: string,
+		order?: string,
 	}
 }

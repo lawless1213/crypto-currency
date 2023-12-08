@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useDelayedData } from "../../hooks/delay";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
@@ -6,8 +7,9 @@ import { IStats } from "../../models/IStats";
 import { useAppSelector } from '../../hooks/redux';
 import { setCurrency, setAmount, isIncrementalChange } from "../../services/CoinService";
 import { ApiParams } from "../../models/IAPI";
-import { CoinsCharacter } from "../../data/coins";
+import { CoinsCharacter, TableTypes } from "../../data/coins";
 import { user } from "../../data/user";
+import { toggleOrder } from "../../store/reducers/tablesParamsSlice";
 
 import {
   TableCell,
@@ -17,7 +19,6 @@ import {
   TableContainer,
   Table,
   Paper,
-	List
 } from "@mui/material";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
@@ -27,15 +28,16 @@ import MySelect from "../UI/MySelect";
 import MyTabs from "../UI/MyTabs";
 
 import s from './CoinsList.module.scss';
-
 interface Props {
-	type?: 'portfolio',
+	type?: TableTypes,
 	title: string,
 	requiredCoins?: string[],
 }
 
 const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
-	let tableParams = useAppSelector(state => state.TablesParamsReducer.coinTables[type ?? 'main']);
+	const dispatch = useDispatch();
+	const tableType = type ?? TableTypes.COIN_MAIN;
+	const tableParams = useAppSelector(state => state.TablesParamsReducer.coinTables[tableType]);
 
 	const [countRow, setCountRows] = useState(Number(tableParams.defaultValues.rows));
 	const [page, setPage] = useState(1);
@@ -46,6 +48,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 		timePeriod: period,
 		'symbols[0]': requiredCoins ? requiredCoins.join() : undefined,
+		orderBy: tableParams.defaultValues.order ?? CoinsCharacter.MARKETCAP,
 	};
 
 	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
@@ -70,11 +73,15 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		pageHandler(1);
 	}
 
-	const tableColumns = Object.values(tableParams.columns)
-  	.filter(column => column.show)
-  	.map(column => column.title);
+	const orderHandler = (value: CoinsCharacter) => {
+		dispatch(toggleOrder({table: tableType, order: value}));
+	}
 
-	const tableColumnsHead = tableColumns.map(item => <TableCell className={s.TableCell} key={item}>{item}</TableCell>)
+	const tableColumns: CoinsCharacter[] = Object.values(tableParams.columns)
+  	.filter(column => column.show)
+		.map(column => column.title as CoinsCharacter);
+
+	const tableColumnsHead = tableColumns.map(item => <TableCell  onClick={() => orderHandler(item)} className={s.TableCell} key={item}>{item}</TableCell>)
 
 	return (
 		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>

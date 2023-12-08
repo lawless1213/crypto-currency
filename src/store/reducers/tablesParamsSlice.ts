@@ -1,4 +1,4 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CoinsCharacter, ICoinsTable, TableTypes } from "../../data/coins";
 
 interface IInitialState {
@@ -40,6 +40,7 @@ const initialState: IInitialState = {
 			defaultValues: {
 				rows: '10',
 				period: '24h',
+				order: CoinsCharacter.MARKETCAP,
 			}
 		},
 		[TableTypes.COIN_PORTFOLIO]: {
@@ -74,6 +75,7 @@ const initialState: IInitialState = {
 			defaultValues: {
 				rows: '50',
 				period: '24h',
+				order: CoinsCharacter.MARKETCAP,
 			}
 		},
 		[TableTypes.COIN_FAVORITES]: {
@@ -109,6 +111,7 @@ const initialState: IInitialState = {
 			defaultValues: {
 				rows: '10',
 				period: '24h',
+				order: CoinsCharacter.MARKETCAP,
 			}
 		}
 	}
@@ -118,9 +121,25 @@ export const TablesParamsSlice = createSlice({
 	name: 'tableParams',
 	initialState,
 	reducers: {
-		
+		toggleOrder(state, action: PayloadAction<{ table: TableTypes, order: CoinsCharacter }>) {
+			const { table, order: newOrder } = action.payload;
+
+			return {
+				...state,
+				coinTables: {
+					...state.coinTables,
+					[table]: {
+						...state.coinTables[table],
+						defaultValues: {
+							...state.coinTables[table].defaultValues,
+							order: newOrder,
+						},
+					},
+				},
+			};
+		}
 	}
 })
 
-// export const {  } = settingsSlice.actions;
+export const { toggleOrder } = TablesParamsSlice.actions;
 export default TablesParamsSlice.reducer;

@@ -1,4 +1,5 @@
 import CoinsList from "../../components/CoinsList/CoinsList";
+import { TableTypes } from "../../data/coins";
 import { user } from "../../data/user";
 
 import s from './Home.module.scss'
@@ -8,7 +9,7 @@ const Home = () => {
 
 	return (
 		<div className={s.Home}>
-			<CoinsList title='Portfolio' type='portfolio' requiredCoins={usersCoins}/>
+			<CoinsList title='Portfolio' type={TableTypes.COIN_PORTFOLIO} requiredCoins={usersCoins}/>
 		</div>
 	)
 } 
