@@ -9,25 +9,30 @@ const initialState: IInitialState = {
 	coinTables: {
 		[TableTypes.COIN_MAIN]: {
 			columns: {
-				name: {
+				[CoinsCharacter.NAME]: {
 					title: CoinsCharacter.NAME,
 					show: true,
+					required: true,
 				},
-				price: {
+				[CoinsCharacter.PRICE]: {
 					title: CoinsCharacter.PRICE,
 					show: true,
 				},
-				change: {
+				[CoinsCharacter.CHANGE]: {
 					title: CoinsCharacter.CHANGE,
 					show: true,
 				},
-				volume24h: {
+				[CoinsCharacter.VOLUME24]: {
 					title: CoinsCharacter.VOLUME24,
 					show: true,
 				},
-				marketCap: {
+				[CoinsCharacter.MARKETCAP]: {
 					title: CoinsCharacter.MARKETCAP,
 					show: true,
+				},
+				[CoinsCharacter.COUNT]: {
+					title: CoinsCharacter.COUNT,
+					show: false,
 				},
 			},
 			rowsValues: ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50'],
@@ -39,45 +44,62 @@ const initialState: IInitialState = {
 		},
 		[TableTypes.COIN_PORTFOLIO]: {
 			columns: {
-				name: {
+				[CoinsCharacter.NAME]: {
 					title: CoinsCharacter.NAME,
 					show: true,
+					required: true,
 				},
-				price: {
+				[CoinsCharacter.PRICE]: {
 					title: CoinsCharacter.PRICE,
 					show: true,
 				},
-				change: {
+				[CoinsCharacter.CHANGE]: {
 					title: CoinsCharacter.CHANGE,
 					show: true,
 				},
-				count: {
+				[CoinsCharacter.VOLUME24]: {
+					title: CoinsCharacter.VOLUME24,
+					show: false,
+				},
+				[CoinsCharacter.MARKETCAP]: {
+					title: CoinsCharacter.MARKETCAP,
+					show: false,
+				},
+				[CoinsCharacter.COUNT]: {
 					title: CoinsCharacter.COUNT,
 					show: true,
 				},
 			},
-			rowsValues: ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50'],
 			periodValues: ['3h', '24h', '7d', '30d', '3m', '1y', '3y', '5y'],
 			defaultValues: {
-				rows: '10',
+				rows: '50',
 				period: '24h',
 			}
 		},
 		[TableTypes.COIN_FAVORITES]: {
 			columns: {
-				name: {
+				[CoinsCharacter.NAME]: {
 					title: CoinsCharacter.NAME,
 					show: true,
+					required: true,
 				},
-				price: {
+				[CoinsCharacter.PRICE]: {
 					title: CoinsCharacter.PRICE,
 					show: true,
 				},
-				change: {
+				[CoinsCharacter.CHANGE]: {
 					title: CoinsCharacter.CHANGE,
 					show: true,
 				},
-				count: {
+				[CoinsCharacter.VOLUME24]: {
+					title: CoinsCharacter.VOLUME24,
+					show: false,
+				},
+				[CoinsCharacter.MARKETCAP]: {
+					title: CoinsCharacter.MARKETCAP,
+					show: false,
+				},
+				[CoinsCharacter.COUNT]: {
 					title: CoinsCharacter.COUNT,
 					show: true,
 				},

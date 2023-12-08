@@ -4,8 +4,10 @@ import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { IStats } from "../../models/IStats";
 import { useAppSelector } from '../../hooks/redux';
-import { setCurrency, isIncrementalChange } from "../../services/CoinService";
+import { setCurrency, setAmount, isIncrementalChange } from "../../services/CoinService";
 import { ApiParams } from "../../models/IAPI";
+import { CoinsCharacter } from "../../data/coins";
+import { user } from "../../data/user";
 
 import {
   TableCell,
@@ -28,10 +30,11 @@ import s from './CoinsList.module.scss';
 
 interface Props {
 	type?: 'portfolio',
+	title: string,
 	requiredCoins?: string[],
 }
 
-const CoinsList: React.FC<Props> = ({type, requiredCoins}: Props) => {
+const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	let tableParams = useAppSelector(state => state.TablesParamsReducer.coinTables[type ?? 'main']);
 
 	const [countRow, setCountRows] = useState(Number(tableParams.defaultValues.rows));
@@ -67,20 +70,21 @@ const CoinsList: React.FC<Props> = ({type, requiredCoins}: Props) => {
 		pageHandler(1);
 	}
 
-	let tableColumns: string[] = [];
-	for (var key in tableParams.columns) {
-		tableColumns.push(tableParams.columns[key].title);
-	}
+	const tableColumns = Object.values(tableParams.columns)
+  	.filter(column => column.show)
+  	.map(column => column.title);
+
 	const tableColumnsHead = tableColumns.map(item => <TableCell className={s.TableCell} key={item}>{item}</TableCell>)
 
 	return (
 		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
-			{
-				periodVariants &&
-				<div className="header">
+			<div className="header">
+				<div className="section_title t-h2">{title}</div>
+				{
+					periodVariants &&
 					<MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} />
+				}
 				</div>
-			}
 			
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
@@ -114,46 +118,71 @@ const CoinsList: React.FC<Props> = ({type, requiredCoins}: Props) => {
 													</div>
 												</div>
 											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin.price)}</span>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<MyBadge 
-														text={`${Math.abs(Number(coin.change))}%`} 
-														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-														classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
-													/>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin["24hVolume"])}</span>
-												</div>
-											</TableCell>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.Content}>
-													<span>{setCurrency(coin.marketCap)}</span>
-												</div>
-											</TableCell>
+											{
+												tableColumns.includes(CoinsCharacter.PRICE) &&
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span>{setCurrency(coin.price)}</span>
+													</div>
+												</TableCell>
+											}
+											{
+												tableColumns.includes(CoinsCharacter.CHANGE) &&
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<MyBadge 
+															text={`${Math.abs(Number(coin.change))}%`} 
+															icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+															classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+														/>
+													</div>
+												</TableCell>
+											}
+											{
+												tableColumns.includes(CoinsCharacter.VOLUME24) &&
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span>{setCurrency(coin["24hVolume"])}</span>
+													</div>
+												</TableCell>
+											}
+											{
+												tableColumns.includes(CoinsCharacter.MARKETCAP) &&
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span>{setCurrency(coin.marketCap)}</span>
+													</div>
+												</TableCell>
+											}
+											{
+												tableColumns.includes(CoinsCharacter.COUNT) &&
+												<TableCell
+													className={s.TableCell}
+													component="th"
+													scope="row"
+												>
+													<div className={s.Content}>
+														<span className="t-h5">{user.portfolio.counts[coin.symbol] ?? 0}</span>
+														<span className="t-caption">{setAmount(user.portfolio.counts[coin.symbol], coin.price)}</span>
+													</div>
+												</TableCell>
+											}
 										</TableRow>
 									)
 								})}
@@ -164,7 +193,7 @@ const CoinsList: React.FC<Props> = ({type, requiredCoins}: Props) => {
 			</div> 
 			<div className="footer">
 				{
-					pagesTotal && pagesTotal > 1 && 
+					pagesTotal > 1 && 
 					<MyPagination page={page} countPages={pagesTotal} onchange={ pageHandler }/>
 				}
 				{

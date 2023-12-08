@@ -42,3 +42,7 @@ export const setCurrency = (value: string | number): string => {
 	let res = '$' + Number(value).toLocaleString();
 	return res;
 }
+
+export const setAmount = (value: string | number, price: string | number): string =>  {
+	return setCurrency(Number(value ?? 0) * Number(price));
+}

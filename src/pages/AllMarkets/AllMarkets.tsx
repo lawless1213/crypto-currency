@@ -4,7 +4,7 @@ import CoinsListCompact from "../../components/CoinsListCompact/CoinsListCompact
 const AllMarkets = () => {
 	return (
 		<div className='AllMarkets'>
-			<CoinsList/>
+			<CoinsList title="All"/>
 		</div>
 	)
 } 

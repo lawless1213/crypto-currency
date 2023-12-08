@@ -23,7 +23,7 @@ interface Props {
 
 const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 	const params = {
-		limit: 4,
+		limit: 5,
 		orderBy: sortType,
 	};
 

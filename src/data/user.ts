@@ -15,7 +15,7 @@ export const user: User = {
 	portfolio: {
 		list: ['BTC'],
 		counts: {
-			'BTC': 0.293579,
+			'BTC': 0.00293579,
 		}
 	}
 }
