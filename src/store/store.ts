@@ -1,9 +1,11 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { CoinAPI } from "../services/CoinService";
 import SettingsReducer from "./reducers/settingsSlice";
+import TablesParamsReducer from "./reducers/tablesParamsSlice";
 
 const rootReducer = combineReducers({
 	SettingsReducer,
+	TablesParamsReducer,
 	[CoinAPI.reducerPath]: CoinAPI.reducer,
 })
 

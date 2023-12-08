@@ -3,7 +3,7 @@ import { useDelayedData } from "../../hooks/delay";
 import { CoinAPI } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { IStats } from "../../models/IStats";
-import { coinsTableParams } from "../../data/coins";
+import { useAppSelector } from '../../hooks/redux';
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
 import { ApiParams } from "../../models/IAPI";
 
@@ -27,13 +27,16 @@ import MyTabs from "../UI/MyTabs";
 import s from './CoinsList.module.scss';
 
 interface Props {
+	type?: 'portfolio',
 	requiredCoins?: string[],
 }
 
-const CoinsList: React.FC<Props> = ({requiredCoins}: Props) => {
-	const [countRow, setCountRows] = useState(Number(coinsTableParams.defaultValues.rows));
+const CoinsList: React.FC<Props> = ({type, requiredCoins}: Props) => {
+	let tableParams = useAppSelector(state => state.TablesParamsReducer.coinTables[type ?? 'main']);
+
+	const [countRow, setCountRows] = useState(Number(tableParams.defaultValues.rows));
 	const [page, setPage] = useState(1);
-	const [period, setPeriod] = useState(coinsTableParams.defaultValues && coinsTableParams.defaultValues.period);
+	const [period, setPeriod] = useState(tableParams.defaultValues && tableParams.defaultValues.period);
 
 	let params: ApiParams = {
 		limit: countRow,
@@ -48,8 +51,8 @@ const CoinsList: React.FC<Props> = ({requiredCoins}: Props) => {
 	const coins: ICoin[] | undefined = displayData?.data.coins;
 	const stats: IStats | undefined = displayData?.data.stats;
 	const pagesTotal: number = stats?.total && coins ? Math.ceil(stats?.total / params.limit)  : 0;
-	const periodVariants: string[] = coinsTableParams.periodValues;
-	const rowsVariants: string[] | undefined = coinsTableParams.rowsValues;
+	const periodVariants: string[] = tableParams.periodValues;
+	const rowsVariants: string[] | undefined = tableParams.rowsValues;
 	
 	const periodHandler = ( value: string) => {
 		setPeriod(value);
@@ -65,8 +68,8 @@ const CoinsList: React.FC<Props> = ({requiredCoins}: Props) => {
 	}
 
 	let tableColumns: string[] = [];
-	for (var key in coinsTableParams.columns) {
-		tableColumns.push(coinsTableParams.columns[key]);
+	for (var key in tableParams.columns) {
+		tableColumns.push(tableParams.columns[key].title);
 	}
 	const tableColumnsHead = tableColumns.map(item => <TableCell className={s.TableCell} key={item}>{item}</TableCell>)
 
@@ -75,7 +78,7 @@ const CoinsList: React.FC<Props> = ({requiredCoins}: Props) => {
 			{
 				periodVariants &&
 				<div className="header">
-					<MyTabs onchange = { periodHandler } value={period} items = {coinsTableParams.periodValues} />
+					<MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} />
 				</div>
 			}
 			

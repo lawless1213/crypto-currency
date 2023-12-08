@@ -1,4 +1,10 @@
-enum CoinsCharacter {
+export enum TableTypes {
+	COIN_MAIN = "main",
+	COIN_PORTFOLIO = "portfolio",
+	COIN_FAVORITES = "favorites"
+}
+
+export enum CoinsCharacter {
 	NAME = "Name",
 	PRICE = "Price",
 	CHANGE = "Change",
@@ -7,9 +13,12 @@ enum CoinsCharacter {
 	COUNT = "Count",
 }
 
-interface coinsTable {
+export interface ICoinsTable {
 	columns: {
-		[key: string]: string
+		[key: string]: {
+			title: string,
+			show: boolean,
+		}
 	},
 	rowsValues?: string[],
 	periodValues: string[],
@@ -19,29 +28,26 @@ interface coinsTable {
 	}
 }
 
-export const coinsTableParams: coinsTable = {
+export const portfolioTableParams: ICoinsTable = {
 	columns: {
-		name: CoinsCharacter.NAME,
-		price: CoinsCharacter.PRICE,
-		change: CoinsCharacter.CHANGE,
-		volume24h: CoinsCharacter.VOLUME24,
-		marketCap: CoinsCharacter.MARKETCAP,
+		name: {
+			title: CoinsCharacter.NAME,
+			show: true,
+		},
+		price: {
+			title: CoinsCharacter.PRICE,
+			show: true,
+		},
+		change: {
+			title: CoinsCharacter.CHANGE,
+			show: true,
+		},
+		count: {
+			title: CoinsCharacter.COUNT,
+			show: true,
+		},
 	},
 	rowsValues: ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50'],
-	periodValues: ['3h', '24h', '7d', '30d', '3m', '1y', '3y', '5y'],
-	defaultValues: {
-		rows: '10',
-		period: '24h',
-	}
-}
-
-export const portfolioTableParams: coinsTable = {
-	columns: {
-		name: CoinsCharacter.NAME,
-		price: CoinsCharacter.PRICE,
-		change: CoinsCharacter.CHANGE,
-		count: CoinsCharacter.COUNT,
-	},
 	periodValues: ['3h', '24h', '7d', '30d', '3m', '1y', '3y', '5y'],
 	defaultValues: {
 		rows: '10',

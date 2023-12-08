@@ -8,7 +8,7 @@ const Home = () => {
 
 	return (
 		<div className={s.Home}>
-			<CoinsList requiredCoins={usersCoins}/>
+			<CoinsList type='portfolio' requiredCoins={usersCoins}/>
 		</div>
 	)
 } 
