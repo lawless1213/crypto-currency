@@ -2,6 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { CoinsListResponse } from "../models/IAPI";
 import { ICoin } from "../models/ICoin";
 import { ApiParams } from "../models/IAPI"
+import { CoinsCharacter } from "../data/coins";
+
+
+export const availableSort: CoinsCharacter[] = [CoinsCharacter.PRICE, CoinsCharacter.MARKETCAP, CoinsCharacter.VOLUME24, CoinsCharacter.CHANGE];
 
 export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',

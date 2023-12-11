@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useDelayedData } from "../../hooks/delay";
-import { CoinAPI } from "../../services/CoinService";
+import { CoinAPI, availableSort } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { IStats } from "../../models/IStats";
 import { useAppSelector } from '../../hooks/redux';
@@ -20,7 +20,7 @@ import {
   Table,
   Paper,
 } from "@mui/material";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar, FaSortAmountDown } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import MyBadge from "../UI/MyBadge";
 import MyPagination from "../UI/MyPagination";
@@ -81,7 +81,25 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
   	.filter(column => column.show)
 		.map(column => column.title as CoinsCharacter);
 
-	const tableColumnsHead = tableColumns.map(item => <TableCell  onClick={() => orderHandler(item)} className={s.TableCell} key={item}>{item}</TableCell>)
+	const tableColumnsHead = tableColumns.map(item => {
+		const isSorting: boolean = availableSort.includes(item);
+		const element: JSX.Element = isSorting ? 
+		<TableCell onClick={() => orderHandler(item)} className={`${s.TableCell} ${s.Clickable}`} key={item}>
+			<div className={`${s.Content} ${s.Row}`}>
+				<span className="caption">{item}</span>
+				{
+					tableParams.defaultValues.order === item 
+					? 
+					<i className="icon"><FaSortAmountDown /></i>
+					:
+					''
+				}
+			</div>
+		</TableCell> : 
+		<TableCell className={`${s.TableCell}`} key={item}>{item}</TableCell>;
+
+		return element;
+	})
 
 	return (
 		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
