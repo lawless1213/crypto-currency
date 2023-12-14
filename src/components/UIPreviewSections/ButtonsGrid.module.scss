@@ -14,13 +14,13 @@
 		.Block	 {
 			display: flex;
 			flex-direction: column;
-			align-items: start;
+			align-items: flex-start;
 			gap: var(--buttons-grid-space);
 
 			.formBlock	 {
 				display: flex;
 				flex-direction: column;
-				align-items: start;
+				align-items: flex-start;
 				gap: var(--buttons-grid-space);
 			}
 		}

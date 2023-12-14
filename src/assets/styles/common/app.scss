@@ -4,7 +4,7 @@
 	grid-template-areas: 'aside header' 'aside main';
 	grid-template-columns: auto 1fr;
 	grid-template-rows: auto 1fr;
-	align-items: start;
+	align-items: flex-start;
 	min-height: 100dvh;
 	padding: var(--g-page-padding);
 	color: var(--g-color-fill);
