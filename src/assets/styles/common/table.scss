@@ -1,49 +1,59 @@
-th.table_cell,
-td.table_cell {
-	padding: 8px;
-	line-height: 1;
-	font-size: 14px;
-	color: var(--g-color-fill);
-	border-bottom: none;
+.table_section {
+	min-height: 350px;
+}
 
-	&.head_cell {
-		padding: 10px;
-		text-transform: uppercase;
-		color: var(--g-color-grey-600);
-	}
+div.table_wrap {
+	background: none;
+	border-radius: 0;
+	box-shadow: none;
 
-	&.clickable {
-		cursor: pointer;
-	}
+	th.table_cell,
+	td.table_cell {
+		padding: 8px;
+		line-height: 1;
+		font-size: 14px;
+		color: var(--g-color-fill);
+		border-bottom: none;
 
-	&:first-child {
-		padding-left: 24px;
-	}
+		&.head_cell {
+			padding: 10px;
+			text-transform: uppercase;
+			color: var(--g-color-grey-600);
+		}
 
-	&:last-child {
-		padding-right: 24px;
-	}
+		&.clickable {
+			cursor: pointer;
+		}
 
-	&:not(:first-child) {
-		text-align: right;
+		&:first-child {
+			padding-left: 24px;
+		}
 
-		> .content {
-			align-items: flex-end;
+		&:last-child {
+			padding-right: 24px;
+		}
 
-			&.row {
-				justify-content: flex-end;
+		&:not(:first-child) {
+			text-align: right;
+
+			> .content {
+				align-items: flex-end;
+
+				&.row {
+					justify-content: flex-end;
+				}
 			}
 		}
-	}
 
-	> .content {
-		display: flex;
-		flex-direction: column;
-		gap: 2px 6px;
+		> .content {
+			display: flex;
+			flex-direction: column;
+			gap: 2px 6px;
 
-		&.row {
-			flex-direction: row; 
-			align-items: center;
+			&.row {
+				flex-direction: row; 
+				align-items: center;
+			}
 		}
 	}
 }

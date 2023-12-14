@@ -1,5 +1,5 @@
 import CoinsList from "../../components/CoinsList/CoinsList";
-import CoinsListCompact from "../../components/CoinsListCompact/CoinsListCompact";
+import CoinsListCompact from "../../components/CoinsList/CoinsListCompact";
 
 const AllMarkets = () => {
 	return (

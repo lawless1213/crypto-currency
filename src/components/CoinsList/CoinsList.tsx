@@ -28,7 +28,6 @@ import MyTabs from "../UI/MyTabs";
 import HeadCell from "../UI/TableComponents/HeadCell";
 import RowCell from "../UI/TableComponents/RowCell";
 
-import s from './CoinsList.module.scss';
 interface Props {
 	type?: TableTypes,
 	title: string,
@@ -146,7 +145,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	})
 
 	return (
-		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
+		<section className={`panel_section table_section ${loading ? 'loading' : ''} ${error ? 'error' : ''}`}>
 			<div className="header">
 				<div className="section_title t-h2">{title}</div>
 				{ periodVariants && <MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} /> }
@@ -155,7 +154,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
 				{!error && tableBodyRows && 
-					<TableContainer className={s.TableWrap} component={Paper}>
+					<TableContainer className='table_wrap' component={Paper}>
 						<Table aria-label="simple table">
 							<TableHead>
 								<TableRow>
