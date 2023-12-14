@@ -7,14 +7,6 @@
 		box-shadow: none;
 		
 		.Table {
-			.TableHead {
-				.TableCell {
-					padding: 10px;
-					text-transform: uppercase;
-					color: var(--g-color-grey-600);
-				}
-			}
-
 			.TableBody {
 				.TableCell {
 					padding: 8px;
@@ -26,10 +18,6 @@
 				line-height: 1;
 				font-size: 14px;
 				border-bottom: none;
-
-				&.Clickable{
-					cursor: pointer;
-				}
 
 				&:first-child {
 					padding-left: 24px;

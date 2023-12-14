@@ -26,6 +26,7 @@ import MyBadge from "../UI/MyBadge";
 import MyPagination from "../UI/MyPagination";
 import MySelect from "../UI/MySelect";
 import MyTabs from "../UI/MyTabs";
+import HeadCell from "../UI/TableComponents/HeadCell";
 
 import s from './CoinsList.module.scss';
 interface Props {
@@ -84,19 +85,13 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	const tableColumnsHead = tableColumns.map(item => {
 		const isSorting: boolean = availableSort.includes(item);
 		const element: JSX.Element = isSorting ? 
-		<TableCell onClick={() => orderHandler(item)} className={`${s.TableCell} ${s.Clickable}`} key={item}>
-			<div className={`${s.Content} ${s.Row}`}>
-				<span className="caption">{item}</span>
-				{
-					tableParams.defaultValues.order === item 
-					? 
-					<i className="icon"><FaSortAmountDown /></i>
-					:
-					''
-				}
-			</div>
-		</TableCell> : 
-		<TableCell className={`${s.TableCell}`} key={item}>{item}</TableCell>;
+		<HeadCell 
+			item={item} 
+			icon={	tableParams.defaultValues.order === item ? <i className="icon"><FaSortAmountDown /></i> : undefined }
+			onclick={() => orderHandler(item)}
+		/> 
+		: 
+		<HeadCell item={item} />
 
 		return element;
 	})

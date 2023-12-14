@@ -4,6 +4,7 @@
 @use './default/colors.css';
 @use './default/default.scss';
 @use './default/scrollbar.scss';
+@use './default/icon.scss';
 @use './common/app.scss';
 @use './common/select.scss';
 @use './common/button.scss';
@@ -13,4 +14,5 @@
 @use './common/panel_section.scss';
 @use './common/loading.scss';
 @use './common/grid.scss';
+@use './common/table.scss';
 
