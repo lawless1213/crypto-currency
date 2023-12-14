@@ -52,7 +52,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		orderBy: tableParams.defaultValues.order ?? CoinsCharacter.MARKETCAP,
 	};
 
-	const { data: dataCoins, error, isLoading } = CoinAPI.useFetchAllCoinsQuery(params);
+	const { data: dataCoins, error } = CoinAPI.useFetchAllCoinsQuery(params);
 	const { displayData, loading } = useDelayedData({ data: dataCoins });
 	
 	const coins: ICoin[] | undefined = displayData?.data.coins;
@@ -61,6 +61,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	const periodVariants: string[] = tableParams.periodValues;
 	const rowsVariants: string[] | undefined = tableParams.rowsValues;
 	
+	// Handlers
 	const periodHandler = ( value: string) => {
 		setPeriod(value);
 	}
@@ -78,20 +79,68 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		dispatch(toggleOrder({table: tableType, order: value}));
 	}
 
+	// Columns
 	const tableColumns: CoinsCharacter[] = Object.values(tableParams.columns)
   	.filter(column => column.show)
 		.map(column => column.title as CoinsCharacter);
 
+	// Head cells
 	const tableColumnsHead = tableColumns.map(item => {
 		const isSorting: boolean = availableSort.includes(item);
 		const element: JSX.Element = isSorting ? 
 		<HeadCell 
+			key={item}
 			item={item} 
 			icon={	tableParams.defaultValues.order === item ? <i className="icon"><FaSortAmountDown /></i> : undefined }
 			onclick={() => orderHandler(item)}
 		/> 
 		: 
 		<HeadCell item={item} />
+
+		return element;
+	})
+
+	// Body rows
+	const tableBodyRows = coins && coins.map (coin => {
+		const element: JSX.Element = 
+		<TableRow key={coin.uuid}>
+			<RowCell contentClasses='row'>
+				<div className='square_img'><img src={coin.iconUrl} alt="" /></div>
+				<div className="title">
+					<div className='t-h3'>{coin.name}</div>
+					<div className='t-caption'>{coin.symbol}</div>
+				</div>
+			</RowCell>
+			{
+				tableColumns.includes(CoinsCharacter.PRICE) &&
+				<RowCell><span>{setCurrency(coin.price)}</span></RowCell>
+			}
+			{
+				tableColumns.includes(CoinsCharacter.CHANGE) &&
+				<RowCell>
+					<MyBadge 
+						text={`${Math.abs(Number(coin.change))}%`} 
+						icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+						classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+					/>
+				</RowCell>
+			}
+			{
+				tableColumns.includes(CoinsCharacter.VOLUME24) &&
+				<RowCell><span>{setCurrency(coin["24hVolume"])}</span></RowCell>
+			}
+			{
+				tableColumns.includes(CoinsCharacter.MARKETCAP) &&
+				<RowCell><span>{setCurrency(coin.marketCap)}</span></RowCell>
+			}
+			{
+				tableColumns.includes(CoinsCharacter.COUNT) &&
+				<RowCell>
+					<span className="t-h5">{user.portfolio.counts[coin.symbol] ?? 0}</span>
+					<span className="t-caption">{setAmount(user.portfolio.counts[coin.symbol], coin.price)}</span>
+				</RowCell>
+			}
+		</TableRow>
 
 		return element;
 	})
@@ -105,74 +154,26 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
-				{coins && coins?.length > 0 && 
+				{!error && tableBodyRows && 
 					<TableContainer className={s.TableWrap} component={Paper}>
-						<Table className={s.Table} aria-label="simple table">
-							<TableHead className={s.TableHead}>
-								<TableRow className={s.TableRow}>{tableColumnsHead}</TableRow>
+						<Table aria-label="simple table">
+							<TableHead>
+								<TableRow>
+									{tableColumnsHead}
+								</TableRow>
 							</TableHead>
-
-							<TableBody className={s.TableBody}>
-								{coins.map (coin => {
-									return (
-										<TableRow key={coin.uuid} className={s.TableRow}>
-											<RowCell contentClasses='row'>
-												<div className='square_img'><img src={coin.iconUrl} alt="" /></div>
-												<div className="title">
-													<div className={`${s.Name} t-h3`}>{coin.name}</div>
-													<div className={`${s.Symbol} t-caption`}>{coin.symbol}</div>
-												</div>
-											</RowCell>
-											{
-												tableColumns.includes(CoinsCharacter.PRICE) &&
-												<RowCell><span>{setCurrency(coin.price)}</span></RowCell>
-											}
-											{
-												tableColumns.includes(CoinsCharacter.CHANGE) &&
-												<RowCell>
-													<MyBadge 
-														text={`${Math.abs(Number(coin.change))}%`} 
-														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-														classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
-													/>
-												</RowCell>
-											}
-											{
-												tableColumns.includes(CoinsCharacter.VOLUME24) &&
-												<RowCell><span>{setCurrency(coin["24hVolume"])}</span></RowCell>
-											}
-											{
-												tableColumns.includes(CoinsCharacter.MARKETCAP) &&
-												<RowCell><span>{setCurrency(coin.marketCap)}</span></RowCell>
-											}
-											{
-												tableColumns.includes(CoinsCharacter.COUNT) &&
-												<RowCell>
-													<span className="t-h5">{user.portfolio.counts[coin.symbol] ?? 0}</span>
-													<span className="t-caption">{setAmount(user.portfolio.counts[coin.symbol], coin.price)}</span>
-												</RowCell>
-											}
-										</TableRow>
-									)
-								})}
+							<TableBody>
+								{tableBodyRows}
 							</TableBody>
 						</Table>
 					</TableContainer>
 				}
 			</div> 
-			
-			<div className="footer">
-				{
-					pagesTotal > 1 && 
-					<MyPagination page={page} countPages={pagesTotal} onchange={ pageHandler }/>
-				}
-				{
-					rowsVariants  && 
-					<MySelect onchange = { rowsHandler } value={countRow} items = {rowsVariants} />
-				}
-			</div>
 
-			
+			<div className="footer">
+				{ pagesTotal > 1 && <MyPagination page={page} countPages={pagesTotal} onchange={ pageHandler }/> }
+				{ rowsVariants  && <MySelect onchange = { rowsHandler } value={countRow} items = {rowsVariants} /> }
+			</div>
 		</section>
 	)
 }
