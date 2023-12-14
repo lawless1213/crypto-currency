@@ -45,7 +45,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 				<MyBadge 
 					text={`${Math.abs(Number(coin.change))}%`} 
 					icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-					classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+					classes={Math.abs(Number(coin.change)) === 0 ? 'border' : (isIncrementalChange(coin) ? 'success border' : 'danger border')}
 				/>
 			</RowCell>
 		</TableRow>
