@@ -1,23 +1,22 @@
 import { TableCell } from "@mui/material";
 
 interface Props {
-	item: string,
 	classes?: string,
-	icon?: JSX.Element,
+	contentClasses?: string,
 	children: string | JSX.Element | JSX.Element[],
 }
 
-const HeadCell: React.FC<Props> = ({item, icon, classes, children}) => {
-	const classNames = `table_cell head_cell ${classes} ${onclick ? 'clickable' : ''}`;
+const RowCell: React.FC<Props> = ({classes, contentClasses, children}) => {
+	const classNames = `table_cell row_cell ${classes}`;
+	const contentClassNames = `content ${contentClasses}`;
 
 	return(
 		<TableCell className={classNames}>
-			<div className='content row'>
-				<span className="caption">{item}</span>
-				{	icon }
+			<div className={contentClassNames}>
+				{children}
 			</div>
 		</TableCell>
 	)
 }
 
-export default HeadCell;
+export default RowCell;

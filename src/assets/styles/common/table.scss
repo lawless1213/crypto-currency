@@ -1,6 +1,9 @@
-th.table_cell {
+th.table_cell,
+td.table_cell {
+	padding: 8px;
 	line-height: 1;
 	font-size: 14px;
+	color: var(--g-color-fill);
 	border-bottom: none;
 
 	&.head_cell {

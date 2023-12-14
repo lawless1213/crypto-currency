@@ -12,7 +12,6 @@ import { user } from "../../data/user";
 import { toggleOrder } from "../../store/reducers/tablesParamsSlice";
 
 import {
-  TableCell,
   TableBody,
   TableRow,
   TableHead,
@@ -20,13 +19,14 @@ import {
   Table,
   Paper,
 } from "@mui/material";
-import { FaRegStar, FaStar, FaSortAmountDown } from "react-icons/fa";
+import { FaSortAmountDown } from "react-icons/fa";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import MyBadge from "../UI/MyBadge";
 import MyPagination from "../UI/MyPagination";
 import MySelect from "../UI/MySelect";
 import MyTabs from "../UI/MyTabs";
 import HeadCell from "../UI/TableComponents/HeadCell";
+import RowCell from "../UI/TableComponents/RowCell";
 
 import s from './CoinsList.module.scss';
 interface Props {
@@ -100,12 +100,9 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		<section className={`${s.CoinsList} ${loading ? 'loading' : ''} ${error ? 'error' : ''}  panel_section`}>
 			<div className="header">
 				<div className="section_title t-h2">{title}</div>
-				{
-					periodVariants &&
-					<MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} />
-				}
-				</div>
-			
+				{ periodVariants && <MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} /> }
+			</div>
+
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
 				{coins && coins?.length > 0 && 
@@ -119,89 +116,41 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 								{coins.map (coin => {
 									return (
 										<TableRow key={coin.uuid} className={s.TableRow}>
-											<TableCell
-												className={s.TableCell}
-												component="th"
-												scope="row"
-											>
-												<div className={s.MainCell}>
-													<FaRegStar className={s.Favorite} />
-													<div className={s.Image}>
-														<img
-															src={coin.iconUrl}
-															alt=""
-														/>
-													</div>
-													<div className="title">
-														<div className={`${s.Name} t-h3`}>{coin.name}</div>
-														<div className={`${s.Symbol} t-caption`}>{coin.symbol}</div>
-													</div>
+											<RowCell contentClasses='row'>
+												<div className='square_img'><img src={coin.iconUrl} alt="" /></div>
+												<div className="title">
+													<div className={`${s.Name} t-h3`}>{coin.name}</div>
+													<div className={`${s.Symbol} t-caption`}>{coin.symbol}</div>
 												</div>
-											</TableCell>
+											</RowCell>
 											{
 												tableColumns.includes(CoinsCharacter.PRICE) &&
-												<TableCell
-													className={s.TableCell}
-													component="th"
-													scope="row"
-												>
-													<div className={s.Content}>
-														<span>{setCurrency(coin.price)}</span>
-													</div>
-												</TableCell>
+												<RowCell><span>{setCurrency(coin.price)}</span></RowCell>
 											}
 											{
 												tableColumns.includes(CoinsCharacter.CHANGE) &&
-												<TableCell
-													className={s.TableCell}
-													component="th"
-													scope="row"
-												>
-													<div className={s.Content}>
-														<MyBadge 
-															text={`${Math.abs(Number(coin.change))}%`} 
-															icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
-															classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
-														/>
-													</div>
-												</TableCell>
+												<RowCell>
+													<MyBadge 
+														text={`${Math.abs(Number(coin.change))}%`} 
+														icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+														classes={Math.abs(Number(coin.change)) === 0 ? 'soft' : (isIncrementalChange(coin) ? 'success soft' : 'danger soft')}
+													/>
+												</RowCell>
 											}
 											{
 												tableColumns.includes(CoinsCharacter.VOLUME24) &&
-												<TableCell
-													className={s.TableCell}
-													component="th"
-													scope="row"
-												>
-													<div className={s.Content}>
-														<span>{setCurrency(coin["24hVolume"])}</span>
-													</div>
-												</TableCell>
+												<RowCell><span>{setCurrency(coin["24hVolume"])}</span></RowCell>
 											}
 											{
 												tableColumns.includes(CoinsCharacter.MARKETCAP) &&
-												<TableCell
-													className={s.TableCell}
-													component="th"
-													scope="row"
-												>
-													<div className={s.Content}>
-														<span>{setCurrency(coin.marketCap)}</span>
-													</div>
-												</TableCell>
+												<RowCell><span>{setCurrency(coin.marketCap)}</span></RowCell>
 											}
 											{
 												tableColumns.includes(CoinsCharacter.COUNT) &&
-												<TableCell
-													className={s.TableCell}
-													component="th"
-													scope="row"
-												>
-													<div className={s.Content}>
-														<span className="t-h5">{user.portfolio.counts[coin.symbol] ?? 0}</span>
-														<span className="t-caption">{setAmount(user.portfolio.counts[coin.symbol], coin.price)}</span>
-													</div>
-												</TableCell>
+												<RowCell>
+													<span className="t-h5">{user.portfolio.counts[coin.symbol] ?? 0}</span>
+													<span className="t-caption">{setAmount(user.portfolio.counts[coin.symbol], coin.price)}</span>
+												</RowCell>
 											}
 										</TableRow>
 									)
@@ -211,6 +160,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 					</TableContainer>
 				}
 			</div> 
+			
 			<div className="footer">
 				{
 					pagesTotal > 1 && 
