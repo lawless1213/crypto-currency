@@ -7,7 +7,6 @@ export enum TableTypes {
 export enum CoinsCharacter {
 	NAME = "name",
 	PRICE = "price",
-	CHANGE = "change",
 	VOLUME24 = "24hVolume",
 	MARKETCAP = "marketCap",
 	COUNT = "count",

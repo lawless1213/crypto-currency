@@ -5,7 +5,7 @@ import { ApiParams } from "../models/IAPI"
 import { CoinsCharacter } from "../data/coins";
 
 
-export const availableSort: CoinsCharacter[] = [CoinsCharacter.PRICE, CoinsCharacter.MARKETCAP, CoinsCharacter.VOLUME24, CoinsCharacter.CHANGE];
+export const availableSort: CoinsCharacter[] = [CoinsCharacter.PRICE, CoinsCharacter.MARKETCAP, CoinsCharacter.VOLUME24];
 
 export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',

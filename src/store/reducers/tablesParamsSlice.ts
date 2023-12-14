@@ -18,10 +18,6 @@ const initialState: IInitialState = {
 					title: CoinsCharacter.PRICE,
 					show: true,
 				},
-				[CoinsCharacter.CHANGE]: {
-					title: CoinsCharacter.CHANGE,
-					show: true,
-				},
 				[CoinsCharacter.VOLUME24]: {
 					title: CoinsCharacter.VOLUME24,
 					show: true,
@@ -54,10 +50,6 @@ const initialState: IInitialState = {
 					title: CoinsCharacter.PRICE,
 					show: true,
 				},
-				[CoinsCharacter.CHANGE]: {
-					title: CoinsCharacter.CHANGE,
-					show: true,
-				},
 				[CoinsCharacter.VOLUME24]: {
 					title: CoinsCharacter.VOLUME24,
 					show: false,
@@ -87,10 +79,6 @@ const initialState: IInitialState = {
 				},
 				[CoinsCharacter.PRICE]: {
 					title: CoinsCharacter.PRICE,
-					show: true,
-				},
-				[CoinsCharacter.CHANGE]: {
-					title: CoinsCharacter.CHANGE,
 					show: true,
 				},
 				[CoinsCharacter.VOLUME24]: {
