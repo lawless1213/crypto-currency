@@ -1,42 +1,56 @@
-import Select, { ActionMeta } from 'react-select';
+import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-type changeHandler = (value:number) => void;
+type changeHandler = (value:string) => void;
 type OptionType = { value: string; label: string };
 
 interface Props {
-	options: OptionType[],
+	options: OptionType[] | string[],
+    defaultValue?: OptionType | string,
 	search?: boolean,
+    customClassName?: string,
 	onchange: changeHandler,
 }
 
 
-const MySelect: React.FC<Props> = ({options, search, onchange}) => {
+const MySelect: React.FC<Props> = ({ options, defaultValue, customClassName, search, onchange }) => {
+    const convertToOptionType = (value: string): OptionType => ({
+      value,
+      label: value,
+    });
+  
+    const convertedOptions: OptionType[] = Array.isArray(options)
+        ? (options as string[]).map(convertToOptionType)
+        : (options as OptionType[]);
+
+    const convertedDefaultValue: OptionType = typeof defaultValue === 'string'
+        ? convertToOptionType(defaultValue as string)
+        : defaultValue as OptionType;
+        
+  
     const animatedComponents = makeAnimated();
     const isSearchable = search || false;
-    const defaultValue: OptionType | null = { value: '1', label: '1' };
-
-    const toggleLanguageHandler = (
-        newValue: any, // or ValueType<OptionType>
-        actionMeta: ActionMeta<OptionType>
-    ) => {
-        if (newValue && 'value' in newValue) {
-            const { value } = newValue as OptionType;
-            console.log(value);
-        }
+  
+    const changeHandler = (newValue: any) => {
+      if (newValue && 'value' in newValue) {
+        const { value } = newValue as OptionType;
+        onchange(value);
+      }
     };
-
+  
     return (
-        <Select
-            className="select select-language"
-            classNamePrefix="select"
-            isSearchable={isSearchable}
-            options={options}
-            defaultValue={defaultValue}
-            onChange={toggleLanguageHandler}
-            components={animatedComponents}
-        />
+      <Select
+        className={customClassName ?? 'select'}
+        classNamePrefix={customClassName ?? 'select'}
+        isSearchable={isSearchable}
+        // closeMenuOnScroll={true}
+        menuPlacement={'auto'}
+        options={convertedOptions}
+        defaultValue={convertedDefaultValue}
+        onChange={changeHandler}
+        components={animatedComponents}
+      />
     );
-};
-
-export default MySelect;
+  };
+  
+  export default MySelect;

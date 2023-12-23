@@ -18,10 +18,10 @@ import {
 } from "@mui/material";
 import { FaSortAmountDown } from "react-icons/fa";
 import MyPagination from "../UI/MyPagination";
-import MySelect from "../UI/MySelect";
 import MyTabs from "../UI/MyTabs";
 import HeadCell from "../UI/TableComponents/HeadCell";
 import CoinsListTableBody from "./CoinsListTableBody";
+import MySelect from "../UI/FormComponents/MySelect";
 
 interface Props {
 	type?: TableTypes,
@@ -64,8 +64,8 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		setPage(value);
 	}
 
-	const rowsHandler = ( value: number) => {
-		setCountRows(value);
+	const rowsHandler = ( value: string) => {
+		setCountRows(Number(value));
 		pageHandler(1);
 	}
 
@@ -98,11 +98,11 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		<section className={`panel_section table_section ${loading ? 'loading' : ''} ${error ? 'error' : ''}`}>
 			<div className="header">
 				<div className="section_title t-h2">{title}</div>
-				{ periodVariants && <MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} /> }
 			</div>
 
 			<div className={`content ${error ? '' : 'no_padding'}`}>
 				{error && <h1>Error...</h1>}
+				{ periodVariants && <MyTabs onchange = { periodHandler } value={period} items = {tableParams.periodValues} /> }
 				{!error && coins && 
 					<TableContainer className='table_wrap' component={Paper}>
 						<Table aria-label="simple table">
@@ -118,8 +118,8 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 			</div> 
 
 			<div className="footer">
+				{ rowsVariants  && <MySelect options={rowsVariants} defaultValue={countRow.toString()} onchange = { rowsHandler } /> }
 				{ pagesTotal > 1 && <MyPagination page={page} countPages={pagesTotal} onchange={ pageHandler }/> }
-				{ rowsVariants  && <MySelect onchange = { rowsHandler } value={countRow} items = {rowsVariants} /> }
 			</div>
 		</section>
 	)
