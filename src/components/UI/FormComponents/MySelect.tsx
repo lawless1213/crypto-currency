@@ -6,9 +6,9 @@ type OptionType = { value: string; label: string };
 
 interface Props {
 	options: OptionType[] | string[],
-    defaultValue?: OptionType | string,
+  defaultValue?: OptionType | string,
 	search?: boolean,
-    customClassName?: string,
+  customClassName?: string,
 	onchange: changeHandler,
 }
 
