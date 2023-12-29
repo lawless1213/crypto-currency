@@ -1,27 +1,30 @@
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-type changeHandler = (value:string) => void;
 type OptionType = { value: string; label: string };
+type onChangeHandler = (value:string) => void;
 
 interface Props {
 	options: OptionType[] | string[],
-  defaultValue?: OptionType | string,
+  defaultValue?: OptionType | string | undefined,
 	search?: boolean,
   customClassName?: string,
-	onchange: changeHandler,
+	onchange: onChangeHandler,
 }
 
 
 const MySelect: React.FC<Props> = ({ options, defaultValue, customClassName, search, onchange }) => {
-    const convertToOptionType = (value: string): OptionType => ({
+  const convertToOptionType = (value: string): OptionType => ({
       value,
       label: value,
     });
   
-    const convertedOptions: OptionType[] = Array.isArray(options)
-        ? (options as string[]).map(convertToOptionType)
-        : (options as OptionType[]);
+    const convertedOptions: OptionType[] = (options as (string | OptionType)[]).map((option) => {
+      if (typeof option === 'string') {
+        return convertToOptionType(option);
+      }
+      return option as OptionType;
+    });
 
     const convertedDefaultValue: OptionType = typeof defaultValue === 'string'
         ? convertToOptionType(defaultValue as string)
