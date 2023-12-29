@@ -1,31 +1,52 @@
-import MySelect from '../../components/UI/FormComponents/MySelect';
-import MyInput from '../../components/UI/FormComponents/MyInput';
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
+
+import MyDropdown from "../../components/UI/MyDropdown";
 
 import s from './FormUI.module.scss';
 
+interface IFormInput {
+  iceCreamType: { label: string; value: string }
+}
+
+const selectOptions = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+]
+
+
 const FormUI = () => {
-  const selectOptions = [
-    {value: '1', label: "first"}, 
-    {value: '2', label: "second"},
-    {value: '3', label: "third"}
-  ];
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      iceCreamType: { label: "", value: "" },
+    },
+  })
+  
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data)
+  }
 
   return (
     <div className={s.FormUI}>
       <div className="panel_section">
         <div className="header">
-          <div className="t-h2">MY SELECT</div>
+          <div className="t-h2">FORM EXAMPLE</div>
         </div>
         <div className="content">
-          <MySelect options={selectOptions} defaultValue={selectOptions[0]} onchange={(value) => console.log(value)}/>
-        </div>
-      </div>
-      <div className="panel_section">
-        <div className="header">
-          <div className="t-h2">MY INPUT</div>
-        </div>
-        <div className="content">
-          <MyInput/>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="iceCreamType"
+            control={control}
+            render={({ field }) => (
+              <MyDropdown
+                {...field}
+                options={selectOptions}
+                onchange={(value) => field.onChange(value)}
+              />
+            )}
+          />
+          <input type="submit" />
+        </form>
         </div>
       </div>
     </div>

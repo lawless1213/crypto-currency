@@ -1,11 +1,16 @@
-import ThemeToggler from "../../components/ThemeToggler/ThemeToggler";
+import MyDropdown from "../../components/UI/MyDropdown";
 import BadgesGrid from "../../components/UIPreviewSections/BadgesGrid";
 import ButtonsGrid from "../../components/UIPreviewSections/ButtonsGrid";
 import LinksGrid from "../../components/UIPreviewSections/LinksGrid";
 
+
 import s from './UI.module.scss';
 
-
+const selectOptions = [
+    {value: '1', label: "first"}, 
+    {value: '2', label: "second"},
+    {value: '3', label: "third"}
+  ];
 
 const UI = () => {
   return (
@@ -13,6 +18,14 @@ const UI = () => {
       <div className="panel_section loading">
         <div className="header"></div>
         <div className="content"></div>
+      </div>
+      <div className="panel_section">
+        <div className="header">
+          <div className="t-h2">MY DROPDOWN</div>
+        </div>
+        <div className="content">
+          <MyDropdown options={selectOptions} defaultValue={selectOptions[0]} onchange={(value) => console.log(value)}/>
+        </div>
       </div>
       <div className="panel_section">
         <div className="header">

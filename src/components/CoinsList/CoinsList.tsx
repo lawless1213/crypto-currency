@@ -21,7 +21,7 @@ import MyPagination from "../UI/MyPagination";
 import MyTabs from "../UI/MyTabs";
 import HeadCell from "../UI/TableComponents/HeadCell";
 import CoinsListTableBody from "./CoinsListTableBody";
-import MySelect from "../UI/FormComponents/MySelect";
+import MyDropdown from "../UI/MyDropdown";
 
 interface Props {
 	type?: TableTypes,
@@ -118,7 +118,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 			</div> 
 
 			<div className="footer">
-				{ rowsVariants  && <MySelect options={rowsVariants} defaultValue={countRow.toString()} onchange = { rowsHandler } /> }
+				{ rowsVariants  && <MyDropdown options={rowsVariants} defaultValue={countRow.toString()} onchange = { rowsHandler } /> }
 				{ pagesTotal > 1 && <MyPagination page={page} countPages={pagesTotal} onchange={ pageHandler }/> }
 			</div>
 		</section>

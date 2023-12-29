@@ -13,7 +13,7 @@ interface Props {
 }
 
 
-const MySelect: React.FC<Props> = ({ options, defaultValue, customClassName, search, onchange }) => {
+const MyDropdown: React.FC<Props> = ({ options, defaultValue, customClassName, search, onchange }) => {
   const convertToOptionType = (value: string): OptionType => ({
       value,
       label: value,
@@ -43,8 +43,8 @@ const MySelect: React.FC<Props> = ({ options, defaultValue, customClassName, sea
   
     return (
       <Select
-        className={customClassName ?? 'select'}
-        classNamePrefix={customClassName ?? 'select'}
+        className={customClassName ?? 'dropdown'}
+        classNamePrefix={customClassName ?? 'dropdown'}
         isSearchable={isSearchable}
         // closeMenuOnScroll={true}
         menuPlacement={'auto'}
@@ -56,4 +56,4 @@ const MySelect: React.FC<Props> = ({ options, defaultValue, customClassName, sea
     );
   };
   
-  export default MySelect;
+  export default MyDropdown;
