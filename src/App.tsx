@@ -9,8 +9,8 @@ function App() {
 
   return (
     <div className={`App ${themeMode}Mode`}>
-      {/* <Aside/> */}
-      {/* <Header/> */}
+      <Aside/>
+      <Header/>
       <Layout/>
     </div>
     
