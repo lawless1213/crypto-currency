@@ -18,9 +18,7 @@ const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins}: Props) => {
 	let navigate = useNavigate();
 
 	const ShowMoreHandler = (coin: ICoin) => {
-		// navigate(`/coin/${props.product.id}`);
-		console.log(coin);
-		
+		navigate(`/coin/${coin.symbol}`);
 	}
 
 	const renderRowCell = (coin: ICoin, columnType: string) => {
@@ -63,7 +61,7 @@ const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins}: Props) => {
 	};
 
 	const tableBodyRows = coins && coins.map(coin => (
-		<TableRow key={coin.uuid}>
+		<TableRow key={coin.uuid} onClick={() => ShowMoreHandler(coin)}>
 			<RowCell contentClasses='row'>
 				<div className='square_img'><img src={coin.iconUrl} alt="" /></div>
 				<div className="title">

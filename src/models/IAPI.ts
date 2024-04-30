@@ -2,7 +2,7 @@ import { ICoin } from "./ICoin";
 import { IStats } from "./IStats";
 
 export interface ApiParams {
-  limit: number,
+  limit?: number,
   referenceCurrencyUuid?: string,
   timePeriod?: string,
   'tiers[0]'?: string,

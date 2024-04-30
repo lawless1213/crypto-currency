@@ -51,7 +51,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	
 	const coins: ICoin[] | undefined = displayData?.data.coins;
 	const stats: IStats | undefined = displayData?.data.stats;
-	const pagesTotal: number = stats?.total && coins ? Math.ceil(stats?.total / params.limit)  : 0;
+	const pagesTotal: number = stats?.total && coins ? Math.ceil(stats?.total / (params.limit ?? stats?.total))  : 0;
 	const periodVariants: string[] = tableParams.periodValues;
 	const rowsVariants: string[] | undefined = tableParams.rowsValues;
 	
