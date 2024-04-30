@@ -1,6 +1,7 @@
 :root {
 	--g-color-light: #ffffff;
 	--g-color-dark: var(--g-color-grey-1000);
+	--logo-color: #F7931A;
 
 	--g-color-grey-100: #EEF0F4;
 	--g-color-grey-200: #DDE1E8;
