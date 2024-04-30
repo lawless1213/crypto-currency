@@ -1,7 +1,7 @@
 // import CoinsList from "../../components/CoinsList/CoinsList";
 import CoinsListCompact from "../../components/CoinsList/CoinsListCompact";
 
-import s from './Market.module.scss'
+import s from './index.module.scss';
 
 const Market = () => {
 	return (

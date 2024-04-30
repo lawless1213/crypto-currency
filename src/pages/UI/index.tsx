@@ -4,7 +4,7 @@ import ButtonsGrid from "../../components/UIPreviewSections/ButtonsGrid";
 import LinksGrid from "../../components/UIPreviewSections/LinksGrid";
 
 
-import s from './UI.module.scss';
+import s from './index.module.scss';
 
 const selectOptions = [
     {value: '1', label: "first"}, 

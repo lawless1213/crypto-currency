@@ -2,7 +2,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form"
 
 import MyDropdown from "../../components/UI/MyDropdown";
 
-import s from './FormUI.module.scss';
+import s from './index.module.scss';
 
 interface IFormInput {
   iceCreamType: { label: string; value: string }

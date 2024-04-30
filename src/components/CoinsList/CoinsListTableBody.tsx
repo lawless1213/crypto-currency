@@ -1,4 +1,5 @@
-import { CoinsCharacter, TableTypes } from "../../data/coins";
+import { CoinsCharacter } from "../../data/coins";
+import { useNavigate } from 'react-router-dom';
 import { ICoin } from "../../models/ICoin";
 import { setCurrency, setAmount, isIncrementalChange } from "../../services/CoinService";
 import { user } from "../../data/user";
@@ -14,6 +15,14 @@ interface Props {
 }
 
 const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins}: Props) => {
+	let navigate = useNavigate();
+
+	const ShowMoreHandler = (coin: ICoin) => {
+		// navigate(`/coin/${props.product.id}`);
+		console.log(coin);
+		
+	}
+
 	const renderRowCell = (coin: ICoin, columnType: string) => {
 		switch (columnType) {
 			case CoinsCharacter.PRICE:

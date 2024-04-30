@@ -2,7 +2,7 @@ import CoinsList from "../../components/CoinsList/CoinsList";
 import { TableTypes } from "../../data/coins";
 import { user } from "../../data/user";
 
-import s from './Home.module.scss'
+import s from './index.module.scss';
 
 const Home = () => {
 	const usersCoins: string[] = user.portfolio.list;
