@@ -12,7 +12,7 @@ const Aside = () => {
 	let { asideMode } = useAppSelector(state => state.SettingsReducer);
 	
 	return (
-		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section`}>
+		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section desktop_only`}>
 			<div className="header">
 				<MyLogo compact={asideMode === AsideModes.SMALL_MODE}/>
 			</div>

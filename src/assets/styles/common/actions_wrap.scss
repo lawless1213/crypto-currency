@@ -1,0 +1,40 @@
+.actions_wrap {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	gap: 8px;
+
+	&.wide {
+		width: 100%;
+	}
+
+	&.no_wrap {
+		flex-wrap: nowrap;
+
+		> * {
+			flex: 1;
+		}
+	}
+
+	&.column {
+		flex-flow: column nowrap;
+	}
+
+	&.space-between {
+		justify-content: space-between;
+	}
+
+	&.center {
+		justify-content: center;
+	}
+
+	&.no_space {
+		gap: 0;
+	}
+
+	@for $j from 1 through 20 {
+		&.gap_#{$j * 2 } {
+			gap: #{$j * 2}px;
+		}
+	}
+}

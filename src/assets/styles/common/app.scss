@@ -1,31 +1,41 @@
+@use '../default/brakepoints.scss' as *;
+
 .App {
 	position: relative;
-	display: grid;
-	grid-template-areas: 'aside header' 'aside main';
-	grid-template-columns: auto 1fr;
-	grid-template-rows: auto 1fr;
-	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
 	min-height: 100dvh;
 	padding: var(--g-page-padding);
 	color: var(--g-color-fill);
 	background: var(--g-color-background);
 	gap: 16px;
 
-	aside {
-		grid-area: aside;
-		animation: 0.6s ease show;
-	}
-
-	header {
-		grid-area: header;
-		animation: 0.6s ease show;
-	}
-
+	aside,
+	header,
 	main {
-		grid-area: main;
-
 		> * {
 			animation: 0.6s ease show;
+		}
+	}
+
+	@media ($md <= width) {
+		display: grid;
+		grid-template-areas: 'aside header' 
+												'aside main';
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto 1fr;
+		align-items: flex-start;
+
+		aside {
+			grid-area: aside;
+		}
+	
+		header {
+			grid-area: header;
+		}
+	
+		main {
+			grid-area: main;
 		}
 	}
 }
