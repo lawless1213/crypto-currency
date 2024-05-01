@@ -6,6 +6,7 @@ import AllMarkets from './AllMarkets';
 import Coin from './Coin';
 import UI from './UI';
 import FormUI from './FormUI';
+import Profile from './Profile';
 
 const Layout = () => {
 	
@@ -13,6 +14,7 @@ const Layout = () => {
 		<main className="main">
 			<Routes>
 				<Route path='/' element={<Home/>}></Route>
+        <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/market' element={<Market/>}></Route>
         <Route path='/allmarkets' element={<AllMarkets/>}></Route>
         <Route path='/coin/:coinSymbol' element={<Coin/>}></Route>

@@ -1,10 +1,21 @@
 import { user } from '../../data/user';
+import { NavLink } from 'react-router-dom';
 import s from './PanelUser.module.scss';
 
 const PanelUser = () => {
 	return (
 		<div className={s.PanelUser}>
-			<div className={`${s.Name} t-h5`}>{user.firstName} {user.lastName}</div>
+			<NavLink 
+				className={({ isActive }) =>
+					[
+						'link primary',
+						isActive ? 'active' : ""
+					].join(" ")
+				}	 
+					to={'/profile'}
+				>
+					<span>{user.firstName} {user.lastName}</span>
+				</NavLink>	
 		</div>
 	)
 }
