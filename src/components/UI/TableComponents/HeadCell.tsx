@@ -12,7 +12,7 @@ interface Props {
 
 const HeadCell: React.FC<Props> = ({item, icon, classes, contentClasses, onclick}) => {
 	const classNames = `table_cell head_cell ${classes} ${onclick ? 'clickable' : ''}`;
-	const contentClassNames = `content row ${contentClasses}`;
+	const contentClassNames = `content row ${contentClasses || ''}`;
 	const handleClick = onclick ? () => onclick(item) : undefined;
 
 	return(

@@ -24,7 +24,8 @@ const Aside = () => {
 								className={({ isActive }) =>
 									[
 										s.Item,
-										isActive ? s.Active : ""
+										'button primary',
+										isActive ? 'active' : "border"
 									].join(" ")
 								}	 
 								to={item.url} key={item.title}

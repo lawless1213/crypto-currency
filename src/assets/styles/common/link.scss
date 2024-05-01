@@ -1,34 +1,45 @@
 .link {
 	--link-text-color: var(--g-color-grey-700);
 	--link-hover-color: var(--g-color-grey-900);
+	--link-text-size: 16px;
+	--link-text-weight: 500;
+	--link-icon-size: 20px;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 4px;
+	min-width: 0px !important;
+	font-size: var(--link-text-size);
+	font-weight: var(--link-text-weight);
 	text-decoration: none;
 	white-space: nowrap;
-	color: var(--link-text-color-state, var(--link-text-color));
+	color: var(--link-text-color-state, var(--link-text-color)) !important;
 	transition: 0.2s;
+	gap: 4px;
 	cursor: pointer;
 
 	span {
-		font-size: 16px;
-		font-weight: 500;
+		font-size: var(--link-text-size);
+		font-weight: var(--link-text-weight);
 	}
 
 	.icon {
-		font-size: 20px;
+		font-size: var(--link-icon-size);
 
 		svg {
 			display: block;
 		}
 	}
 
-	&:hover,
 	&:active,
-	&.active {
+	&:hover {
 		--link-text-color-state: var(--link-hover-color);
+	}
+
+	&.active,
+	&.Mui-selected {
+		--link-text-color-state: var(--link-hover-color);
+		pointer-events: none;
 	}
 
 	&:disabled,
@@ -37,6 +48,8 @@
 		pointer-events: none;
 		opacity: 0.4;
 	}	
+
+
 
 	&.primary {
 		--link-text-color: var(--g-color-primary-600);
@@ -74,24 +87,13 @@
 	}
 
 	&.small {
-		span {
-			font-size: 14px;
-			font-weight: 400;
-		}
-	
-		.icon {
-			font-size: 16px;
-		}
+		--link-text-size: 14px;
+		--link-icon-size: 16px;
 	}
 
 	&.big {
-		span {
-			font-size: 18px;
-		}
-	
-		.icon {
-			font-size: 24px;
-		}
+		--link-text-size: 18px;
+		--link-icon-size: 24px;
 	}
 
 	&.text_first {

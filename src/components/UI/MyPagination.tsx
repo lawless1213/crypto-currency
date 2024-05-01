@@ -20,7 +20,7 @@ const MyPagination: React.FC<Props> = ({countPages, onchange, page, classes, cla
 	}
 
 	const classNames = `pagination ${classes}`;
-	const classBtnNames = classesBtn ?? 'link light';
+	const classBtnNames = classesBtn ?? 'link info';
 
 	const { items } = usePagination({
     count: countPages,

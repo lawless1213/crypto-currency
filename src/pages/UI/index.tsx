@@ -16,12 +16,14 @@ const UI = () => {
   return (
     <div className={s.UI}>
       <div className="panel_section loading">
-        <div className="header"></div>
+        <div className="header">
+          <div className="t-h2">SECTION LOADING</div>
+        </div>
         <div className="content"></div>
       </div>
       <div className="panel_section">
         <div className="header">
-          <div className="t-h2">MY DROPDOWN</div>
+          <div className="t-h2">DROPDOWN</div>
         </div>
         <div className="content">
           <MyDropdown options={selectOptions} defaultValue={selectOptions[0]} onchange={(value) => console.log(value)}/>

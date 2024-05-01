@@ -15,16 +15,12 @@ const HeaderNav = () => {
 					{
 						items.map( item => 
 							<NavLink 
-								className={({ isActive }) =>
-									[
-										'button', 
-										'primary', 
-										'border', 
-										'compact',
-										s.Item,
-										isActive ? s.Active : ""
-									].join(" ")
-								}	 
+							className={({ isActive }) =>
+								[
+									'button primary compact',
+									isActive ? 'active' : "border"
+								].join(" ")
+							}	 
 								to={item.url} key={item.title}
 							>
 								<div className={`${s.Icon} icon`}><item.icon /></div>

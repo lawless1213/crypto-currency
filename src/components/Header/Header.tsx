@@ -22,7 +22,7 @@ const Header = () => {
 	return (
 		<header className={`${s.Header} header panel_section`}>
 			<div className={`${s.Content} content`}>
-				<MyButton onclick={toggleAsideHandler} classes='border compact desktop_only' icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
+				<MyButton onclick={toggleAsideHandler} classes='primary transparent compact desktop_only' icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
 				<div className="space" style={{flex: 1}}></div>
 				<ThemeToggler width="60px"/>
 				<PanelUser/>

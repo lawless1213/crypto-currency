@@ -20,9 +20,9 @@ export const menu: IAsideMenuItem[] = [
 		url: '/allmarkets',
 		icon: FaCoins
 	},
-	// {
-	// 	title: 'UI Components',
-	// 	url: '/ui-components',
-	// 	icon: TbAppsFilled
-	// }
+	{
+		title: 'UI Components',
+		url: '/ui-components',
+		icon: TbAppsFilled
+	}
 ]
