@@ -12,13 +12,13 @@ interface Props {
 const MyLogo: React.FC<Props> = ({compact, isLink, size}: Props) => {
 	return (
 		<NavLink
-			className={`${s.Logo} ${size && s[size]}`}
+			className={`logo ${s.Logo} ${size && s[size]}`}
 			to='/'
 		>
-			<div className={s.Image}>
+			<div className={`logo_image ${s.Image}`}>
 				<img src={Params.logo} alt="" />
 			</div>
-			{!compact && <span className={`${s.Caption} t-h2`}>{Params.title}</span>}
+			{!compact && <span className={`${s.Caption} logo_caption t-h2`}>{Params.title}</span>}
 		</NavLink>
 	)
 }

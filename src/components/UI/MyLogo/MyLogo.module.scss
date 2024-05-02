@@ -26,9 +26,13 @@
 		transition: 0.5s ease;
 	}
 
-	.Image,
-	.Caption {
+	.Image{
 		animation: 0.6s ease show;
+	}
+	
+	.Caption {
+		opacity: 0;
+		animation: 0.6s ease 0.2s show forwards;
 	}
 
 	&:hover {

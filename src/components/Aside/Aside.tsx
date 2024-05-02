@@ -24,7 +24,7 @@ const Aside = () => {
 								className={({ isActive }) =>
 									[
 										s.Item,
-										'button primary',
+										'button primary big jc_left',
 										isActive ? 'active' : "border"
 									].join(" ")
 								}	 
