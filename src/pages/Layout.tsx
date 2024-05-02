@@ -17,7 +17,7 @@ const Layout = () => {
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/market' element={<Market/>}></Route>
         <Route path='/allmarkets' element={<AllMarkets/>}></Route>
-        <Route path='/coin/:coinSymbol' element={<Coin/>}></Route>
+        <Route path='/coin/:coinParams' element={<Coin/>}></Route>
         <Route path='/ui-components' element={<UI/>}></Route>
         <Route path='/ui-form' element={<FormUI/>}></Route>
       </Routes>

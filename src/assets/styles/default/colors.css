@@ -80,6 +80,7 @@
 .lightMode {
 	--g-color-background: var(--g-color-grey-100);
 	--g-color-panel: var(--g-color-grey-200);
+	--g-color-panel-hover: var(--g-color-grey-300);
 	--g-color-divider: var(--g-color-grey-500);
 	--g-color-form-elements: var(--g-color-grey-300);
 	--g-color-fill: var(--g-color-dark);
@@ -89,6 +90,7 @@
 .darkMode {
 	--g-color-background: var(--g-color-grey-1000);
 	--g-color-panel: var(--g-color-grey-900);
+	--g-color-panel-hover: var(--g-color-grey-800);
 	--g-color-divider: var(--g-color-grey-800);
 	--g-color-form-elements: var(--g-color-grey-800);
 	--g-color-fill: var(--g-color-light);

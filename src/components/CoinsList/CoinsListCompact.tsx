@@ -1,4 +1,5 @@
 import { CoinAPI } from "../../services/CoinService";
+import { useNavigate } from 'react-router-dom';
 import { ICoin } from "../../models/ICoin";
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
 import { useDelayedData } from "../../hooks/delay";
@@ -20,6 +21,12 @@ interface Props {
 }
 
 const CoinsListCompact: React.FC<Props> = ({sortType}) => {
+	let navigate = useNavigate();
+
+	const ShowMoreHandler = (coin: ICoin) => {
+		navigate(`/coin/${coin.uuid}_${coin.name}`);
+	}
+
 	const params = {
 		limit: 5,
 		orderBy: sortType,
@@ -32,7 +39,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 
 	const tableBodyRows = coins && coins.map (coin => {
 		const element: JSX.Element = 
-		<TableRow key={coin.uuid}>
+		<TableRow className='row_link' key={coin.uuid} onClick={() => ShowMoreHandler(coin)}>
 			<RowCell contentClasses='row'>
 				<div className='square_img'><img src={coin.iconUrl} alt="" /></div>
 				<div className="title">

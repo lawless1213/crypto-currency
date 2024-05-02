@@ -7,6 +7,15 @@ div.table_wrap {
 	border-radius: 0;
 	box-shadow: none;
 
+	.row_link {
+		transition: 0.2s;
+		cursor: pointer;
+
+		&:hover {
+			background: var(--g-color-panel-hover);
+		}
+	}
+
 	th.table_cell,
 	td.table_cell {
 		padding: 8px;

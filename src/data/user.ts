@@ -13,9 +13,12 @@ export const user: User = {
 	firstName: "Andrii",
 	lastName: "Lototskyi",
 	portfolio: {
-		list: ['BTC'],
+		list: ['BTC', 'BNB', 'USDT', 'FDUSD'],
 		counts: {
-			'BTC': 0.00293579,
+			'BTC': 0.00232579,
+			'BNB': 0.14616301,
+			'USDT': 47.3634178,
+			'FDUSD': 0.011,
 		}
 	}
 }

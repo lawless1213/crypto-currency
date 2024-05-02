@@ -5,7 +5,7 @@ import { CoinAPI, availableSort } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
 import { IStats } from "../../models/IStats";
 import { useAppSelector } from '../../hooks/redux';
-import { ApiParams } from "../../models/IAPI";
+import { CoinsListApiParams } from "../../models/IAPI";
 import { CoinsCharacter, TableTypes } from "../../data/coins";
 import { toggleOrder } from "../../store/reducers/tablesParamsSlice";
 
@@ -38,11 +38,11 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	const [page, setPage] = useState(1);
 	const [period, setPeriod] = useState(tableParams.defaultValues && tableParams.defaultValues.period);
 
-	let params: ApiParams = {
+	let params: CoinsListApiParams = {
 		limit: countRow,
 		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 		timePeriod: period,
-		'symbols[0]': requiredCoins ? requiredCoins.join() : undefined,
+		symbols: requiredCoins,
 		orderBy: tableParams.defaultValues.order ?? CoinsCharacter.MARKETCAP,
 	};
 

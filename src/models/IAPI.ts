@@ -1,12 +1,14 @@
 import { ICoin } from "./ICoin";
+import { ICoinDetail } from "./ICoinDetail";
 import { IStats } from "./IStats";
 
-export interface ApiParams {
+// Coins List
+export interface CoinsListApiParams {
   limit?: number,
   referenceCurrencyUuid?: string,
   timePeriod?: string,
   'tiers[0]'?: string,
-  'symbols[0]'?: string,
+  symbols?: string[],
   orderBy?: string,
   orderDirection?: string,
   offset?: string
@@ -17,5 +19,19 @@ export interface CoinsListResponse {
   data: {
     stats: IStats;
     coins: ICoin[];
+  };
+}
+
+// Coin Detail
+export interface CoinDetailApiParams {
+  uuid: string,
+  referenceCurrencyUuid?: string,
+  timePeriod?: string,
+};
+
+export interface CoinDetailResponse {
+  status: string;
+  data: {
+    coin: ICoinDetail;
   };
 }
