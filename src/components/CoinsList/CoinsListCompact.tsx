@@ -61,7 +61,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 	})
 
 	return (
-		<section className={`panel_section table_section ${loading ? 'loading' : ''} ${error ? 'error' : ''}`}>
+		<section className={`panel_section middle_section ${loading ? 'loading' : ''} ${error ? 'error' : ''}`}>
 			<div className="header">
 				<span className="t-lead">{Params.coinsSections.sortedByTitle[sortType]}</span>
 			</div>

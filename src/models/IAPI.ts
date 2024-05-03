@@ -1,5 +1,5 @@
 import { ICoin } from "./ICoin";
-import { ICoinDetail } from "./ICoinDetail";
+import { ICoinDetail, ICoinPriceHistory } from "./ICoinDetail";
 import { IStats } from "./IStats";
 
 // Coins List
@@ -33,5 +33,20 @@ export interface CoinDetailResponse {
   status: string;
   data: {
     coin: ICoinDetail;
+  };
+}
+
+// Coin Detail
+export interface CoinPriceHistoryApiParams {
+  uuid: string,
+  referenceCurrencyUuid?: string,
+  timePeriod?: string,
+};
+
+export interface CoinPriceHistoryResponse {
+  status: string;
+  data: {
+    change: string;
+    history: ICoinPriceHistory[];
   };
 }

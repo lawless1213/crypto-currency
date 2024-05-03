@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { ICoin } from "../models/ICoin";
 import { CoinsListApiParams, CoinsListResponse} from "../models/IAPI"
 import { CoinDetailApiParams, CoinDetailResponse} from "../models/IAPI"
+import { CoinPriceHistoryApiParams, CoinPriceHistoryResponse} from "../models/IAPI"
 import { CoinsCharacter } from "../data/coins";
 
 
@@ -35,7 +36,7 @@ export const CoinAPI = createApi({
 				};
 			}
 		}),
-		fetchCoinDetail: build.query<CoinDetailResponse, { uuid: string, referenceCurrencyUuid?: string, interval?: string, limit?: number, }>({
+		fetchCoinDetail: build.query<CoinDetailResponse, { uuid: string, referenceCurrencyUuid?: string, timePeriod?: string, }>({
 			query: (params) => {
 				const defaultParams: CoinDetailApiParams = {
 					uuid: '',
@@ -49,6 +50,28 @@ export const CoinAPI = createApi({
 
 				return {
 					url: `/coin/${params.uuid}`,
+					params: mergedParams,
+					headers: {
+							'X-RapidAPI-Key': '8f3327a863mshf1d76badd7b8c7cp1f13b4jsn4dc544205eb9',
+							'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+					}
+				};
+			}
+		}),
+		fetchCoinPriceHistory: build.query<CoinPriceHistoryResponse, { uuid: string, referenceCurrencyUuid?: string, timePeriod?: string }>({
+			query: (params) => {
+				const defaultParams: CoinPriceHistoryApiParams = {
+					uuid: '',
+					referenceCurrencyUuid: 'yhjMzLPhuIDl',
+					timePeriod: '24h',
+				};
+
+				const mergedParams = Object.fromEntries(
+					Object.entries({ ...defaultParams, ...params }).filter(([key, _]) => key !== 'uuid')
+				);;
+
+				return {
+					url: `/coin/${params.uuid}/history`,
 					params: mergedParams,
 					headers: {
 							'X-RapidAPI-Key': '8f3327a863mshf1d76badd7b8c7cp1f13b4jsn4dc544205eb9',

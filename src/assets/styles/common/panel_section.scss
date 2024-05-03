@@ -8,6 +8,14 @@
 	border-radius: 12px;
 	gap: 20px;
 
+	&.middle_section {
+		min-height: 350px;
+	}
+	
+	&.big_section {
+		min-height: 600px;
+	}
+
 	&.no_padding {
 		padding: 0;
 	}
@@ -37,6 +45,7 @@
 
 	> .content {
 		padding: 0 24px;
+		flex: 1;
 
 		&.no_padding {
 			padding: 0;

@@ -48,3 +48,8 @@ export interface ICoinDetail {
   contractAddresses: any[];
   tags: string[];
 }
+
+export interface ICoinPriceHistory {
+  price: string;
+  timestamp: number;
+}

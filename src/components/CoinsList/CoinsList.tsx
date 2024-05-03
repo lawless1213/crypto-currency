@@ -100,7 +100,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 	})
 
 	return (
-		<section className={`panel_section table_section ${loading ? 'loading' : ''} ${error ? 'error' : ''}`}>
+		<section className={`panel_section middle_section ${loading ? 'loading' : ''} ${error ? 'error' : ''}`}>
 			<div className="header">
 				<div className="section_title t-h2">{title}</div>
 			</div>
