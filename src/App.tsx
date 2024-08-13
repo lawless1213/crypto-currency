@@ -6,10 +6,8 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import Layout from './pages/Layout';
 
 function App() {
-	let { themeMode } = useAppSelector(state => state.SettingsReducer);
-
   return (
-    <div className={`App ${themeMode}Mode`}>
+    <div className='App'>
       <Aside/>
       <Header/>
       <HeaderNav/>

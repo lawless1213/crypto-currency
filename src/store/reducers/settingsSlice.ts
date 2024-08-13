@@ -4,12 +4,16 @@ import { AsideModes } from "../../models/IAside";
 
 
 function getStorageTheme(): ThemeModes.DARK_MODE | ThemeModes.LIGHT_MODE | null {
-  const mode: string | null = localStorage.getItem(THEME_MODE_KEY);
-  return mode ? JSON.parse(mode) : null;
+  const storageThemeValue: string | null = localStorage.getItem(THEME_MODE_KEY);
+	const themeMode = storageThemeValue ? JSON.parse(storageThemeValue) : ThemeModes.DARK_MODE;
+
+	document.documentElement.setAttribute('data-theme', themeMode);
+
+  return themeMode;
 }
 
 const initialState = {
-	themeMode: getStorageTheme() || ThemeModes.DARK_MODE,
+	themeMode: getStorageTheme(),
 	asideMode: AsideModes.FULL_MODE,
 }
 
@@ -20,6 +24,7 @@ export const settingsSlice = createSlice({
 		toggleTheme(state) {
 			let newTheme = state.themeMode === ThemeModes.LIGHT_MODE ? ThemeModes.DARK_MODE : ThemeModes.LIGHT_MODE;
 			localStorage.setItem(THEME_MODE_KEY, JSON.stringify(newTheme));
+			document.documentElement.setAttribute('data-theme', newTheme);
 
 			return {...state, themeMode: newTheme}
 		},

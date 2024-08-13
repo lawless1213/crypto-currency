@@ -18,3 +18,11 @@
 @use 'common/grid.scss';
 @use 'common/table.scss';
 @use 'common/media_devices.scss';
+
+// @at-root [data-theme="dark"] & {
+// 	--test-var: black;
+// }
+
+// @at-root [data-theme="light"] & {
+// 	--test-var: white;
+// }
