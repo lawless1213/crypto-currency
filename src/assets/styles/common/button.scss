@@ -16,6 +16,15 @@
 	--button-hover-border-color: var(--g-color-grey-700);
 	--button-hover-border-size: 0px;
 
+	// TODO: refactor buttons color
+	// @at-root [data-theme="dark"] & {
+    
+  // }
+
+  // @at-root [data-theme="light"] & {
+    
+  // }
+
 	display: flex;
 	justify-content: center;
 	align-items: center;

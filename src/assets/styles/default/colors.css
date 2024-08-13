@@ -1,6 +1,6 @@
 :root {
 	--g-color-light: #ffffff;
-	--g-color-dark: var(--g-color-grey-1000);
+	--g-color-dark: var(--g-color-purple-800);
 	--logo-color: #F7931A;
 
 	--g-color-grey-100: #EEF0F4;
@@ -24,7 +24,7 @@
 	--g-color-primary-600: #319DFF;
 	--g-color-primary-700: #0077E4;
 	--g-color-primary-800: #005098;
-	--g-color-primary-800: #161B21;
+	--g-color-primary-900: #161B21;
 
 	--g-color-purple-100: #ECD0FD;
 	--g-color-purple-200: #D8A1FA;
@@ -34,7 +34,7 @@
 	--g-color-purple-600: #800AC7;
 	--g-color-purple-700: #600896;
 	--g-color-purple-800: #400564;
-	--g-color-purple-800: #200332;
+	--g-color-purple-900: #200332;
 
 	--g-color-success-100: #CAFBEC;
 	--g-color-success-200: #95F7D9;
@@ -44,7 +44,7 @@
 	--g-color-success-600: #0DA678;
 	--g-color-success-700: #0A7D5A;
 	--g-color-success-800: #06533C;
-	--g-color-success-800: #032A1E;
+	--g-color-success-900: #032A1E;
 
 	--g-color-danger-100: #FFE5EC;
 	--g-color-danger-200: #FFCBD9;
@@ -54,7 +54,7 @@
 	--g-color-danger-600: #FF316A;
 	--g-color-danger-700: #E4003F;
 	--g-color-danger-800: #98002A;
-	--g-color-danger-800: #4C0015;
+	--g-color-danger-900: #4C0015;
 
 	--g-color-warning-100: #FFF2DA;
 	--g-color-warning-200: #FFE6B5;
@@ -64,7 +64,7 @@
 	--g-color-warning-600: #FFAA04;
 	--g-color-warning-700: #C28100;
 	--g-color-warning-800: #825600;
-	--g-color-warning-800: #412B00;
+	--g-color-warning-900: #412B00;
 
 	--g-color-info-100: #CAF6F9;
 	--g-color-info-200: #95EDF2;
@@ -74,7 +74,7 @@
 	--g-color-info-600: #129199;
 	--g-color-info-700: #0E6D73;
 	--g-color-info-800: #09484C;
-	--g-color-info-800: #052426;
+	--g-color-info-900: #052426;
 }
 
 [data-theme='light'] {
