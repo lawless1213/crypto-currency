@@ -10,12 +10,11 @@ interface InitialStateInterface {
 
 const initialState:InitialStateInterface = {
 	data: null,
-	status: 'loading',
+	status: '',
 };
 
-export const fetchRegister = createAsyncThunk('auth/fetchUserData', async (params: UserRegisterParams) => {
-	const { data } = await axios.post('/auth/register', params);
-
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (user: UserRegisterParams) => {
+	const { data } = await axios.post('/auth/register', user);
 	return data;
 })
 
