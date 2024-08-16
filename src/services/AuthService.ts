@@ -1,7 +1,17 @@
-import axios from "axios";
+import { getAuth, signOut } from "firebase/auth";
+import { removeUser } from "store/reducers/userSlice";
+import { useNavigate } from "react-router-dom";
 
-const instance = axios.create({
-	baseURL: 'http://localhost:4444',
-})
+const handleSignOut = () => {
+	const navigate = useNavigate();
+	const auth = getAuth();
 
-export default instance;
+	signOut(auth).then(() => {
+		removeUser();
+		navigate('/');
+	}).catch((error) => {
+		console.error("An error happened during sign-out:", error);
+	});
+};
+
+export default { handleSignOut }

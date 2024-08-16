@@ -5,6 +5,8 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { setupStore } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
+import './firebase/firebase';
+import { AuthProvider } from 'store/context/AuthContext';
 
 const store = setupStore();
 
@@ -15,7 +17,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter basename='/crypto-currency'>
     <Provider store={store}>
-      <App/>
+      <AuthProvider>
+        <App/>
+      </AuthProvider>
     </Provider>
   </BrowserRouter>
 );

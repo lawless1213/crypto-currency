@@ -1,5 +1,3 @@
-import { useAppSelector } from './hooks/redux';
-
 import Aside from './components/Aside/Aside';
 import Header from './components/Header/Header';
 import HeaderNav from './components/HeaderNav/HeaderNav';

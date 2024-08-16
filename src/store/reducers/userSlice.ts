@@ -1,43 +1,38 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../services/AuthService";
-import { IUser } from "../../models/IUser";
-import { UserRegisterParams } from "../../models/IAPIUser";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialStateInterface {
-	data: IUser | null;
-	status: string;
+  isAuth: boolean,
+	email: string | null,
+	token: string | null,
+	id: string | null,
 }
 
 const initialState:InitialStateInterface = {
-	data: null,
-	status: '',
+  isAuth: false,
+  email: null,
+	token: null,
+	id: null,
 };
 
-export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (user: UserRegisterParams) => {
-	const { data } = await axios.post('/auth/register', user);
-	return data;
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setUser(state, action) {
+      state.isAuth = true;
+      state.email = action.payload.email;
+      state.token = action.payload.token;
+      state.id = action.payload.id;
+    },
+    removeUser(state) {
+      state.isAuth = false;
+      state.email = null;
+      state.token = null;
+      state.id = null;
+    }
+  }
 })
 
-const UserReducerSlice = createSlice({
-  name: 'auth',
-  initialState,
-	reducers: {
+export const {setUser, removeUser} = userSlice.actions;
 
-	},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchRegister.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.data = action.payload;
-      })
-      .addCase(fetchRegister.rejected, (state) => {
-        state.status = 'failed';
-        state.data = null;
-      });
-  },
-});
-
-export const UserReducer = UserReducerSlice.reducer;
+export default userSlice.reducer;
