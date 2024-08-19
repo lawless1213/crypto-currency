@@ -2,10 +2,10 @@ import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/
 import { CoinAPI } from "../services/CoinService";
 import SettingsReducer from "./reducers/settingsSlice";
 import TablesParamsReducer from "./reducers/tablesParamsSlice";
-import  UserReducer  from "./reducers/userSlice";
+import  ModalsReducer  from "./reducers/modalSlice";
 
 const rootReducer = combineReducers({
-	user: UserReducer,
+	modals: ModalsReducer,
 	SettingsReducer,
 	TablesParamsReducer,
 	[CoinAPI.reducerPath]: CoinAPI.reducer,

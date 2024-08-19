@@ -5,10 +5,11 @@ interface Props {
 	text?: string,
 	icon?: JSX.Element,
 	onclick?: ClickHandler,
+	asLink?: boolean, 
 }
 
-const MyButton: React.FC<Props> = ({text, icon, classes, onclick}) => {
-	const classNames = `button ${classes}`
+const MyButton: React.FC<Props> = ({text, icon, classes, onclick, asLink = false}) => {
+	const classNames = `${!asLink ? 'button' : 'link'} ${classes}`
 
 	return (
 		<div onClick={onclick} className={classNames}>

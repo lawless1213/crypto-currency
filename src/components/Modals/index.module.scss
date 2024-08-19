@@ -1,0 +1,28 @@
+.ModalLayout {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	inset: 0;
+	backdrop-filter: blur(4px);
+	transition: 0.2s;
+
+	.Overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.Popup {
+		position: relative;
+		width: 100%;
+		max-width: var(--modal-width, 600px);
+		min-height: 300px;
+
+		.Header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			text-transform: uppercase;
+		}
+	}
+}
