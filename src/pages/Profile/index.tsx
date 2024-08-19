@@ -14,7 +14,6 @@ const Profile = () => {
 				<div>
 					<h1>Welcome, {currentUser?.email || "Guest"}</h1>
 				</div>
-				<SignUp/>
 			</div>
 		</section>
 	)

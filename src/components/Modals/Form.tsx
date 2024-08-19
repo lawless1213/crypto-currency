@@ -27,11 +27,13 @@ const Form: React.FC<Props> = ({ title, handleClick }) => {
         onChange={(e) => setPass(e.target.value)}
         placeholder="password"
       />
-			<MyButton 
-				classes='primary rounded border small'
-				text={title}
-				onclick={() => handleClick(email, pass)}
-			/>
+      <div className="actions_wrap">
+        <MyButton 
+          classes='primary rounded border small'
+          text={title}
+          onclick={() => handleClick(email, pass)}
+        />
+      </div>
     </div>
   );
 };

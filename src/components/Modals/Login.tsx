@@ -2,11 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Form } from "./Form";
-import { setUser } from "store/reducers/userSlice";
-import { useAppDispatch } from "hooks/redux";
 
 const Login = () => {
-	// const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const handleLogin = (email:string, password:string) => {
@@ -14,12 +11,6 @@ const Login = () => {
 
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({user}) => {
-				// console.log(user);
-				// dispatch(setUser({
-				// 	email: user.email,
-				// 	token: user.refreshToken,
-				// 	id: user.uid,
-				// }))
 				navigate('/');
 			})
 			.catch((error) => {
@@ -29,12 +20,17 @@ const Login = () => {
 	}
 
 	return (
-		<div>
-			<Form
-				title="sign_in"
-				handleClick={handleLogin}
-			/>
-		</div>
+		<section className={`panel_section middle_section`}>
+			<div className="header">
+				<div className="section_title t-h2">LOGIN</div>
+			</div>
+			<div className="content">
+				<Form
+					title="LOGIN"
+					handleClick={handleLogin}
+				/>
+			</div>
+		</section>
 	)
 }
 

@@ -7,6 +7,8 @@ import Coin from './Coin';
 import UI from './UI';
 import FormUI from './FormUI';
 import Profile from './Profile';
+import Login from 'components/Modals/Login';
+import SignUp from 'components/Modals/SignUp';
 
 const Layout = () => {
 	
@@ -15,6 +17,8 @@ const Layout = () => {
 			<Routes>
 				{/* <Route path='/' element={<Home/>}></Route> */}
         <Route path='/profile' element={<Profile/>}></Route>
+        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/register' element={<SignUp/>}></Route>
         {/* <Route path='/market' element={<Market/>}></Route>
         <Route path='/allmarkets' element={<AllMarkets/>}></Route>
         <Route path='/coin/:coinParams' element={<Coin/>}></Route> */}
