@@ -1,9 +1,10 @@
 import MyButton from '../UI/MyButton';
-import { useModalServices } from '../../services/ModalServices'
+import { useModalServices } from '../../services/ModalServices';
 import { useAppSelector } from '../../hooks/redux';
 import { ModalView } from 'models/IModals';
-import Login from './Login';
-import SignUp from './SignUp';
+import Login from './Blocks/Login';
+import SignUp from './Blocks/SignUp';
+import Success from './Blocks/Success';
 import { IoMdClose } from "react-icons/io";
 
 import s from './index.module.scss';
@@ -18,19 +19,21 @@ const ModalLayout = () => {
 				return <Login/>
 			case ModalView.SIGNUP:
 				return <SignUp/>
+			case ModalView.SUCCESS:
+				return <Success/>
 		}
 	}
 	
 
 	return (
-		<div className={s.ModalLayout}>
-			<div className={s.Overlay}></div>
-			<div className={s.Popup}>
-				<div className={s.Header}>
+		<div className={`modal ${s.ModalLayout}`}>
+			<div className={s.Overlay} onClick={closeModalHandler}></div>
+			<div className={`panel_section middle_section ${s.Popup}`}>
+				<div className={`header ${s.Header}`}>
 					<div className="title">{modalView}</div>
 					<MyButton onclick={closeModalHandler} classes='info' icon={<IoMdClose />} asLink={true}/>
 				</div>
-				<div className={s.Content}>
+				<div className={`content ${s.Content}`}>
 					{getModalBlock()}
 				</div>
 			</div>

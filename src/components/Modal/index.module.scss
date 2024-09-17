@@ -1,0 +1,55 @@
+.ModalLayout {
+	--overlay-time-animation: 0.4s;
+	--overlay-animation-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: showOpacity var(--overlay-time-animation) var(--overlay-animation-function) forwards;
+	opacity: 0;
+	inset: 0;
+	backdrop-filter: blur(4px);
+
+	.Overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.Popup {
+		position: relative;
+		visibility: hidden;
+		width: 100%;
+		max-width: var(--modal-width, 600px);
+		min-height: 300px;
+		border-radius: 12px;
+		box-shadow: 0 0 15px 1px rgba(black, 0.2);
+		transform: translateY(50px);
+		animation: showOpacity var(--overlay-time-animation) var(--overlay-animation-function) forwards;
+		opacity: 0;
+
+		.Header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			text-transform: uppercase;
+		}
+	}
+}
+
+@keyframes showElipse {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes showOpacity {
+  to {
+		visibility: visible;
+		transform: translateY(0);
+    opacity: 1;
+  }
+}

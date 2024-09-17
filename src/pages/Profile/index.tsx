@@ -1,6 +1,6 @@
 import { useAuth } from "store/context/AuthContext";
-import Login from "../../components/Modals/Login";
-import SignUp from "../../components/Modals/SignUp";
+import Login from "../../components/Modal/Blocks/Login";
+import SignUp from "../../components/Modal/Blocks/SignUp";
 
 const Profile = () => {
 	const { currentUser } = useAuth();

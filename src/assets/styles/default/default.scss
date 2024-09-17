@@ -1,4 +1,9 @@
 body {
-	background: var(--g-color-background);
 	color: var(--g-color-fill);
+	background: var(--g-color-background);
+	padding-right: 6px;
+
+	&:has(.modal) {
+		overflow: hidden;
+	}
 }
