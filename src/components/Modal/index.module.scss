@@ -1,5 +1,5 @@
 .ModalLayout {
-	--overlay-time-animation: 0.4s;
+	--overlay-time-animation: 0.3s;
 	--overlay-animation-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
 	position: fixed;
 	display: flex;
@@ -23,7 +23,8 @@
 		min-height: 300px;
 		border-radius: 12px;
 		box-shadow: 0 0 15px 1px rgba(black, 0.2);
-		transform: translateY(50px);
+		transform: translateY(50px) rotateX(45deg);
+		transform-origin: center bottom;
 		animation: showOpacity var(--overlay-time-animation) var(--overlay-animation-function) forwards;
 		opacity: 0;
 
@@ -36,20 +37,10 @@
 	}
 }
 
-@keyframes showElipse {
-  from {
-    transform: translateY(-100%);
-  }
-
-  to {
-    transform: translateY(0%);
-  }
-}
-
 @keyframes showOpacity {
   to {
 		visibility: visible;
-		transform: translateY(0);
+		transform: translateY(0) rotateX(0);
     opacity: 1;
   }
 }

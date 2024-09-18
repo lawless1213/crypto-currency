@@ -1,50 +1,64 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { useState } from 'react';
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import MyButton from '../../UI/MyButton';
-
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+interface MyForm {
+  email: string,
+  password: string,
+}
+
 const Login = () => {
-	const navigate = useNavigate();
-	const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const { register, handleSubmit, formState: { errors } } = useForm<MyForm>({
+    defaultValues: {}
+  })
 
-	const handleLogin = (email:string, password:string) => {
-		const auth = getAuth();
+  const submit: SubmitHandler<MyForm> = data => {
+    console.log(data);
+  }
 
-		signInWithEmailAndPassword(auth, email, password)
-			.then(({user}) => {
-				navigate('/');
-			})
-			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-			});
-	}
+  const error: SubmitErrorHandler<MyForm> = data => {
+    console.log(data);
+  }
+
+	// const navigate = useNavigate();
+
+	// const handleLogin = (email:string, password:string) => {
+	// 	const auth = getAuth();
+
+	// 	signInWithEmailAndPassword(auth, email, password)
+	// 		.then(({user}) => {
+	// 			navigate('/');
+	// 		})
+	// 		.catch((error) => {
+	// 			const errorCode = error.code;
+	// 			const errorMessage = error.message;
+	// 		});
+	// }
 
 	return (
-		<div>
+		<form onSubmit={handleSubmit(submit, error)} noValidate autoComplete='off'>
 			<input
         type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
         placeholder="email"
+        {...register('email', {required: true, })}
+        aria-invalid={errors.email ? true : false}
       />
       <input
         type="password"
-        value={pass}
-        onChange={(e) => setPass(e.target.value)}
         placeholder="password"
+        {...register('password', {required: true})}
+        aria-invalid={errors.password ? true : false}
       />
       <div className="actions_wrap center">
         <MyButton 
           classes='primary rounded border'
-          text='Submit'
-          onclick={() => handleLogin(email, pass)}
+          text='LOGIN'
         />
       </div>
-		</div>
+		</form>
 	)
 }
 
