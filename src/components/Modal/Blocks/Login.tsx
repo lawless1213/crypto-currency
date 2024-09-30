@@ -1,25 +1,36 @@
-// import { useNavigate } from 'react-router-dom';
-// import { useState } from 'react';
-import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import MyButton from '../../UI/MyButton';
+import MyInput from '../../UI/FormComponents/MyInput';
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-interface MyForm {
+interface LoginInteface {
   email: string,
   password: string,
 }
 
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .required('Email is required field')
+    .email(),
+  password: yup
+    .string()
+    .required('Password is required field')
+    .min(6, 'Password min 6 symbols')
+    .max(20, 'Password max 20 symbols'),
+})
+
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<MyForm>({
+  const { control, register, handleSubmit, formState: { errors } } = useForm<LoginInteface>({
+    mode: 'onBlur',
+    resolver: yupResolver(schema),
     defaultValues: {}
   })
 
-  const submit: SubmitHandler<MyForm> = data => {
-    console.log(data);
-  }
-
-  const error: SubmitErrorHandler<MyForm> = data => {
+  const submit: SubmitHandler<LoginInteface> = data => {
     console.log(data);
   }
 
@@ -39,22 +50,43 @@ const Login = () => {
 	// }
 
 	return (
-		<form onSubmit={handleSubmit(submit, error)} noValidate autoComplete='off'>
-			<input
-        type="email"
-        placeholder="email"
-        {...register('email', {required: true, })}
-        aria-invalid={errors.email ? true : false}
+		<form onSubmit={handleSubmit(submit)} noValidate autoComplete='off'>
+
+      <Controller
+        name = 'email'
+        control={control}
+        render={
+          ({field}) => <MyInput 
+            {...field}
+            name = 'email'
+            type="email"
+            label = 'Email'
+            required = {true}
+            error = { errors.email?.message }
+          />
+        }
       />
-      <input
-        type="password"
-        placeholder="password"
-        {...register('password', {required: true})}
-        aria-invalid={errors.password ? true : false}
+
+      <Controller
+        name = 'password'
+        control={control}
+        render={
+          ({field}) => <MyInput 
+            {...field}
+            name = 'password'
+            type="password"
+            label = 'Password'
+            required = {true}
+            error = { errors.password?.message }
+            template = 'password' 
+          />
+        }
       />
+
+      
       <div className="actions_wrap center">
         <MyButton 
-          classes='primary rounded border'
+          classes={`primary rounded border ${Object.keys(errors).length > 0 && 'disabled'}`}
           text='LOGIN'
         />
       </div>
