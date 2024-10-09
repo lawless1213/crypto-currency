@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <Aside/> */}
+      <Aside/>
       <Header/>
       <HeaderNav/>
       <Layout/>

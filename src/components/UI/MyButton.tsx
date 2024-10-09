@@ -1,4 +1,4 @@
-type ClickHandler = () => void;
+type ClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => void;
 
 interface Props {
 	classes?: string,

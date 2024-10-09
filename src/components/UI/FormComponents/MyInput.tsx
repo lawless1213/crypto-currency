@@ -17,7 +17,10 @@ interface Props {
 
 const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, required = false, label, error, template, ...field }, ref) => {
 	const [showPassword, setShowPassword] = React.useState(false);
-	const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const handleClickShowPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		setShowPassword((show) => !show);
+	};
 	
 	return (
 		<TextField 
@@ -35,9 +38,9 @@ const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, require
 						<MyButton 
 							asLink={true}
 							classes="info small"
-							icon={<LuEye />}
+							icon = {showPassword ? <LuEyeOff /> : <LuEye />}
 							type='button'
-							onclick={handleClickShowPassword}
+							onclick={(event: React.MouseEvent<HTMLButtonElement>) => handleClickShowPassword(event)}
 						/>
 					</InputAdornment>
 				),
