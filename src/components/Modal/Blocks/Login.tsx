@@ -31,23 +31,17 @@ const Login = () => {
   })
 
   const submit: SubmitHandler<LoginInteface> = data => {
-    console.log(data);
+    const auth = getAuth();
+
+    signInWithEmailAndPassword(auth, data.email, data.password)
+			.then(({user}) => {
+				
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+			});
   }
-
-	// const navigate = useNavigate();
-
-	// const handleLogin = (email:string, password:string) => {
-	// 	const auth = getAuth();
-
-	// 	signInWithEmailAndPassword(auth, email, password)
-	// 		.then(({user}) => {
-	// 			navigate('/');
-	// 		})
-	// 		.catch((error) => {
-	// 			const errorCode = error.code;
-	// 			const errorMessage = error.message;
-	// 		});
-	// }
 
 	return (
 		<form onSubmit={handleSubmit(submit)} noValidate autoComplete='off'>

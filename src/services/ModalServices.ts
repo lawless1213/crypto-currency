@@ -5,7 +5,7 @@ import { ModalView } from "models/IModals";
 export const useModalServices = () => {
   const dispatch = useAppDispatch();
 
-  const openSignUpModal = (type: ModalView) => {
+  const openModalHandler = (type: ModalView) => {
     dispatch(openModal({ view: type }));
   };
 
@@ -13,5 +13,5 @@ export const useModalServices = () => {
     dispatch(closeModal());
   };
 
-  return { openSignUpModal, closeModalHandler };
+  return { openModalHandler, closeModalHandler };
 };

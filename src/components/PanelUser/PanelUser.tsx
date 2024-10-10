@@ -8,7 +8,7 @@ import { ModalView } from 'models/IModals';
 import s from './PanelUser.module.scss';
 
 const PanelUser = () => {
-	const { openSignUpModal } = useModalServices();
+	const { openModalHandler } = useModalServices();
 	const { currentUser } = useAuth();
 
 	if (currentUser) {
@@ -26,8 +26,8 @@ const PanelUser = () => {
 	} else {
 		return (
 			<div className={s.PanelUser}>
-				<MyButton onclick={() => openSignUpModal(ModalView.SIGNUP)} classes='success border' text='SIGNUP'/>
-				<MyButton onclick={() => openSignUpModal(ModalView.SIGNIN)} classes='primary border' text='SIGNIN'/>
+				<MyButton onclick={() => openModalHandler(ModalView.SIGNUP)} classes='success border' text='SIGNUP'/>
+				<MyButton onclick={() => openModalHandler(ModalView.SIGNIN)} classes='primary border' text='SIGNIN'/>
 			</div>
 		)
 	}

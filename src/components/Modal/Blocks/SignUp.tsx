@@ -1,54 +1,92 @@
-import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
-import { useState } from 'react';
+import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import MyButton from '../../UI/MyButton';
+import MyInput from '../../UI/FormComponents/MyInput';
 import { useModalServices } from '../../../services/ModalServices'
 import { ModalView } from 'models/IModals';
 
+interface SignUpInteface {
+  email: string,
+  password: string,
+}
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .required('Email is required field')
+    .email(),
+  password: yup
+    .string()
+    .required('Password is required field')
+    .min(6, 'Password min 6 symbols')
+    .max(20, 'Password max 20 symbols'),
+})
 
 const SignUp = () => {
-	const navigate = useNavigate();
-	const [email, setEmail] = useState('');
-	const [pass, setPass] = useState('');
-	const { openSignUpModal } = useModalServices();
+	const { openModalHandler } = useModalServices();
+	const { control, register, handleSubmit, formState: { errors } } = useForm<SignUpInteface>({
+    mode: 'onBlur',
+    resolver: yupResolver(schema),
+    defaultValues: {}
+  })
 
-	const handleRegister = (email:string, password:string) => {
-		// const auth = getAuth();
-		openSignUpModal(ModalView.SUCCESS);
+	const submit: SubmitHandler<SignUpInteface> = data => {
+    const auth = getAuth();
 
-		// createUserWithEmailAndPassword (auth, email, password)
-		// 	.then(({user}) => {
-		// 		navigate('/');
-		// 		openSignUpModal(ModalView.SUCCESS);
-		// 	})
-		// 	.catch((error) => {
-		// 		const errorCode = error.code;
-		// 		const errorMessage = error.message;
-		// 	});
-	}
+    createUserWithEmailAndPassword (auth, data.email, data.password)
+			.then(({user}) => {
+				openModalHandler(ModalView.SUCCESS);
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+			});
+  }
 
 	return (
-		<div>
-			<input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="email"
+		<form onSubmit={handleSubmit(submit)} noValidate autoComplete='off'>
+
+      <Controller
+        name = 'email'
+        control={control}
+        render={
+          ({field}) => <MyInput 
+            {...field}
+            name = 'email'
+            type="email"
+            label = 'Email'
+            required = {true}
+            error = { errors.email?.message }
+          />
+        }
       />
-      <input
-        type="password"
-        value={pass}
-        onChange={(e) => setPass(e.target.value)}
-        placeholder="password"
+
+      <Controller
+        name = 'password'
+        control={control}
+        render={
+          ({field}) => <MyInput 
+            {...field}
+            name = 'password'
+            type="password"
+            label = 'Password'
+            required = {true}
+            error = { errors.password?.message }
+            template = 'password' 
+          />
+        }
       />
+
+      
       <div className="actions_wrap center">
         <MyButton 
-          classes='primary rounded border'
-          text='Submit'
-          onclick={() => handleRegister(email, pass)}
+          classes={`primary rounded border ${Object.keys(errors).length > 0 && 'disabled'}`}
+          text='LOGIN'
         />
       </div>
-		</div>
+		</form>
 	)
 }
 
