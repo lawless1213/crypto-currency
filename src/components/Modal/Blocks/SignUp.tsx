@@ -10,6 +10,7 @@ import { ModalView } from 'models/IModals';
 interface SignUpInteface {
   email: string,
   password: string,
+  retypePassword: string,
 }
 
 const schema = yup.object().shape({
@@ -22,6 +23,13 @@ const schema = yup.object().shape({
     .required('Password is required field')
     .min(6, 'Password min 6 symbols')
     .max(20, 'Password max 20 symbols'),
+  retypePassword: yup
+    .string()
+    .required('Password is required field')
+    .min(6, 'Password min 6 symbols')
+    .max(20, 'Password max 20 symbols')
+    .oneOf([yup.ref('password')], 'Your passwords do not match.')
+
 })
 
 const SignUp = () => {
@@ -64,7 +72,7 @@ const SignUp = () => {
       />
 
       <Controller
-        name = 'password'
+        name = 'retypePassword'
         control={control}
         render={
           ({field}) => <MyInput 
@@ -74,6 +82,22 @@ const SignUp = () => {
             label = 'Password'
             required = {true}
             error = { errors.password?.message }
+            template = 'password' 
+          />
+        }
+      />
+
+      <Controller
+        name = 'password'
+        control={control}
+        render={
+          ({field}) => <MyInput 
+            {...field}
+            name = 'retypePassword'
+            type="password"
+            label = 'retypePassword'
+            required = {true}
+            error = { errors.retypePassword?.message }
             template = 'password' 
           />
         }
