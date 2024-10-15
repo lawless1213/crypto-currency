@@ -7,7 +7,7 @@ const Success = () => {
 	return (
 		<div className="actions_wrap center">
 			<MyButton 
-				classes='primary rounded border'
+				classes='primary border'
 				text='DONE'
 				onclick={closeModalHandler}
 			/>

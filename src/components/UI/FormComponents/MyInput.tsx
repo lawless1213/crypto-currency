@@ -1,7 +1,6 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import { FaLock } from "react-icons/fa6";
+import InputAdornment from '@mui/material/InputAdornment'
 import MyButton from '../MyButton';
 import { LuEye, LuEyeOff } from "react-icons/lu";
 
@@ -11,40 +10,52 @@ interface Props {
 	required?: boolean,
 	label?: string,
 	error?: string,
+	success?: boolean, 
 	startAdornment?: JSX.Element,
 	template?: string | JSX.Element,
 }
 
-const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, required = false, label, error, template, ...field }, ref) => {
+const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, required = false, label, error, success, template, ...field }, ref) => {
 	const [showPassword, setShowPassword] = React.useState(false);
 	const handleClickShowPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		setShowPassword((show) => !show);
 	};
+
+	const successClass = success ? 'success' : '';
+	const errorClass = error ? 'error' : '';
 	
 	return (
 		<TextField 
 			{...field}
 			id = {name} 
-			type = {template != 'password' ? type : showPassword ? 'text' : 'password'}
+			type = {template !== 'password' ? type : showPassword ? 'text' : 'password'}
+			className={`form-group ${successClass} ${errorClass}`}
 			required = {required}
 			label = {label} 
 			error = {error ? true : false}
 			helperText = {error}
-			variant = "standard" 
-			InputProps={template === 'password' ? {
-				endAdornment: (
+			variant = "standard"
+			
+			InputProps={{
+				className: 'input-wrap',
+				endAdornment: template === 'password' ? (
 					<InputAdornment position="end">
 						<MyButton 
 							asLink={true}
-							classes="info small"
-							icon = {showPassword ? <LuEyeOff /> : <LuEye />}
+							classes={error ? 'danger' : success ? 'success' : 'info'}
+							icon={showPassword ? <LuEyeOff /> : <LuEye />}
 							type='button'
-							onclick={(event: React.MouseEvent<HTMLButtonElement>) => handleClickShowPassword(event)}
+							onclick={handleClickShowPassword}
 						/>
 					</InputAdornment>
-				),
-			} : undefined}
+				) : undefined,
+			}}
+
+			FormHelperTextProps={{
+				className: 'helper-text t-caption',
+			}}
+
 			inputRef={ref}
 		/>
   );

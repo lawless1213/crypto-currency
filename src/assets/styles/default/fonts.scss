@@ -15,9 +15,9 @@ $fonts: (
 
 @each $font, $keys in $fonts {
   .t-#{$font} {
-    font-size: map-get($keys, fs);
-		font-weight: map-get($keys, fw);
-    line-height: 1;
+    font-size: map-get($keys, fs) !important;
+		font-weight: map-get($keys, fw) !important;
+    line-height: 1 !important;
   }
 }
 

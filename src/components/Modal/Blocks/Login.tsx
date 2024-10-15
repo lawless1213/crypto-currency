@@ -24,8 +24,8 @@ const schema = yup.object().shape({
 })
 
 const Login = () => {
-  const { control, register, handleSubmit, formState: { errors } } = useForm<LoginInteface>({
-    mode: 'onBlur',
+  const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<LoginInteface>({
+    mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {}
   })
@@ -57,6 +57,7 @@ const Login = () => {
             label = 'Email'
             required = {true}
             error = { errors.email?.message }
+            success={!errors.email && !!field.value}
           />
         }
       />
@@ -73,6 +74,7 @@ const Login = () => {
             required = {true}
             error = { errors.password?.message }
             template = 'password' 
+            success = {!errors.password && !!field.value}
           />
         }
       />
@@ -80,7 +82,7 @@ const Login = () => {
       
       <div className="actions_wrap center">
         <MyButton 
-          classes={`primary rounded border ${Object.keys(errors).length > 0 && 'disabled'}`}
+          classes={`primary border wide ${!isValid && 'disabled'}`}
           text='LOGIN'
         />
       </div>

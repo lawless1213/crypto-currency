@@ -1,14 +1,16 @@
+@use '../../assets/styles/default/brakepoints.scss' as *;
+
 .ModalLayout {
 	--overlay-time-animation: 0.3s;
 	--overlay-animation-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
 	position: fixed;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: var(--modal-position, center);
 	animation: showOpacity var(--overlay-time-animation) var(--overlay-animation-function) forwards;
 	opacity: 0;
 	inset: 0;
-	backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px) brightness(50%);
 
 	.Overlay {
 		position: absolute;
@@ -21,12 +23,14 @@
 		width: 100%;
 		max-width: var(--modal-width, 600px);
 		min-height: 300px;
-		border-radius: 12px;
+		border-radius: var(--modal-br, 12px);
 		box-shadow: 0 0 15px 1px rgba(black, 0.2);
 		transform: translateY(50px) rotateX(45deg);
 		transform-origin: center bottom;
 		animation: showOpacity var(--overlay-time-animation) var(--overlay-animation-function) forwards;
 		opacity: 0;
+		box-shadow: var(--g-color-background) 0px 1px 3px 0px, var(--g-color-background) 0px 0px 0px 1px;
+
 
 		.Header {
 			display: flex;
@@ -34,6 +38,12 @@
 			align-items: center;
 			text-transform: uppercase;
 		}
+	}
+
+	@media (width <= $md) {
+		--modal-width: 100%;
+		--modal-br: 0;
+		--modal-position: flex-start;
 	}
 }
 

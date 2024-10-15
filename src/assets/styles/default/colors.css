@@ -85,6 +85,7 @@
 	--g-color-form-elements: var(--g-color-grey-300);
 	--g-color-fill: var(--g-color-dark);
 	--g-color-loader: var(--g-color-grey-800);
+	--g-color-success: var(--g-color-success-500);
 }
 
 [data-theme='dark'] {
@@ -95,4 +96,5 @@
 	--g-color-form-elements: var(--g-color-grey-800);
 	--g-color-fill: var(--g-color-light);
 	--g-color-loader: var(--g-color-grey-500);
+	--g-color-success: var(--g-color-success-500);
 }

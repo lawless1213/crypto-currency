@@ -1,5 +1,53 @@
 form {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	gap: 16px;
+
+	.form-group {
+		&:not(.error) {
+			label {
+				color: var(--g-color-fill);
+			}
+	
+			.input-wrap {
+				&:before {
+					border-color: var(--g-color-fill);
+				}
+			}
+		}
+
+		&.success {
+			label {
+				color: var(--g-color-success);
+			}
+
+			input {
+				color: var(--g-color-success);
+			}
+	
+			.input-wrap {
+				&:before {
+					border-color: var(--g-color-success);
+				}
+			}
+		}
+
+		&:not(:has(.helper-text)) {
+			padding-bottom: 16px;
+		}
+
+		input {
+			color: var(--g-color-fill);
+			caret-color: var(--g-color-fill);
+		}
+
+		.helper-text {
+			margin-top: 4px;
+		}
+	}
+
+	.actions_wrap {
+		margin-top: auto;
+	}
 }

@@ -31,9 +31,9 @@ const ModalLayout = () => {
 			<div className={`panel_section middle_section ${s.Popup}`}>
 				<div className={`header ${s.Header}`}>
 					<div className="title">{modalView}</div>
-					<MyButton onclick={closeModalHandler} classes='info' icon={<IoMdClose />} asLink={true}/>
+					<MyButton onclick={closeModalHandler} classes='info big' icon={<IoMdClose />} asLink={true}/>
 				</div>
-				<div className={`content ${s.Content}`}>
+				<div className={`content column ${s.Content}`}>
 					{getModalBlock()}
 				</div>
 			</div>
