@@ -35,7 +35,7 @@ const schema = yup.object().shape({
 const SignUp = () => {
 	const { openModalHandler } = useModalServices();
 	const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<SignUpInteface>({
-    mode: 'onBlur',
+    mode: 'onSubmit',
     resolver: yupResolver(schema),
     defaultValues: {}
   })
@@ -50,6 +50,9 @@ const SignUp = () => {
 			.catch((error) => {
 				const errorCode = error.code;
 				const errorMessage = error.message;
+
+        console.log(errorCode);
+        
 			});
   }
 
@@ -106,7 +109,7 @@ const SignUp = () => {
       
       <div className="actions_wrap center">
         <MyButton 
-          classes={`primary border wide ${!isValid && 'disabled'}`}
+          classes={`primary border wide`}
           text='REGISTER'
         />
       </div>

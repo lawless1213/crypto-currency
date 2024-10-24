@@ -96,4 +96,9 @@
 		
 		box-shadow: inset 0 0 0 var(--badge-border-size) var(--badge-bg);
 	}
+
+	&.transparent {
+		--badge-color-state: var(--badge-bg);
+		--badge-bg-state: transparent;
+	}
 }

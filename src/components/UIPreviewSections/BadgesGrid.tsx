@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 
 const BadgesGrid = () => {
 	const colorStyle = ['', 'primary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
-	const types = ['', 'soft', 'border'];
+	const types = ['', 'soft', 'border', 'transparent'];
 
 	return (
 		<div className="panel_section">

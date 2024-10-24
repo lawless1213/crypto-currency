@@ -1,31 +1,20 @@
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
+import { useState } from 'react';
+import MyBadge from 'components/UI/MyBadge';
+import { schemaLogin as schema } from 'services/AuthService';
+import { LoginInteface }  from '../../../models/IAuth';
 
-interface LoginInteface {
-  email: string,
-  password: string,
-}
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required('Email is required field')
-    .email(),
-  password: yup
-    .string()
-    .required('Password is required field')
-    .min(6, 'Password min 6 symbols')
-    .max(20, 'Password max 20 symbols'),
-})
 
 const Login = () => {
+  const [errorText, setErrorText] = useState<string | null>(null);
+
   const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<LoginInteface>({
-    mode: 'onBlur',
+    mode: "onSubmit",
     resolver: yupResolver(schema),
     defaultValues: {}
   })
@@ -39,7 +28,27 @@ const Login = () => {
 			})
 			.catch((error) => {
 				const errorCode = error.code;
-				const errorMessage = error.message;
+        let errorText;
+      
+        switch (errorCode) {
+          case AuthErrorCodes.INVALID_PASSWORD:
+            errorText = 'Invalid credentials';
+            break;
+          case AuthErrorCodes.INVALID_EMAIL:
+            errorText = 'Invalid credentials';
+            break;
+            case AuthErrorCodes.INVALID_LOGIN_CREDENTIALS:
+            errorText = 'Invalid credentials';
+            break;
+          case AuthErrorCodes.USER_DELETED:
+            errorText = 'User not found';
+            break;
+          default:
+            errorText = 'Something went wrong';
+            break;
+        }
+
+        setErrorText(errorText);
 			});
   }
 
@@ -79,10 +88,11 @@ const Login = () => {
         }
       />
 
+      { errorText &&<MyBadge text={errorText} classes='danger transparent'/> }
       
       <div className="actions_wrap center">
         <MyButton 
-          classes={`primary border wide ${!isValid && 'disabled'}`}
+          classes={`primary border wide`}
           text='LOGIN'
         />
       </div>
