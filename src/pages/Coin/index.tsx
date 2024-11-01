@@ -6,6 +6,7 @@ import { ICoinDetail } from "../../models/ICoinDetail";
 import PriceHistory from "../../components/CoinSections/PriceHistory";
 
 import s from './index.module.scss';
+import PurchaseCoin from "components/CoinSections/PurchaseForm";
 
 const Coin = () => {
 	let { coinParams } = useParams<{ coinParams?: string }>();
@@ -24,7 +25,10 @@ const Coin = () => {
 	
 
 	return (
-		<PriceHistory coinUUID={coinUUID}/>
+		<>
+			<PriceHistory coinUUID={coinUUID}/>
+			<PurchaseCoin coinUUID={coinUUID} coinName={coinName}/>
+		</>
 	)
 } 
 

@@ -1,8 +1,15 @@
 form {
 	display: flex;
 	flex: 1;
-	flex-direction: column;
 	gap: 16px;
+
+	&:not(.row) {
+		flex-direction: column;
+
+		.actions_wrap {
+			margin-top: auto;
+		}
+	}
 
 	.form-group {
 		&:not(.error) {
@@ -45,9 +52,5 @@ form {
 		.helper-text {
 			margin-top: 4px;
 		}
-	}
-
-	.actions_wrap {
-		margin-top: auto;
 	}
 }

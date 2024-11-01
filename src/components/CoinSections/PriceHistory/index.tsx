@@ -14,7 +14,6 @@ import {
 } from 'chart.js';
 
 import { Line } from 'react-chartjs-2';
-import { callback } from "chart.js/dist/helpers/helpers.core";
 
 ChartJS.register(
   CategoryScale,
@@ -134,7 +133,7 @@ const PriceHistory: React.FC<Props> = ({coinUUID}: Props) => {
 		<section className={`panel_section big_section  ${loading ? 'loading' : ''}`}>
 			<div className={`content no_padding`}>
 				<Line options={options} data={data} />
-			</div> 
+			</div>
 		</section>
 	)
 } 

@@ -13,9 +13,9 @@ const Aside = () => {
 	
 	return (
 		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section desktop_only`}>
-			<div className="header">
+			{/* <div className="header">
 				<MyLogo compact={asideMode === AsideModes.SMALL_MODE}/>
-			</div>
+			</div> */}
 			<div className="content">
 				<div className={s.Menu}>
 					{
