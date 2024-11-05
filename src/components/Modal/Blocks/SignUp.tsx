@@ -1,6 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
@@ -34,6 +35,7 @@ const schema = yup.object().shape({
 
 const SignUp = () => {
 	const { openModalHandler } = useModalServices();
+  const [errorText, setErrorText] = useState<string | null>(null);
 	const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<SignUpInteface>({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
@@ -48,11 +50,10 @@ const SignUp = () => {
 				openModalHandler(ModalView.SUCCESS);
 			})
 			.catch((error) => {
+        // todo: add errors
 				const errorCode = error.code;
-				const errorMessage = error.message;
-
-        console.log(errorCode);
         
+        setErrorText(errorCode);
 			});
   }
 
@@ -70,6 +71,10 @@ const SignUp = () => {
             label = 'Email'
             required = {true}
             error = { errors.email?.message }
+            onChange={(e) => {
+              setErrorText(null); 
+              field.onChange(e);
+            }}
           />
         }
       />
@@ -86,6 +91,10 @@ const SignUp = () => {
             required = {true}
             error = { errors.password?.message }
             template = 'password' 
+            onChange={(e) => {
+              setErrorText(null); 
+              field.onChange(e);
+            }}
           />
         }
       />
@@ -102,6 +111,10 @@ const SignUp = () => {
             required = {true}
             error = { errors.retypePassword?.message }
             template = 'password' 
+            onChange={(e) => {
+              setErrorText(null); 
+              field.onChange(e);
+            }}
           />
         }
       />

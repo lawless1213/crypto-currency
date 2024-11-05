@@ -12,26 +12,40 @@ export const addCoinToPortfolio = async (coin: IUserCoin, currentUser: User | nu
 
 		if (docSnap.exists()) {
 			const data = docSnap.data();
-			if (data?.portfolio) {
-				await updateDoc(dbCoins, {
-					[`portfolio.${coin.name}`]: coin.value
-				});
-			} else {
-				await updateDoc(dbCoins, {
-					portfolio: {
-						[coin.name]: coin.value
-					}
-				});
-			}
+
+			const oldValue = data?.portfolio?.[coin.name] ?? 0;
+			const newValue = Number(oldValue) + Number(coin.value);
+			
+			await updateDoc(dbCoins, {
+				[`portfolio.${coin.name}`]: newValue
+			});
 		} else {
 			await setDoc(dbCoins, {
 				portfolio: {
-					[coin.name]: coin.value
+					[coin.name]: Number(coin.value)
 				}
 			});
-			console.log("Document successfully created with portfolio!");
 		}
 	} catch (e) {
 		console.error("Error writing or fetching document: ", e);
 	}
+};
+
+export const getAllPortfolio = async (currentUser: User | null) => {
+  if (!currentUser) return [];
+
+  const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
+
+  try {
+    const docSnap = await getDoc(dbCoins);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data?.portfolio ?? [];
+    }
+  } catch (e) {
+    console.error("Error writing or fetching document: ", e);
+  }
+
+  return [];
 };

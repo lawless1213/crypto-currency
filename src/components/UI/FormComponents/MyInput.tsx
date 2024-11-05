@@ -9,13 +9,14 @@ interface Props {
 	type?: string,
 	required?: boolean,
 	label?: string,
-	error?: string,
+	error?: string | null,
 	success?: boolean, 
 	startAdornment?: JSX.Element,
 	template?: string | JSX.Element,
+	onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, required = false, label, error, success, template, ...field }, ref) => {
+const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, required = false, label, error, success, template, onChange, ...field }, ref) => {
 	const [showPassword, setShowPassword] = React.useState(false);
 	const handleClickShowPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
@@ -36,7 +37,10 @@ const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, require
 			error = {error ? true : false}
 			helperText = {error}
 			variant = "standard"
-			
+			onChange={(e) => {
+        onChange?.(e); 
+      }}
+
 			InputProps={{
 				className: 'input-wrap',
 				endAdornment: template === 'password' ? (

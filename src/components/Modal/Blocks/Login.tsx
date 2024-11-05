@@ -67,6 +67,10 @@ const Login = () => {
             required = {true}
             error = { errors.email?.message }
             success={!errors.email && !!field.value}
+            onChange={(e) => {
+              setErrorText(null); 
+              field.onChange(e);
+            }}
           />
         }
       />
@@ -84,6 +88,10 @@ const Login = () => {
             error = { errors.password?.message }
             template = 'password' 
             success = {!errors.password && !!field.value}
+            onChange={(e) => {
+              setErrorText(null); 
+              field.onChange(e);
+            }}
           />
         }
       />

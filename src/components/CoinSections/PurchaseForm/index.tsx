@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import { useState } from 'react';
 import MyBadge from 'components/UI/MyBadge';
 import { addCoinToPortfolio } from 'services/UsersCoinsService';
+import { useAuth } from 'store/context/AuthContext';
+import { IUserCoin } from "../../../models/IUser";
 
 interface Props {
 	coinUUID: string, 
@@ -16,22 +18,34 @@ export interface PurchaseFormInteface {
   value?: number,
 }
 
-const schemaPurchase = yup.object().shape({
-  value: yup
-    .number()
-})
+// const schemaPurchase = yup.object().shape({
+//   value: yup
+//     .number()
+// })
 
-const PurchaseCoin: React.FC<Props> = () => {
+const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   const [errorText, setErrorText] = useState<string | null>(null);
+	const { currentUser } = useAuth();
 
   const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<PurchaseFormInteface>({
     mode: "onSubmit",
-    resolver: yupResolver(schemaPurchase),
     defaultValues: {}
   })
 
   const submit: SubmitHandler<PurchaseFormInteface> = data => {
-		// addCoinToPortfolio()
+		if(!coinName) return;
+
+		if(!data.value || data.value <= 0) {
+			setErrorText('Enter correct value');
+			return;
+		}
+
+		const coin:IUserCoin = {
+			name: coinName,
+			value: data.value
+		}
+		
+		addCoinToPortfolio(coin, currentUser)
   }
 
 	return (
@@ -47,12 +61,14 @@ const PurchaseCoin: React.FC<Props> = () => {
 								name = 'value'
 								type="number"
 								label = 'Value'
-								error = { errors.value?.message }
-								success={!errors.value && !!field.value}
+								error = { errorText }
+								onChange={(e) => {
+									setErrorText(null); 
+									field.onChange(e);
+								}}
 							/>
 						}
 					/>
-					{ errorText &&<MyBadge text={errorText} classes='danger transparent'/> }
 					<div className="actions_wrap center">
 						<MyButton 
 							classes={`primary border wide big uppercase`}
