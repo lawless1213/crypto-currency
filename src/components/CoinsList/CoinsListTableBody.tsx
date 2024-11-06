@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ICoin } from "../../models/ICoin";
 import { setCurrency, setAmount, isIncrementalChange } from "../../services/CoinService";
 import { user } from "../../data/user";
+import { useAuth } from 'store/context/AuthContext';
 
 import RowCell from "../UI/TableComponents/RowCell";
 import MyBadge from "../UI/MyBadge";
@@ -15,10 +16,11 @@ interface Props {
 }
 
 const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins}: Props) => {
+	const { currentUser } = useAuth();
 	let navigate = useNavigate();
 
 	const ShowMoreHandler = (coin: ICoin) => {
-		navigate(`/coin/${coin.uuid}_${coin.name}`);
+		navigate(`/coin/${coin.uuid}_${coin.symbol}`);
 	}
 
 	const renderRowCell = (coin: ICoin, columnType: string) => {

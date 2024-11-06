@@ -41,7 +41,7 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 		}
 
 		const coin:IUserCoin = {
-			name: coinName,
+			name: coinUUID,
 			value: data.value
 		}
 		

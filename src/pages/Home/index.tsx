@@ -3,33 +3,35 @@ import { useAuth } from 'store/context/AuthContext';
 import { useEffect, useState } from 'react';
 
 import CoinsList from "../../components/CoinsList/CoinsList";
-import { TableTypes } from "../../data/coins";
-import { user } from "../../data/user";
+import { TableTypes } from "../../data/coins"
 
 import s from './index.module.scss';
 
 const Home = () => {
 	const { currentUser } = useAuth();
-	const [ allCoins, setAllCoins ] = useState<string[]>([]);
+	const [ allCoins, setAllCoins ] = useState<Record<string, any>>({});
 
   useEffect(() => {
     const fetchPortfolio = async () => {
       const portfolio = await getAllPortfolio(currentUser);
-			console.log(Object.keys(portfolio));
-			
-      setAllCoins(Object.keys(portfolio));
+      setAllCoins(portfolio || []);
     };
 
     if (currentUser) {
       fetchPortfolio();
     }
   }, [currentUser]);
+
+	console.log(allCoins);
 	
-	const usersCoins: string[] = user.portfolio.list;
 
 	return (
 		<div className={s.Home}>
-			<CoinsList title='Portfolio' type={TableTypes.COIN_PORTFOLIO} requiredCoins={usersCoins}/>
+			{ 
+				Object.keys(allCoins).length > 0 ? 
+				<CoinsList title='Portfolio' type={TableTypes.COIN_PORTFOLIO} requiredCoins={allCoins}/> 
+				: <CoinsList title="All"/> 
+			}
 		</div>
 	)
 } 

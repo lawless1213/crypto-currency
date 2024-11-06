@@ -23,10 +23,11 @@ import HeadCell from "../UI/TableComponents/HeadCell";
 import CoinsListTableBody from "./CoinsListTableBody";
 import MyDropdown from "../UI/MyDropdown";
 
+type RequiredCoins = string[] | { };
 interface Props {
 	type?: TableTypes,
 	title: string,
-	requiredCoins?: string[],
+	requiredCoins?: RequiredCoins,
 }
 
 const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
@@ -42,7 +43,9 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		limit: countRow,
 		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 		timePeriod: period,
-		symbols: requiredCoins,
+		uuids: Array.isArray(requiredCoins) 
+    ? requiredCoins 
+    : Object.keys(requiredCoins || {}),
 		orderBy: tableParams.defaultValues.order ?? CoinsCharacter.MARKETCAP,
 	};
 

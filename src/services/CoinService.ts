@@ -12,7 +12,7 @@ export const CoinAPI = createApi({
 	reducerPath: 'coinAPI',
 	baseQuery: fetchBaseQuery({baseUrl: 'https://coinranking1.p.rapidapi.com/'}),
 	endpoints: (build) => ({
-		fetchAllCoins: build.query<CoinsListResponse, {symbols?: string[], limit?: number, referenceCurrencyUuid?: string, timePeriod?: string, tiers?: string[], orderBy?: string, orderDirection?: string, offset?: string }>({
+		fetchAllCoins: build.query<CoinsListResponse, {uuids?: string[], limit?: number, referenceCurrencyUuid?: string, timePeriod?: string, tiers?: string[], orderBy?: string, orderDirection?: string, offset?: string }>({
 			query: (params) => {
 				const defaultParams: CoinsListApiParams = {
 					limit: 5,

@@ -9,6 +9,7 @@ export interface CoinsListApiParams {
   timePeriod?: string,
   'tiers[0]'?: string,
   symbols?: string[],
+  uuids?: string[],
   orderBy?: string,
   orderDirection?: string,
   offset?: string
