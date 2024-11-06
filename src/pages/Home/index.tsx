@@ -1,5 +1,6 @@
 import { getAllPortfolio } from "services/UsersCoinsService";
 import { useAuth } from 'store/context/AuthContext';
+import { usePortfolio } from 'store/context/PortfolioContext';
 import { useEffect, useState } from 'react';
 
 import CoinsList from "../../components/CoinsList/CoinsList";
@@ -9,27 +10,17 @@ import s from './index.module.scss';
 
 const Home = () => {
 	const { currentUser } = useAuth();
-	const [ allCoins, setAllCoins ] = useState<Record<string, any>>({});
+	const { portfolio, fetchPortfolio } = usePortfolio();
 
-  useEffect(() => {
-    const fetchPortfolio = async () => {
-      const portfolio = await getAllPortfolio(currentUser);
-      setAllCoins(portfolio || []);
-    };
-
-    if (currentUser) {
-      fetchPortfolio();
-    }
+	useEffect(() => {
+    fetchPortfolio(currentUser);
   }, [currentUser]);
-
-	console.log(allCoins);
-	
 
 	return (
 		<div className={s.Home}>
 			{ 
-				Object.keys(allCoins).length > 0 ? 
-				<CoinsList title='Portfolio' type={TableTypes.COIN_PORTFOLIO} requiredCoins={allCoins}/> 
+				Object.keys(portfolio).length > 0 ? 
+				<CoinsList title='Portfolio' type={TableTypes.COIN_PORTFOLIO} requiredCoins={portfolio}/> 
 				: <CoinsList title="All"/> 
 			}
 		</div>

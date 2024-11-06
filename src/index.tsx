@@ -7,6 +7,7 @@ import { setupStore } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
 import './firebase/firebase';
 import { AuthProvider } from 'store/context/AuthContext';
+import { PortfolioProvider } from 'store/context/PortfolioContext';
 
 const store = setupStore();
 
@@ -18,7 +19,9 @@ root.render(
   <BrowserRouter basename='/crypto-currency'>
     <Provider store={store}>
       <AuthProvider>
-        <App/>
+        <PortfolioProvider>
+          <App/>
+        </PortfolioProvider>
       </AuthProvider>
     </Provider>
   </BrowserRouter>

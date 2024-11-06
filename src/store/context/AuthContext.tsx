@@ -2,12 +2,10 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 
-// Типи даних для контексту
 interface AuthContextType {
   currentUser: User | null;
 }
 
-// Створення контексту з початковим значенням undefined
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = (): AuthContextType => {
