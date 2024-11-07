@@ -1,12 +1,8 @@
 import { useParams } from "react-router-dom";
-import { CoinAPI } from "../../services/CoinService";
-import { useDelayedData } from "../../hooks/delay";
-import { CoinDetailApiParams } from "../../models/IAPI";
-import { ICoinDetail } from "../../models/ICoinDetail";
 import PriceHistory from "../../components/CoinSections/PriceHistory";
+import PaySection from '../../components/CoinSections/PaySection'
 
 import s from './index.module.scss';
-import PurchaseCoin from "components/CoinSections/PurchaseForm";
 
 const Coin = () => {
 	let { coinParams } = useParams<{ coinParams?: string }>();
@@ -27,7 +23,7 @@ const Coin = () => {
 	return (
 		<>
 			<PriceHistory coinUUID={coinUUID}/>
-			<PurchaseCoin coinUUID={coinUUID} coinName={coinName}/>
+			<PaySection coinUUID={coinUUID} coinName={coinName}/>
 		</>
 	)
 } 

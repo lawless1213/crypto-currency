@@ -15,7 +15,7 @@ interface PurchaseFormInteface {
   value?: number,
 }
 
-const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
+const SaleCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   const [ errorText, setErrorText ] = useState<string | null>(null);
 	const { currentUser } = useAuth();
 	const { addPortfolioItem } = usePortfolio();
@@ -44,36 +44,32 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   }
 
 	return (
-		<section className={`panel_section`}>
-			<div className={`content`}>
-				<form className='row' onSubmit={handleSubmit(submit)} noValidate autoComplete='off'>
-					<Controller
+		<form className='row' onSubmit={handleSubmit(submit)} noValidate autoComplete='off'>
+			<Controller
+				name = 'value'
+				control={control}
+				render={
+					({field}) => <MyInput 
+						{...field}
 						name = 'value'
-						control={control}
-						render={
-							({field}) => <MyInput 
-								{...field}
-								name = 'value'
-								type = "number"
-								label = 'Value'
-								error = { errorText }
-								onChange={(e) => {
-									setErrorText(null); 
-									field.onChange(e);
-								}}
-							/>
-						}
+						type = "number"
+						label = 'Value'
+						error = { errorText }
+						onChange={(e) => {
+							setErrorText(null); 
+							field.onChange(e);
+						}}
 					/>
-					<div className="actions_wrap center">
-						<MyButton 
-							classes={`primary border wide big uppercase`}
-							text='SUBMIT'
-						/>
-					</div>
-				</form>
+				}
+			/>
+			<div className="actions_wrap center">
+				<MyButton 
+					classes={`primary border wide big uppercase`}
+					text='SUBMIT'
+				/>
 			</div>
-		</section>
+		</form>
 	)
 }
 
-export default PurchaseCoin;
+export default SaleCoin;
