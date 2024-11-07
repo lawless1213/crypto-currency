@@ -7,13 +7,13 @@ interface Props {
 	classes?: string,
 	contentClasses?: string,
 	icon?: JSX.Element,
-	onclick?: ClickHandler,
+	onClick?: ClickHandler,
 }
 
-const HeadCell: React.FC<Props> = ({item, icon, classes, contentClasses, onclick}) => {
-	const classNames = `table_cell head_cell ${classes} ${onclick ? 'clickable' : ''}`;
+const HeadCell: React.FC<Props> = ({item, icon, classes, contentClasses, onClick}) => {
+	const classNames = `table_cell head_cell ${classes} ${onClick ? 'clickable' : ''}`;
 	const contentClassNames = `content row ${contentClasses || ''}`;
-	const handleClick = onclick ? () => onclick(item) : undefined;
+	const handleClick = onClick ? () => onClick(item) : undefined;
 
 	return(
 		<TableCell onClick={handleClick} className={classNames}>

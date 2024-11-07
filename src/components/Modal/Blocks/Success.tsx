@@ -9,7 +9,7 @@ const Success = () => {
 			<MyButton 
 				classes='primary border'
 				text='DONE'
-				onclick={closeModalHandler}
+				onClick={closeModalHandler}
 			/>
 		</div>
 	)

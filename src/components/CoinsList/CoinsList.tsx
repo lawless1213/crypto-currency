@@ -88,7 +88,7 @@ const CoinsList: React.FC<Props> = ({type, title,uuids, requiredCoins}: Props) =
 			item={item} 
 			classes={	`link primary small ${tableParams.defaultValues.order === item ? ' active' : ''}` }
 			icon={	tableParams.defaultValues.order === item ? <i className="icon"><FaSortAmountDown /></i> : undefined }
-			onclick={() => orderHandler(item)}
+			onClick={() => orderHandler(item)}
 		/> 
 		: 
 		<HeadCell 

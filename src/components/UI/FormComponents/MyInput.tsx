@@ -50,7 +50,7 @@ const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, require
 							classes={error ? 'danger' : success ? 'success' : 'info'}
 							icon={showPassword ? <LuEyeOff /> : <LuEye />}
 							type='button'
-							onclick={handleClickShowPassword}
+							onClick={handleClickShowPassword}
 						/>
 					</InputAdornment>
 				) : undefined,

@@ -64,8 +64,8 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 			/>
 			<div className="actions_wrap center">
 				<MyButton 
-					classes={`primary border wide big uppercase`}
-					text='SUBMIT'
+					classes={`primary wide big uppercase`}
+					text='PURCHASE'
 				/>
 			</div>
 		</form>

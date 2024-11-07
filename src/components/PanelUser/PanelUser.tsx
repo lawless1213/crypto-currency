@@ -20,14 +20,14 @@ const PanelUser = () => {
 				>
 						<span>{currentUser.email}</span>
 				</NavLink>
-				<MyButton onclick={handleSignOut} classes='primary border' text='LOGOUT'/>
+				<MyButton onClick={handleSignOut} classes='primary border' text='LOGOUT'/>
 			</div>
 		)
 	} else {
 		return (
 			<div className={s.PanelUser}>
-				<MyButton onclick={() => openModalHandler(ModalView.SIGNUP)} classes='success border' text='SIGNUP'/>
-				<MyButton onclick={() => openModalHandler(ModalView.SIGNIN)} classes='primary border' text='SIGNIN'/>
+				<MyButton onClick={() => openModalHandler(ModalView.SIGNUP)} classes='success border' text='SIGNUP'/>
+				<MyButton onClick={() => openModalHandler(ModalView.SIGNIN)} classes='primary border' text='SIGNIN'/>
 			</div>
 		)
 	}

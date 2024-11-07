@@ -4,6 +4,22 @@
 	align-items: center;
 	gap: 8px;
 
+	&.group_buttons {
+		.button {
+			border-radius: 0 !important;
+		}
+
+		.button:first-of-type {
+			border-top-left-radius: var(--button-border-radius) !important;
+			border-bottom-left-radius: var(--button-border-radius) !important;
+		}
+
+		.button:last-of-type {
+			border-top-right-radius: var(--button-border-radius) !important;
+			border-bottom-right-radius: var(--button-border-radius) !important;
+		}
+	}
+
 	&.wide {
 		width: 100%;
 	}

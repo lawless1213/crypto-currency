@@ -35,14 +35,14 @@ const PaySection: React.FC<Props> = ({coinUUID, coinName}) => {
 	return (
 		<section className={`panel_section`}>
 			<div className="header">
-				<div className="actions_wrap">
+				<div className="actions_wrap no_space group_buttons">
 					
 				{payFormValues.map((form) => (
 						<MyButton
 							key={form}
-							classes={`${activeForm === form ? 'active' : ''}`}
+							classes={`button primary small ${activeForm === form ? 'active' : 'border'}`}
 							text={form}
-							onсlick={() => ActiveFormHandler(form)}
+							onClick={() => ActiveFormHandler(form as PayForms)}
 						/>
 					))}
 				</div>

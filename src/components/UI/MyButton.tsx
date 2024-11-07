@@ -4,16 +4,16 @@ interface Props {
 	classes?: string,
 	text?: string,
 	icon?: JSX.Element,
-	onclick?: ClickHandler,
+	onClick?: ClickHandler,
 	asLink?: boolean, 
 	type?: string,
 }
 
-const MyButton: React.FC<Props> = ({text, icon, classes, onclick, asLink = false, type}) => {
+const MyButton: React.FC<Props> = ({text, icon, classes, onClick, asLink = false, type}) => {
 	const classNames = `${!asLink ? 'button' : 'link'} ${classes}`
 
 	return (
-		<button onClick={onclick} className={classNames}>
+		<button onClick={onClick} className={classNames}>
 			{icon && <i className="icon">{icon}</i>}
 			{text && <span className="caption">{text}</span>}
 		</button>
