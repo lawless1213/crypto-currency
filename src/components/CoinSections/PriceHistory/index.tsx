@@ -1,7 +1,7 @@
 import { CoinPriceHistoryApiParams } from "../../../models/IAPI";
 import { CoinAPI } from "../../../services/CoinService";
 import { useDelayedData } from "../../../hooks/delay";
-import { ICoinPriceHistory } from "../../../models/ICoinDetail";
+import { ICoinDetail, ICoinPriceHistory } from "../../../models/ICoinDetail";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -27,12 +27,12 @@ ChartJS.register(
 
 
 interface Props {
-	coinUUID: string 
+	coin: ICoinDetail 
 }
 
-const PriceHistory: React.FC<Props> = ({coinUUID}: Props) => {
+const PriceHistory: React.FC<Props> = ({coin}: Props) => {
 	let params: CoinPriceHistoryApiParams = {
-		uuid : coinUUID,
+		uuid : coin.uuid,
 		timePeriod: '24h'
 	}
 

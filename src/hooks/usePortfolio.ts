@@ -17,7 +17,18 @@ export const useAddPortfolioItem = () => {
   if (!context) throw new Error("useAddPortfolioItem must be used within a PortfolioProvider");
 
   return useCallback(
-    (coin: IUserCoin) => context.addPortfolioItem( coin),
+    (coin: IUserCoin) => context.addPortfolioItem(coin),
+    [context]
+  );
+};
+
+// Хук для додавання монети до портфоліо
+export const useGetPortfolioItem = () => {
+  const context = useContext(PortfolioContext);
+  if (!context) throw new Error("useAddPortfolioItem must be used within a PortfolioProvider");
+
+  return useCallback(
+    (uuid: string) => context.getPortfolioItem(uuid),
     [context]
   );
 };

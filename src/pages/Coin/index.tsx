@@ -21,15 +21,12 @@ const Coin = () => {
 	const { displayData, loading } = useDelayedData({ data: dataCoin });
 	const coin: ICoinDetail | undefined = displayData?.data.coin;
 
-	console.log(coin);
-	
-
 	return (
 		<>
-			{coin?.name}
 			{/* <img src={coin?.iconUrl} alt="" /> */}
-			<PriceHistory coinUUID={coinUUID}/>
-			<PaySection coinUUID={coinUUID} coinName={coinName}/>
+			{coin?.name}
+			{coin && <PriceHistory coin={coin}/>}
+			{coin && <PaySection coin={coin}/>}
 		</>
 	)
 } 

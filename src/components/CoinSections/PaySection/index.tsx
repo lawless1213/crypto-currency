@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PurchaseCoin  from '../PayForms/purchase';
 import SaleCoin from '../PayForms/sale';
 import MyButton from '../../UI/MyButton';
+import { useGetPortfolioItem } from "../../../hooks/usePortfolio";
+import { setAmount } from 'services/CoinService';
+import { ICoinDetail } from 'models/ICoinDetail';
+
 
 enum PayForms {
 	PURCHASE = 'PURCHASE',
@@ -9,26 +13,36 @@ enum PayForms {
 }
 
 interface Props {
-	coinUUID: string, 
-	coinName: string | undefined,
+	coin: ICoinDetail,
 }
 
-const PaySection: React.FC<Props> = ({coinUUID, coinName}) => {
+const PaySection: React.FC<Props> = ({coin}) => {
 	let currentForm;
+	const PortfolioItem = useGetPortfolioItem();
+	const [value, setValue] = useState(PortfolioItem(coin.uuid));
+
+	useEffect(() => {
+		setValue(Number(PortfolioItem(coin.uuid)))
+		console.log(PortfolioItem(coin.uuid));
+		console.log(setAmount(value, coin.uuid));
+		
+		
+	}, [PortfolioItem(coin.uuid)])
+	
+	
 	const [activeForm, setActiveForm] = useState(PayForms.PURCHASE);
 	const payFormValues = Object.values(PayForms);
 	
-
 	const ActiveFormHandler = (form:PayForms) => {
 		setActiveForm(form);
 	}
 
 	switch (activeForm) {
 		case PayForms.PURCHASE:
-			currentForm = <PurchaseCoin coinUUID={coinUUID} coinName={coinName}/>
+			currentForm = <PurchaseCoin coinUUID={coin.uuid} coinName={coin.name}/>
 			break;
 		case PayForms.SALE:
-			currentForm = <SaleCoin coinUUID={coinUUID} coinName={coinName}/>
+			currentForm = <SaleCoin coinUUID={coin.uuid} coinName={coin.name}/>
 			break;
 	}
 
@@ -36,7 +50,6 @@ const PaySection: React.FC<Props> = ({coinUUID, coinName}) => {
 		<section className={`panel_section`}>
 			<div className="header">
 				<div className="actions_wrap no_space group_buttons">
-					
 				{payFormValues.map((form) => (
 						<MyButton
 							key={form}
@@ -48,6 +61,8 @@ const PaySection: React.FC<Props> = ({coinUUID, coinName}) => {
 				</div>
 			</div>
 			<div className={`content`}>
+				<div>{value}</div>
+				<div>{setAmount(value, coin.uuid)}</div>
 				{currentForm}
 			</div>
 		</section>

@@ -1,6 +1,5 @@
 // context/PortfolioContext.tsx
 import React, { createContext, useEffect, useMemo, useState, FC, ReactNode } from "react";
-import { User } from "firebase/auth";
 import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { IUserCoin, IPortfolio } from "../../models/IUser";
@@ -9,6 +8,7 @@ import { useAuth } from "store/context/AuthContext";
 interface PortfolioContextProps {
   portfolio: IPortfolio;
   addPortfolioItem: ( coin: IUserCoin) => Promise<void>;
+  getPortfolioItem: (uuid: string) => number;
 }
 
 export const PortfolioContext = createContext<PortfolioContextProps | undefined>(undefined);
@@ -72,7 +72,15 @@ export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
     }
   };
 
-  const value = useMemo(() => ({ portfolio, addPortfolioItem }), [portfolio]);
+	const getPortfolioItem = (uuid:string) => {
+		if (!currentUser) return 0;
+
+		const targetCoin = portfolio.hasOwnProperty(uuid) ? portfolio[uuid] : 0;
+		
+		return targetCoin;
+	}
+
+  const value = useMemo(() => ({ portfolio, addPortfolioItem, getPortfolioItem }), [portfolio]);
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
 };
