@@ -2,7 +2,6 @@ import { useState } from 'react';
 import PurchaseCoin  from '../PayForms/purchase';
 import SaleCoin from '../PayForms/sale';
 import MyButton from '../../UI/MyButton';
-import { usePortfolio } from "../../../store/context/PortfolioContext";
 
 enum PayForms {
 	PURCHASE = 'PURCHASE',

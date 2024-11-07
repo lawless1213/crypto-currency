@@ -4,7 +4,7 @@ import MyInput from '../../UI/FormComponents/MyInput';
 import { useState } from 'react';
 import { useAuth } from 'store/context/AuthContext';
 import { IUserCoin } from "../../../models/IUser";
-import { usePortfolio } from "../../../store/context/PortfolioContext";
+// import { usePortfolio } from "../../../store/context/PortfolioContext";
 
 interface Props {
 	coinUUID: string, 
@@ -18,7 +18,7 @@ interface PurchaseFormInteface {
 const SaleCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   const [ errorText, setErrorText ] = useState<string | null>(null);
 	const { currentUser } = useAuth();
-	const { addPortfolioItem } = usePortfolio();
+	// const { addPortfolioItem } = usePortfolio();
 
 
   const { control, register, handleSubmit, formState: { errors, isValid }, reset } = useForm<PurchaseFormInteface>({
@@ -39,7 +39,7 @@ const SaleCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 			value: data.value
 		}
 		
-		addPortfolioItem(currentUser, coin);
+		// addPortfolioItem(currentUser, coin);
 		reset({ value: 0 }); 
   }
 

@@ -2,9 +2,8 @@ import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
 import { useState } from 'react';
-import { useAuth } from 'store/context/AuthContext';
 import { IUserCoin } from "../../../models/IUser";
-import { usePortfolio } from "../../../store/context/PortfolioContext";
+import { useAddPortfolioItem } from "../../../hooks/usePortfolio";
 
 interface Props {
 	coinUUID: string, 
@@ -17,14 +16,13 @@ interface PurchaseFormInteface {
 
 const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   const [ errorText, setErrorText ] = useState<string | null>(null);
-	const { currentUser } = useAuth();
-	const { addPortfolioItem } = usePortfolio();
-
 
   const { control, register, handleSubmit, formState: { errors, isValid }, reset } = useForm<PurchaseFormInteface>({
     mode: "onSubmit",
     defaultValues: {}
   })
+
+	const addPortfolioItem = useAddPortfolioItem();
 
   const submit: SubmitHandler<PurchaseFormInteface> = data => {
 		if(!coinName) return;
@@ -39,7 +37,7 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 			value: data.value
 		}
 		
-		addPortfolioItem(currentUser, coin);
+		addPortfolioItem(coin);
 		reset({ value: 0 }); 
   }
 

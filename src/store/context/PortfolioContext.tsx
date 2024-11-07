@@ -1,16 +1,17 @@
-import React, { createContext, FC, useContext, useEffect, useState, ReactNode, useMemo  } from "react";
+// context/PortfolioContext.tsx
+import React, { createContext, useEffect, useMemo, useState, FC, ReactNode } from "react";
 import { User } from "firebase/auth";
-import { collection, setDoc, doc, getDoc, updateDoc } from "firebase/firestore"; 
+import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { IUserCoin, IPortfolio } from "../../models/IUser";
+import { useAuth } from "store/context/AuthContext";
 
 interface PortfolioContextProps {
   portfolio: IPortfolio;
-  fetchPortfolio: (currentUser: User | null) => Promise<void>;
-	addPortfolioItem: (currentUser: User | null, coin: IUserCoin) => Promise<void>;
+  addPortfolioItem: ( coin: IUserCoin) => Promise<void>;
 }
 
-const PortfolioContext = createContext<PortfolioContextProps | undefined>(undefined);
+export const PortfolioContext = createContext<PortfolioContextProps | undefined>(undefined);
 
 interface PortfolioProviderProps {
   children: ReactNode;
@@ -18,66 +19,60 @@ interface PortfolioProviderProps {
 
 export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
   const [portfolio, setPortfolio] = useState<IPortfolio>({});
+	const { currentUser } = useAuth();
 
-  const fetchPortfolio = async (currentUser: User | null) => {
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      if (!currentUser) return;
+      const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
+      try {
+        const docSnap = await getDoc(dbCoins);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setPortfolio(data?.portfolio ?? {});
+        }
+      } catch (e) {
+        console.error("Error fetching portfolio document: ", e);
+      }
+    };
+
+    fetchPortfolio();
+  }, [currentUser]);
+
+  const addPortfolioItem = async (coin: IUserCoin) => {
     if (!currentUser) return;
 
     const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
-
     try {
       const docSnap = await getDoc(dbCoins);
+      let newValue: number;
 
       if (docSnap.exists()) {
         const data = docSnap.data();
-        setPortfolio(data?.portfolio ?? {});
+        const oldValue = data?.portfolio?.[coin.name] ?? 0;
+        newValue = Number(oldValue) + Number(coin.value);
+        await updateDoc(dbCoins, {
+          [`portfolio.${coin.name}`]: newValue
+        });
+      } else {
+        newValue = Number(coin.value);
+        await setDoc(dbCoins, {
+          portfolio: {
+            [coin.name]: newValue
+          }
+        });
       }
+
+      setPortfolio((prevPortfolio) => ({
+        ...prevPortfolio,
+        [coin.name]: newValue,
+      }));
     } catch (e) {
-      console.error("Error fetching portfolio document: ", e);
+      console.error("Error updating portfolio document: ", e);
     }
   };
 
-	const addPortfolioItem = async (currentUser: User | null, coin: IUserCoin) => {
-		if (!currentUser) return;
-		const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
-	
-		try {
-			const docSnap = await getDoc(dbCoins);
-			let newValue:number;
-
-			if (docSnap.exists()) {
-				const data = docSnap.data();
-				const oldValue = data?.portfolio?.[coin.name] ?? 0;
-				newValue = Number(oldValue) + Number(coin.value);
-				await updateDoc(dbCoins, {
-					[`portfolio.${coin.name}`]: newValue
-				});
-			} else {
-				newValue = Number(coin.value);
-				await setDoc(dbCoins, {
-					portfolio: {
-						[coin.name]: newValue
-					}
-				});
-			}
-	
-			setPortfolio(prevPortfolio => ({
-				...prevPortfolio,
-				[coin.name]: newValue,
-			}));
-		} catch (e) {
-			console.error("Error updating portfolio document: ", e);
-		}
-	};
-
-  const value = useMemo(() => ({ portfolio, fetchPortfolio, addPortfolioItem }), [portfolio]);
+  const value = useMemo(() => ({ portfolio, addPortfolioItem }), [portfolio]);
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
-};
-
-export const usePortfolio = () => {
-  const context = useContext(PortfolioContext);
-  if (!context) {
-    throw new Error("usePortfolio must be used within a PortfolioProvider");
-  }
-  return context;
 };

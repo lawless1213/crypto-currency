@@ -27,7 +27,7 @@ const Coin = () => {
 	return (
 		<>
 			{coin?.name}
-			<img src={coin?.iconUrl} alt="" />
+			{/* <img src={coin?.iconUrl} alt="" /> */}
 			<PriceHistory coinUUID={coinUUID}/>
 			<PaySection coinUUID={coinUUID} coinName={coinName}/>
 		</>

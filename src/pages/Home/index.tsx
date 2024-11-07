@@ -1,19 +1,12 @@
-import { useEffect } from 'react';
-import { useAuth } from 'store/context/AuthContext';
-import { usePortfolio } from 'store/context/PortfolioContext';
+import { usePortfolioData } from "../../hooks/usePortfolio";
 import CoinsList from "../../components/CoinsList/CoinsList";
 import { TableTypes } from "../../data/coins"
 
 import s from './index.module.scss';
 
 const Home = () => {
-	const { currentUser } = useAuth();
-	const { portfolio, fetchPortfolio } = usePortfolio();
-
-	useEffect(() => {
-    fetchPortfolio(currentUser);
-  }, [currentUser]);
-
+	const portfolio = usePortfolioData();
+	
 	return (
 		<div className={s.Home}>
 			{ 
