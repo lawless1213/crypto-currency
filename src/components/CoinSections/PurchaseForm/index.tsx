@@ -1,33 +1,27 @@
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
-import * as yup from 'yup';
 import { useState } from 'react';
-import MyBadge from 'components/UI/MyBadge';
-import { addCoinToPortfolio } from 'services/UsersCoinsService';
 import { useAuth } from 'store/context/AuthContext';
 import { IUserCoin } from "../../../models/IUser";
+import { usePortfolio } from "../../../store/context/PortfolioContext";
 
 interface Props {
 	coinUUID: string, 
 	coinName: string | undefined,
 }
 
-export interface PurchaseFormInteface {
+interface PurchaseFormInteface {
   value?: number,
 }
 
-// const schemaPurchase = yup.object().shape({
-//   value: yup
-//     .number()
-// })
-
 const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
-  const [errorText, setErrorText] = useState<string | null>(null);
+  const [ errorText, setErrorText ] = useState<string | null>(null);
 	const { currentUser } = useAuth();
+	const { addPortfolioItem } = usePortfolio();
 
-  const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<PurchaseFormInteface>({
+
+  const { control, register, handleSubmit, formState: { errors, isValid }, reset } = useForm<PurchaseFormInteface>({
     mode: "onSubmit",
     defaultValues: {}
   })
@@ -45,7 +39,8 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 			value: data.value
 		}
 		
-		addCoinToPortfolio(coin, currentUser)
+		addPortfolioItem(currentUser, coin);
+		reset({ value: 0 }); 
   }
 
 	return (
@@ -59,7 +54,7 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 							({field}) => <MyInput 
 								{...field}
 								name = 'value'
-								type="number"
+								type = "number"
 								label = 'Value'
 								error = { errorText }
 								onChange={(e) => {
@@ -72,7 +67,7 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 					<div className="actions_wrap center">
 						<MyButton 
 							classes={`primary border wide big uppercase`}
-							text='purchase'
+							text='SUBMIT'
 						/>
 					</div>
 				</form>

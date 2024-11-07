@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext, useEffect, useState, ReactNode } from "react";
+import React, { createContext, FC, useContext, useEffect, useState, ReactNode, useMemo  } from "react";
 import { User } from "firebase/auth";
 import { collection, setDoc, doc, getDoc, updateDoc } from "firebase/firestore"; 
 import { db } from "../../firebase/firebase";
@@ -7,6 +7,7 @@ import { IUserCoin, IPortfolio } from "../../models/IUser";
 interface PortfolioContextProps {
   portfolio: IPortfolio;
   fetchPortfolio: (currentUser: User | null) => Promise<void>;
+	addPortfolioItem: (currentUser: User | null, coin: IUserCoin) => Promise<void>;
 }
 
 const PortfolioContext = createContext<PortfolioContextProps | undefined>(undefined);
@@ -68,7 +69,7 @@ export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
 		}
 	};
 
-  const value = { portfolio, fetchPortfolio, addPortfolioItem };
+  const value = useMemo(() => ({ portfolio, fetchPortfolio, addPortfolioItem }), [portfolio]);
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
 };
