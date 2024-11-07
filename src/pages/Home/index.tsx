@@ -1,8 +1,6 @@
-import { getAllPortfolio } from "services/UsersCoinsService";
+import { useEffect } from 'react';
 import { useAuth } from 'store/context/AuthContext';
 import { usePortfolio } from 'store/context/PortfolioContext';
-import { useEffect, useState } from 'react';
-
 import CoinsList from "../../components/CoinsList/CoinsList";
 import { TableTypes } from "../../data/coins"
 

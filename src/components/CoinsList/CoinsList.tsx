@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useDelayedData } from "../../hooks/delay";
 import { CoinAPI, availableSort } from "../../services/CoinService";
 import { ICoin } from "../../models/ICoin";
+import { IPortfolio } from "../../models/IUser";
 import { IStats } from "../../models/IStats";
 import { useAppSelector } from '../../hooks/redux';
 import { CoinsListApiParams } from "../../models/IAPI";
@@ -22,15 +23,14 @@ import MyTabs from "../UI/MyTabs";
 import HeadCell from "../UI/TableComponents/HeadCell";
 import CoinsListTableBody from "./CoinsListTableBody";
 import MyDropdown from "../UI/MyDropdown";
-
-type RequiredCoins = string[] | { };
 interface Props {
 	type?: TableTypes,
 	title: string,
-	requiredCoins?: RequiredCoins,
+	uuids?: string[],
+	requiredCoins?: IPortfolio,
 }
 
-const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
+const CoinsList: React.FC<Props> = ({type, title,uuids, requiredCoins}: Props) => {
 	const dispatch = useDispatch();
 	const tableType = type ?? TableTypes.COIN_MAIN;
 	const tableParams = useAppSelector(state => state.TablesParamsReducer.coinTables[tableType]);
@@ -43,9 +43,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 		limit: countRow,
 		offset: page > 1 ? (countRow * (page - 1)).toString() : '0',
 		timePeriod: period,
-		uuids: Array.isArray(requiredCoins) 
-    ? requiredCoins 
-    : Object.keys(requiredCoins || {}),
+		uuids: requiredCoins ? Object.keys(requiredCoins) || {} : uuids,
 		orderBy: tableParams.defaultValues.order ?? CoinsCharacter.MARKETCAP,
 	};
 
@@ -119,7 +117,7 @@ const CoinsList: React.FC<Props> = ({type, title, requiredCoins}: Props) => {
 									{tableColumnsHead}
 								</TableRow>
 							</TableHead>
-							<CoinsListTableBody tableColumns={tableColumns} coins={coins}/>
+							<CoinsListTableBody tableColumns={tableColumns} coins={coins} {...(requiredCoins !== undefined && { portfolio: requiredCoins })}/>
 						</Table>
 					</TableContainer>
 				}

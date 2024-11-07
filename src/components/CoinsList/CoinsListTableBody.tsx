@@ -1,22 +1,22 @@
 import { CoinsCharacter } from "../../data/coins";
 import { useNavigate } from 'react-router-dom';
 import { ICoin } from "../../models/ICoin";
+import { IPortfolio } from "../../models/IUser";
 import { setCurrency, setAmount, isIncrementalChange } from "../../services/CoinService";
-import { user } from "../../data/user";
-import { useAuth } from 'store/context/AuthContext';
 
 import RowCell from "../UI/TableComponents/RowCell";
 import MyBadge from "../UI/MyBadge";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import { TableBody, TableRow } from "@mui/material";
 
+
 interface Props {
 	tableColumns: CoinsCharacter[],
 	coins: ICoin[],
+	portfolio?: IPortfolio, 
 }
 
-const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins}: Props) => {
-	const { currentUser } = useAuth();
+const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins, portfolio}: Props) => {
 	let navigate = useNavigate();
 
 	const ShowMoreHandler = (coin: ICoin) => {
@@ -51,10 +51,12 @@ const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins}: Props) => {
 			case CoinsCharacter.MARKETCAP:
 				return <RowCell><span>{setCurrency(coin.marketCap)}</span></RowCell>;
 			case CoinsCharacter.COUNT:
+				let amount = portfolio && coin.uuid in portfolio ? portfolio[coin.uuid] : 0;
+				
 				return (
 					<RowCell>
-						<span className="t-h5">{user.portfolio.counts[coin.symbol] ?? 0}</span>
-						<span className="t-caption">{setAmount(user.portfolio.counts[coin.symbol], coin.price)}</span>
+						<span className="t-h5">{amount}</span>
+						<span className="t-caption">{setAmount(amount, coin.price)}</span>
 					</RowCell>
 				);
 			default:

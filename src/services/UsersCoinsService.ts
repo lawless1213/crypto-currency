@@ -30,22 +30,3 @@ export const addCoinToPortfolio = async (coin: IUserCoin, currentUser: User | nu
 		console.error("Error writing or fetching document: ", e);
 	}
 };
-
-export const getAllPortfolio = async (currentUser: User | null) => {
-  if (!currentUser) return [];
-
-  const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
-
-  try {
-    const docSnap = await getDoc(dbCoins);
-
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      return data?.portfolio ?? [];
-    }
-  } catch (e) {
-    console.error("Error writing or fetching document: ", e);
-  }
-
-  return [];
-};

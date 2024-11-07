@@ -2,12 +2,7 @@ import React, { createContext, FC, useContext, useEffect, useState, ReactNode } 
 import { User } from "firebase/auth";
 import { collection, setDoc, doc, getDoc, updateDoc } from "firebase/firestore"; 
 import { db } from "../../firebase/firebase";
-import { IUserCoin } from "../../models/IUser";
-
-
-interface IPortfolio {
-  [key: string]: number;
-}
+import { IUserCoin, IPortfolio } from "../../models/IUser";
 
 interface PortfolioContextProps {
   portfolio: IPortfolio;
