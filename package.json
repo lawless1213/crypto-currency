@@ -1,7 +1,7 @@
 {
   "name": "crypto-currency",
   "version": "0.1.0",
-  "homepage": "https://lawless1213.github.io/crypto-currency",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
