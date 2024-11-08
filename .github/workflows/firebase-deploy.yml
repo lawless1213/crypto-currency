@@ -1,28 +1,42 @@
-name: Deploy to Firebase Hosting
-
-on:
-  push:
-    branches:
-      - master # Заміна на потрібну гілку
-
 jobs:
-  build-and-deploy:
+  setup:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Актуальна версія Node.js для вашого проекту
+          node-version: '20'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
+
+  build:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Build Project
         run: CI=false npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Deploy to Firebase
         env:
