@@ -11,7 +11,6 @@ import s from './index.module.scss';
 const Coin = () => {
 	let { coinParams } = useParams<{ coinParams?: string }>();
 	let coinUUID = coinParams?.split('_')[0] || '';
-	let coinName = coinParams?.split('_')[1] || undefined;
 	
 	let params: CoinDetailApiParams = {
 		uuid: coinUUID
@@ -23,10 +22,8 @@ const Coin = () => {
 
 	return (
 		<>
-			{/* <img src={coin?.iconUrl} alt="" /> */}
-			{coin?.name}
-			{coin && <PriceHistory coin={coin}/>}
 			{coin && <PaySection coin={coin}/>}
+			{coin && <PriceHistory coin={coin}/>}
 		</>
 	)
 } 

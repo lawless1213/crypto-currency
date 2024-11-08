@@ -3,7 +3,7 @@ import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
 import { useState } from 'react';
 import { IUserCoin } from "../../../models/IUser";
-import { useAddPortfolioItem } from "../../../hooks/usePortfolio";
+import { useSalePortfolioItem } from "../../../hooks/usePortfolio";
 
 interface Props {
 	coinUUID: string, 
@@ -25,7 +25,7 @@ const SaleCoin: React.FC<Props> = ({coinUUID, coinName}) => {
     defaultValues: {}
   })
 
-	const addPortfolioItem = useAddPortfolioItem();
+	const salePortfolioItem = useSalePortfolioItem();
 
 
   const submit: SubmitHandler<PurchaseFormInteface> = data => {
@@ -41,7 +41,7 @@ const SaleCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 			value: data.value
 		}
 		
-		// addPortfolioItem(currentUser, coin);
+		salePortfolioItem(coin);
 
 		setSuccessUpdate(true);
 		setTimeout(() => {

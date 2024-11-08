@@ -8,6 +8,7 @@ import { useAuth } from "store/context/AuthContext";
 interface PortfolioContextProps {
   portfolio: IPortfolio;
   addPortfolioItem: ( coin: IUserCoin) => Promise<void>;
+  salePortfolioItem: ( coin: IUserCoin) => Promise<void>;
   getPortfolioItem: (uuid: string) => number;
 }
 
@@ -45,7 +46,7 @@ export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
     const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
     try {
       const docSnap = await getDoc(dbCoins);
-      let newValue: number;
+      let newValue: number | undefined = undefined;
 
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -65,8 +66,38 @@ export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
 
       setPortfolio((prevPortfolio) => ({
         ...prevPortfolio,
-        [coin.name]: newValue,
+        [coin.name]: newValue as number,
       }));
+    } catch (e) {
+      console.error("Error updating portfolio document: ", e);
+    }
+  };
+
+  const salePortfolioItem = async (coin: IUserCoin) => {
+    if (!currentUser) return;
+
+    const dbCoins = doc(collection(db, "usersCoins"), currentUser.uid);
+    try {
+      const docSnap = await getDoc(dbCoins);
+      let newValue: number | undefined = undefined;
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const oldValue = data?.portfolio?.[coin.name] ?? 0;
+        if (Number(coin.value) > oldValue) return;
+
+        newValue = Number(oldValue) - Number(coin.value);
+        await updateDoc(dbCoins, {
+          [`portfolio.${coin.name}`]: newValue
+        });
+      }
+
+      if(newValue) {
+        setPortfolio((prevPortfolio) => ({
+          ...prevPortfolio,
+          [coin.name]: newValue as number,
+        }));
+      }
     } catch (e) {
       console.error("Error updating portfolio document: ", e);
     }
@@ -80,7 +111,7 @@ export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
 		return targetCoin;
 	}
 
-  const value = useMemo(() => ({ portfolio, addPortfolioItem, getPortfolioItem }), [portfolio]);
+  const value = useMemo(() => ({ portfolio, addPortfolioItem, salePortfolioItem, getPortfolioItem }), [portfolio]);
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
 };

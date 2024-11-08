@@ -130,7 +130,7 @@ const PriceHistory: React.FC<Props> = ({coin}: Props) => {
 	};
 
 	return (
-		<section className={`panel_section big_section  ${loading ? 'loading' : ''}`}>
+		<section className={`panel_section middle_section  ${loading ? 'loading' : ''}`} style={{ flex: 1 }}>
 			<div className={`content no_padding`}>
 				<Line options={options} data={data} />
 			</div>

@@ -45,8 +45,8 @@ const PaySection: React.FC<Props> = ({coin}) => {
 	return (
 		<section className={`panel_section`}>
 			<div className="header">
-				<div>Your amount: {setCurrency(value, coin.symbol)}</div>
-				<div>{setAmount(value, coin.price)}</div>
+				<div>{coin.name}</div>
+				<div>Your amount: {setCurrency(value, coin.symbol)} ({setAmount(value, coin.price)})</div>
 				
 			</div>
 			<div className="content">
