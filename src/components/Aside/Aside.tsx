@@ -2,10 +2,9 @@ import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import { AsideModes } from '../../models/IAside';
 import { menu } from '../../data/asideMenu';
+import MyLogo from '../UI/MyLogo/MyLogo';
 
 import s from './Aside.module.scss'
-
-import MyLogo from '../UI/MyLogo/MyLogo';
 
 const Aside = () => {
 	const items = menu;
