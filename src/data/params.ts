@@ -1,6 +1,6 @@
 import logo from '../assets/images/logo.svg';
 
-interface Params {
+interface IParams {
 	title: string;
 	logo: string;
 	coinsSections: {
@@ -12,7 +12,7 @@ interface Params {
 	}
 }
 
-const Params: Params = {
+const Params: IParams = {
 	title: 'Crypto',
 	logo: logo,
 	coinsSections: {

@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <BrowserRouter basename='/crypto-currency'>
+  <BrowserRouter basename='/'>
     <Provider store={store}>
       <AuthProvider>
         <PortfolioProvider>

@@ -19,11 +19,12 @@ interface Props {
 const PaySection: React.FC<Props> = ({coin}) => {
 	let currentForm;
 	const PortfolioItem = useGetPortfolioItem();
+	let currentPortfolioItem = PortfolioItem(coin.uuid);
 	const [value, setValue] = useState(PortfolioItem(coin.uuid));
 
 	useEffect(() => {
-		setValue(Number(PortfolioItem(coin.uuid)))
-	}, [PortfolioItem(coin.uuid)])
+		setValue(Number(currentPortfolioItem))
+	}, [currentPortfolioItem])
 	
 	
 	const [activeForm, setActiveForm] = useState(PayForms.PURCHASE);

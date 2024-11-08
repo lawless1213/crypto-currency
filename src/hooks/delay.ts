@@ -24,7 +24,7 @@ export const useDelayedData = <T>({ data, delay }: UseDelayedDataProps<T>): UseD
 
       return () => clearTimeout(timeout);
     }
-  }, [data]);
+  }, [data, delay]);
 
   return { displayData, loading };
 };
