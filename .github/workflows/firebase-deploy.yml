@@ -1,3 +1,10 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - master 
+
 jobs:
   setup:
     runs-on: ubuntu-latest
