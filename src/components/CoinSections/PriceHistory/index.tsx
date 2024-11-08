@@ -37,7 +37,7 @@ const PriceHistory: React.FC<Props> = ({coin}: Props) => {
 	}
 
 	
-	const { data: dataHistory, error } = CoinAPI.useFetchCoinPriceHistoryQuery(params);
+	const { data: dataHistory } = CoinAPI.useFetchCoinPriceHistoryQuery(params);
 	const { displayData, loading } = useDelayedData({ data: dataHistory });
 	const coinHistory: ICoinPriceHistory[] | undefined = displayData?.data.history;
 

@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { CoinAPI } from "../services/CoinService";
 import SettingsReducer from "./reducers/settingsSlice";
 import TablesParamsReducer from "./reducers/tablesParamsSlice";

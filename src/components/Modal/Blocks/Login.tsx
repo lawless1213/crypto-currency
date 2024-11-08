@@ -13,7 +13,7 @@ import { LoginInteface }  from '../../../models/IAuth';
 const Login = () => {
   const [errorText, setErrorText] = useState<string | null>(null);
 
-  const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<LoginInteface>({
+  const { control, handleSubmit, formState: { errors } } = useForm<LoginInteface>({
     mode: "onSubmit",
     resolver: yupResolver(schema),
     defaultValues: {}

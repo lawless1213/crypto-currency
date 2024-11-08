@@ -6,7 +6,7 @@ import { ICoinDetail } from '../../models/ICoinDetail'
 import { useDelayedData } from "hooks/delay";
 import { CoinAPI } from "services/CoinService";
 
-import s from './index.module.scss';
+// import s from './index.module.scss';
 
 const Coin = () => {
 	let { coinParams } = useParams<{ coinParams?: string }>();
@@ -16,8 +16,8 @@ const Coin = () => {
 		uuid: coinUUID
 	};
 
-	const { data: dataCoin, error } = CoinAPI.useFetchCoinDetailQuery(params);
-	const { displayData, loading } = useDelayedData({ data: dataCoin });
+	const { data: dataCoin } = CoinAPI.useFetchCoinDetailQuery(params);
+	const { displayData } = useDelayedData({ data: dataCoin });
 	const coin: ICoinDetail | undefined = displayData?.data.coin;
 
 	return (

@@ -18,9 +18,7 @@ const SaleCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   const [ errorText, setErrorText ] = useState<string | null>(null);
   const [ successUpdate, setSuccessUpdate ] = useState<boolean>(false);
 
-
-
-  const { control, register, handleSubmit, formState: { errors, isValid }, reset } = useForm<PurchaseFormInteface>({
+  const { control, handleSubmit, reset } = useForm<PurchaseFormInteface>({
     mode: "onSubmit",
     defaultValues: {}
   })

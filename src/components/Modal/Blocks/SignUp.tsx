@@ -7,6 +7,8 @@ import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
 import { useModalServices } from '../../../services/ModalServices'
 import { ModalView } from 'models/IModals';
+import MyBadge from 'components/UI/MyBadge';
+
 
 interface SignUpInteface {
   email: string,
@@ -36,7 +38,7 @@ const schema = yup.object().shape({
 const SignUp = () => {
 	const { openModalHandler } = useModalServices();
   const [errorText, setErrorText] = useState<string | null>(null);
-	const { control, register, handleSubmit, formState: { errors, isValid } } = useForm<SignUpInteface>({
+	const { control, handleSubmit, formState: { errors } } = useForm<SignUpInteface>({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
     defaultValues: {}
@@ -118,7 +120,7 @@ const SignUp = () => {
           />
         }
       />
-
+      { errorText &&<MyBadge text={errorText} classes='danger transparent'/> }
       
       <div className="actions_wrap center">
         <MyButton 

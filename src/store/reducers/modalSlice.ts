@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { ModalView, MODAL_VIEW_KEY } from "../../models/IModals";
+import { ModalView } from "../../models/IModals";
 
 const initialState = {
   modalView: null as ModalView | null,
