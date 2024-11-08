@@ -16,6 +16,7 @@ interface PurchaseFormInteface {
 
 const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
   const [ errorText, setErrorText ] = useState<string | null>(null);
+  const [ successUpdate, setSuccessUpdate ] = useState<boolean>(false);
 
   const { control, register, handleSubmit, formState: { errors, isValid }, reset } = useForm<PurchaseFormInteface>({
     mode: "onSubmit",
@@ -38,6 +39,12 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 		}
 		
 		addPortfolioItem(coin);
+		
+		setSuccessUpdate(true);
+		setTimeout(() => {
+			setSuccessUpdate(false)
+		}, 2000)
+
 		reset({ value: 0 }); 
   }
 
@@ -62,8 +69,9 @@ const PurchaseCoin: React.FC<Props> = ({coinUUID, coinName}) => {
 			/>
 			<div className="actions_wrap center">
 				<MyButton 
-					classes={`primary wide big uppercase`}
+					classes={`success wide uppercase`}
 					text='PURCHASE'
+					successUpdate={successUpdate}
 				/>
 			</div>
 		</form>

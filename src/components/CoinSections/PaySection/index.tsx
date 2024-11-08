@@ -3,7 +3,7 @@ import PurchaseCoin  from '../PayForms/purchase';
 import SaleCoin from '../PayForms/sale';
 import MyButton from '../../UI/MyButton';
 import { useGetPortfolioItem } from "../../../hooks/usePortfolio";
-import { setAmount } from 'services/CoinService';
+import { setAmount, setCurrency } from 'services/CoinService';
 import { ICoinDetail } from 'models/ICoinDetail';
 
 
@@ -23,10 +23,6 @@ const PaySection: React.FC<Props> = ({coin}) => {
 
 	useEffect(() => {
 		setValue(Number(PortfolioItem(coin.uuid)))
-		console.log(PortfolioItem(coin.uuid));
-		console.log(setAmount(value, coin.uuid));
-		
-		
 	}, [PortfolioItem(coin.uuid)])
 	
 	
@@ -49,8 +45,13 @@ const PaySection: React.FC<Props> = ({coin}) => {
 	return (
 		<section className={`panel_section`}>
 			<div className="header">
+				<div>Your amount: {value}</div>
+				<div>{setAmount(value, coin.price)}</div>
+				
+			</div>
+			<div className="content">
 				<div className="actions_wrap no_space group_buttons">
-				{payFormValues.map((form) => (
+					{payFormValues.map((form) => (
 						<MyButton
 							key={form}
 							classes={`button primary small ${activeForm === form ? 'active' : 'border'}`}
@@ -61,8 +62,6 @@ const PaySection: React.FC<Props> = ({coin}) => {
 				</div>
 			</div>
 			<div className={`content`}>
-				<div>{value}</div>
-				<div>{setAmount(value, coin.uuid)}</div>
 				{currentForm}
 			</div>
 		</section>
