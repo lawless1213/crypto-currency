@@ -1,5 +1,5 @@
 // context/PortfolioContext.tsx
-import React, { createContext, useEffect, useMemo, useState, FC, ReactNode } from "react";
+import React, { createContext, useEffect, useState, FC, ReactNode } from "react";
 import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { IUserCoin, IPortfolio } from "../../models/IUser";
@@ -111,7 +111,7 @@ export const PortfolioProvider: FC<PortfolioProviderProps> = ({ children }) => {
 		return targetCoin;
 	}
 
-  const value = useMemo(() => ({ portfolio, addPortfolioItem, salePortfolioItem, getPortfolioItem }), [portfolio]);
+  const value = { portfolio, addPortfolioItem, salePortfolioItem, getPortfolioItem };
 
   return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
 };
