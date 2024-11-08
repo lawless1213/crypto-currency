@@ -83,15 +83,6 @@ export const CoinAPI = createApi({
 	})
 })
 
-export const isIncrementalChange = (coin: ICoin): boolean => {
-	return coin.change.charAt(0) !== '-';
-};
-
-export const setCurrency = (value: string | number): string => {
-	let res = '$' + Number(value).toLocaleString();
-	return res;
-}
-
-export const setAmount = (value: string | number, price: string | number): string =>  {
-	return setCurrency(Number(value ?? 0) * Number(price));
-}
+export const isIncrementalChange = (coin: ICoin): boolean => coin.change.charAt(0) !== '-';
+export const setCurrency = (value: string | number, currency?: string): string => (currency ? currency : '$') + ' ' + Number(value).toLocaleString();
+export const setAmount = (value: string | number, price: string | number): string => setCurrency(Number(value ?? 0) * Number(price));
