@@ -10,6 +10,7 @@ const Aside = () => {
 	const items = menu;
 	let { asideMode } = useAppSelector(state => state.SettingsReducer);
 	
+	
 	return (
 		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section desktop_only`}>
 			<div className="header">
