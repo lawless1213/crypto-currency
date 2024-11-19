@@ -2,6 +2,7 @@ import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import MyButton from '../../UI/MyButton';
 import MyInput from '../../UI/FormComponents/MyInput';
+import { useModalServices } from '../../../services/ModalServices'
 
 import { getAuth, signInWithEmailAndPassword, AuthErrorCodes } from "firebase/auth";
 import { useState } from 'react';
@@ -11,8 +12,8 @@ import { LoginInteface }  from '../../../models/IAuth';
 
 
 const Login = () => {
+	const { closeModalHandler } = useModalServices();
   const [errorText, setErrorText] = useState<string | null>(null);
-
   const { control, handleSubmit, formState: { errors } } = useForm<LoginInteface>({
     mode: "onSubmit",
     resolver: yupResolver(schema),
@@ -24,7 +25,7 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, data.email, data.password)
 			.then(({user}) => {
-				
+        closeModalHandler();
 			})
 			.catch((error) => {
 				const errorCode = error.code;

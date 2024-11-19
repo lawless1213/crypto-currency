@@ -1,15 +1,24 @@
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/redux';
+import { toggleAsideMode } from '../../store/reducers/settingsSlice';
 import { AsideModes } from '../../models/IAside';
 import { menu } from '../../data/asideMenu';
 import MyLogo from '../UI/MyLogo/MyLogo';
+import MyButton from '../UI/MyButton';
+import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
+
 
 import s from './Aside.module.scss'
 
 const Aside = () => {
+	const dispatch = useDispatch();
 	const items = menu;
+
 	let { asideMode } = useAppSelector(state => state.SettingsReducer);
-	
+	const toggleAsideHandler = () => {
+    dispatch(toggleAsideMode());
+  };
 	
 	return (
 		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section desktop_only`}>
@@ -37,6 +46,7 @@ const Aside = () => {
 							</NavLink>	
 						)
 					}
+					<MyButton onClick={toggleAsideHandler} classes={`${s.Item} button primary big border`} icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
 				</div>
 			</div>
 		</aside>

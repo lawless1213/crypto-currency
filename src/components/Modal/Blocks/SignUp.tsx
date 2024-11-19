@@ -8,36 +8,13 @@ import MyInput from '../../UI/FormComponents/MyInput';
 import { useModalServices } from '../../../services/ModalServices'
 import { ModalView } from 'models/IModals';
 import MyBadge from 'components/UI/MyBadge';
-
-
-interface SignUpInteface {
-  email: string,
-  password: string,
-  retypePassword: string,
-}
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required('Email is required field')
-    .email(),
-  password: yup
-    .string()
-    .required('Password is required field')
-    .min(6, 'Password min 6 symbols')
-    .max(20, 'Password max 20 symbols'),
-  retypePassword: yup
-    .string()
-    .required('Password is required field')
-    .min(6, 'Password min 6 symbols')
-    .max(20, 'Password max 20 symbols')
-    .oneOf([yup.ref('password')], 'Your passwords do not match.')
-
-})
+import { schemaSignUp as schema} from "services/AuthService";
+import { SignUpInteface }  from '../../../models/IAuth';
 
 const SignUp = () => {
 	const { openModalHandler } = useModalServices();
   const [errorText, setErrorText] = useState<string | null>(null);
+  
 	const { control, handleSubmit, formState: { errors } } = useForm<SignUpInteface>({
     mode: 'onSubmit',
     resolver: yupResolver(schema),

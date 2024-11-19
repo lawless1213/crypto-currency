@@ -13,7 +13,7 @@ interface IParams {
 }
 
 const Params: IParams = {
-	title: 'Crypto',
+	title: 'crypto currency',
 	logo: logo,
 	coinsSections: {
 		sortedByTitle: {

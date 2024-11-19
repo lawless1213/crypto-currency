@@ -1,19 +1,18 @@
 import { useAuth } from "store/context/AuthContext";
 
+import { usePortfolioData } from "../../hooks/usePortfolio";
+import CoinsList from "../../components/CoinsList/CoinsList";
+import { TableTypes } from "../../data/coins"
+
 const Profile = () => {
 	const { currentUser } = useAuth();
+	const portfolio = usePortfolioData();
+
 
 	return (
-		<section className={`panel_section middle_section`}>
-			<div className="header">
-				<div className="section_title t-h2">Profile</div>
-			</div>
-			<div className="content">
-				<div>
-					<h1>Welcome, {currentUser?.email || "Guest"}</h1>
-				</div>
-			</div>
-		</section>
+		<>
+			<CoinsList title='Portfolio' type={TableTypes.COIN_PORTFOLIO} requiredCoins={portfolio}/>
+		</>
 	)
 } 
 

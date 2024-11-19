@@ -18,7 +18,7 @@ const MyLogo: React.FC<Props> = ({compact, isLink, size}: Props) => {
 			<div className={`logo_image ${s.Image}`}>
 				<img src={Params.logo} alt="" />
 			</div>
-			{!compact && <span className={`${s.Caption} logo_caption t-h2`}>{Params.title}</span>}
+			{!compact && <span className={`${s.Caption} logo_caption t-lead`}>{Params.title}</span>}
 		</NavLink>
 	)
 }
