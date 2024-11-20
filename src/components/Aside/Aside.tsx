@@ -23,13 +23,13 @@ const Aside = () => {
   };
 	
 	return (
-		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section desktop_only`}>
+		<aside className={`${s.Aside} ${s[asideMode] ?? ''} aside panel_section small_padding desktop_only`}>
 			<div className="header">
 				<MyLogo compact={asideMode === AsideModes.SMALL_MODE}/>
 			</div>
 			<div className="content">
 				<div className={s.Menu}>
-					<MyButton onClick={() => openModalHandler(ModalView.SIGNUP)} classes={`${s.Item} button success big border jc_left`} icon={icons.WALLET} text={asideMode === AsideModes.FULL_MODE ? 'Deposit' : undefined}/>
+					<MyButton onClick={() => openModalHandler(ModalView.DEPOSIT)} classes={`${s.Item} button success big border jc_left`} icon={icons.WALLET} text={asideMode === AsideModes.FULL_MODE ? 'Deposit' : undefined}/>
 					{
 						items.map( item => 
 							<NavLink 

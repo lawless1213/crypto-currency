@@ -8,19 +8,16 @@
 
 * {
 	&::-webkit-scrollbar {
-    width: 6px;
+    width: 2px;
     height: 100%;
     background-color: var(--g-color-background);
-    border-radius: 6px;
   }
 
   &::-webkit-scrollbar-track {
     background-color: var(--g-color-background);
-    border-radius: 6px;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: var(--g-color-primary-600);
-    border-radius: 6px;
   }
 }
