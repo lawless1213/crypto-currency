@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment'
 import MyButton from '../MyButton';
-import { LuEye, LuEyeOff } from "react-icons/lu";
+import { icons } from 'components/Icons';
 
 interface Props {
 	name: string,
@@ -48,7 +48,7 @@ const MyInput = React.forwardRef<HTMLInputElement, Props>(({ name, type, require
 						<MyButton 
 							asLink={true}
 							classes={error ? 'danger' : success ? 'success' : 'info'}
-							icon={showPassword ? <LuEyeOff /> : <LuEye />}
+							icon={ showPassword ? icons.EYE_ON : icons.EYE_OFF }
 							type='button'
 							onClick={handleClickShowPassword}
 						/>

@@ -1,6 +1,7 @@
 import MyBadge from "../UI/MyBadge";
 import s from './BadgesGrid.module.scss';
-import { FaPlus } from "react-icons/fa6";
+import { icons } from 'components/Icons';
+
 
 const BadgesGrid = () => {
 	const colorStyle = ['', 'primary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
@@ -19,7 +20,7 @@ const BadgesGrid = () => {
 								{
 									types.map(type => 
 										<div className={s.Block}>
-											<MyBadge text={style ? style : 'default'} icon={<FaPlus/>} classes={`${style} ${type}`}/>
+											<MyBadge text={style ? style : 'default'} icon={ icons.PLUS } classes={`${style} ${type}`}/>
 										</div>
 									)
 								}

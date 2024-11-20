@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { toggleTheme } from '../../store/reducers/settingsSlice';
 import { useAppSelector } from '../../hooks/redux';
-import { MdLightMode, MdDarkMode  } from "react-icons/md";
+import { icons } from 'components/Icons';
+
 import s from './ThemeToggler.module.scss';
 
 interface ThemeTogglerProps {
@@ -20,7 +21,7 @@ const ThemeToggler = ({width}: ThemeTogglerProps) => {
 	return(
 		<button className={`${s.TogglerTheme} ${themeMode === 'dark' ? s.DarkMode : ''}`} style={style} onClick={toggleThemeHandler}>
 			<div className ={s.Indicator}>
-			{ themeMode === 'dark' ? <MdDarkMode className={s.Icon} /> : <MdLightMode className={s.Icon} />}
+			{ themeMode === 'dark' ? icons.THEME_DARK : icons.THEME_LIGHT }
 			</div>
 		</button>
 	)

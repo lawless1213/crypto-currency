@@ -6,7 +6,7 @@ import { setCurrency, setAmount, isIncrementalChange } from "../../services/Coin
 
 import RowCell from "../UI/TableComponents/RowCell";
 import MyBadge from "../UI/MyBadge";
-import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import { icons } from 'components/Icons';
 import { TableBody, TableRow } from "@mui/material";
 
 
@@ -32,17 +32,11 @@ const CoinsListTableBody: React.FC<Props> = ({tableColumns, coins, portfolio}: P
 						text={`${Math.abs(Number(coin.change))}%`}
 						icon={
 							Math.abs(Number(coin.change)) === 0
-								? null
-								: isIncrementalChange(coin)
-								? <FaArrowTrendUp />
-								: <FaArrowTrendDown />
+								? null : isIncrementalChange(coin) ? icons.TRAND_UP : icons.TRAND_DOWN
 						}
 						classes={
 							Math.abs(Number(coin.change)) === 0
-								? 'border'
-								: isIncrementalChange(coin)
-								? 'success border'
-								: 'danger border'
+								? 'border' : isIncrementalChange(coin) ? 'success border' : 'danger border'
 						}
 					/>
 				</RowCell>;

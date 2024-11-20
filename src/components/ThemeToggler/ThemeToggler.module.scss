@@ -26,11 +26,7 @@
 		border-radius: 50%;
 		box-shadow: 0 var(--toggler-padding) calc(var(--toggler-padding) * 4) rgba(0,0,0, .2);
 		transition: transform .3s ease;
-
-		.Icon{
-			font-size: calc(var(--toggler-width)/4);
-			color: var(--g-color-light);
-		}
+		color: var(--g-color-light);
 	}
 
 	&.DarkMode {

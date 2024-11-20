@@ -1,7 +1,10 @@
 export enum ModalView {
-	SIGNIN = 'signin',
-	SIGNUP = 'signup',
-	SUCCESS = 'success'
+	SIGNIN = 'SIGNIN',
+	SIGNUP = 'SIGNUP',
+
+	DEPOSIT = "DEPOSIT",
+
+	SUCCESS = 'SUCCESS'
 }
 
 export const MODAL_VIEW_KEY: string = 'modalView';

@@ -1,17 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/redux';
+import { useModalServices } from '../../services/ModalServices'
+import { ModalView } from 'models/IModals';
 import { toggleAsideMode } from '../../store/reducers/settingsSlice';
 import { AsideModes } from '../../models/IAside';
 import { menu } from '../../data/asideMenu';
 import MyLogo from '../UI/MyLogo/MyLogo';
 import MyButton from '../UI/MyButton';
-import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
-
+import { icons } from 'components/Icons';
 
 import s from './Aside.module.scss'
 
 const Aside = () => {
+	const { openModalHandler } = useModalServices();
 	const dispatch = useDispatch();
 	const items = menu;
 
@@ -27,6 +29,7 @@ const Aside = () => {
 			</div>
 			<div className="content">
 				<div className={s.Menu}>
+					<MyButton onClick={() => openModalHandler(ModalView.SIGNUP)} classes={`${s.Item} button success big border jc_left`} icon={icons.WALLET} text={asideMode === AsideModes.FULL_MODE ? 'Deposit' : undefined}/>
 					{
 						items.map( item => 
 							<NavLink 
@@ -39,14 +42,14 @@ const Aside = () => {
 								}	 
 								to={item.url} key={item.title}
 							>
-								<div className={`${s.Icon} icon`}><item.icon /></div>
+								<div className={`${s.Icon} icon`}>{ item.icon }</div>
 								{
-									asideMode === AsideModes.FULL_MODE && <div className={`${s.Caption} t-body`}>{item.title}</div>
+									asideMode === AsideModes.FULL_MODE && <div className={`caption t-body`}>{item.title}</div>
 								}
 							</NavLink>	
 						)
 					}
-					<MyButton onClick={toggleAsideHandler} classes={`${s.Item} button primary big border`} icon={asideMode === AsideModes.FULL_MODE  ? <RiMenuFoldLine /> : <RiMenuUnfoldLine/>}/>
+					<MyButton onClick={toggleAsideHandler} classes={`${s.Item} button primary big border`} icon={asideMode === AsideModes.FULL_MODE  ? icons.MENU_HIDE : icons.MENU_OPEN}/>
 				</div>
 			</div>
 		</aside>

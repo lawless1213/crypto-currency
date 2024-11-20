@@ -23,7 +23,7 @@ const HeaderNav = () => {
 							}	 
 								to={item.url} key={item.title}
 							>
-								<div className={`${s.Icon} icon`}><item.icon /></div>
+								<div className={`${s.Icon} icon`}>{ item.icon }</div>
 							</NavLink>	
 						)
 					}

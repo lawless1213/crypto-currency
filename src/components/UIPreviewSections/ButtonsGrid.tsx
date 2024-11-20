@@ -1,6 +1,6 @@
 import MyButton from "../UI/MyButton";
 import s from './ButtonsGrid.module.scss';
-import { FaPlus } from "react-icons/fa6";
+import { icons } from 'components/Icons';
 
 const ButtonsGrid = () => {
 	const colorStyle = ['', 'primary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
@@ -24,9 +24,9 @@ const ButtonsGrid = () => {
 											{
 												sizes.map(size => 
 													<div className={s.formBlock}>
-														<MyButton icon={<FaPlus/>} classes={`compact ${style} ${type} ${size}`}/>
+														<MyButton icon={ icons.PLUS } classes={`compact ${style} ${type} ${size}`}/>
 														<MyButton text={style ? style : 'default'} classes={`rounded ${style} ${type} ${size}`}/>
-														<MyButton text={style ? style : 'default'} icon={<FaPlus/>} classes={`${style} ${type} ${size}`}/>
+														<MyButton text={style ? style : 'default'} icon={ icons.PLUS } classes={`${style} ${type} ${size}`}/>
 													</div>											
 												)
 											}

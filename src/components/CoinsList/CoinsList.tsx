@@ -17,7 +17,7 @@ import {
   Table,
   Paper,
 } from "@mui/material";
-import { FaSortAmountDown } from "react-icons/fa";
+import { icons } from 'components/Icons';
 import MyPagination from "../UI/MyPagination";
 import MyTabs from "../UI/MyTabs";
 import HeadCell from "../UI/TableComponents/HeadCell";
@@ -87,7 +87,7 @@ const CoinsList: React.FC<Props> = ({type, title,uuids, requiredCoins}: Props) =
 			key={item}
 			item={item} 
 			classes={	`link primary small ${tableParams.defaultValues.order === item ? ' active' : ''}` }
-			icon={	tableParams.defaultValues.order === item ? <i className="icon"><FaSortAmountDown /></i> : undefined }
+			icon={	tableParams.defaultValues.order === item ? <i className="icon">{icons.SORT}</i> : undefined }
 			onClick={() => orderHandler(item)}
 		/> 
 		: 

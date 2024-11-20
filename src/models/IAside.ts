@@ -1,4 +1,4 @@
-import { IconType } from "react-icons";
+import { ReactElement } from "react";
 
 export enum AsideModes {
 	FULL_MODE = 'full',
@@ -8,5 +8,5 @@ export enum AsideModes {
 export interface IAsideMenuItem {
 	title: string,
 	url: string,
-	icon: IconType,
+	icon: ReactElement,
 }

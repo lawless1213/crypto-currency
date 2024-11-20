@@ -1,5 +1,5 @@
 import usePagination from '@mui/material/usePagination';
-import { MdKeyboardDoubleArrowLeft, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { icons } from 'components/Icons';
 
 type ChangeHandler = ( value: number) => void;
 
@@ -13,10 +13,10 @@ interface Props {
 
 const MyPagination: React.FC<Props> = ({countPages, onchange, page, classes, classesBtn}) => {
 	const ArrowComponents = {
-		first:  <MdKeyboardDoubleArrowLeft/>,
-		previous:  <MdKeyboardArrowLeft/>,
-		next: <MdKeyboardArrowRight/>,
-		last:  <MdKeyboardDoubleArrowRight/>,
+		first:  icons.ARROW_LEFT_DOUBLE,
+		previous:  icons.ARROW_LEFT,
+		next: icons.ARROW_RIGHT,
+		last:  icons.ARROW_RIGHT_DOUBLE,
 	}
 
 	const classNames = `pagination ${classes}`;

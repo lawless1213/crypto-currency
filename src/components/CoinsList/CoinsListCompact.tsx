@@ -4,6 +4,7 @@ import { ICoin } from "../../models/ICoin";
 import { setCurrency, isIncrementalChange } from "../../services/CoinService";
 import { useDelayedData } from "../../hooks/delay";
 import Params from "../../data/params";
+import { icons } from 'components/Icons';
 
 import {
   TableBody,
@@ -12,7 +13,6 @@ import {
   Table,
   Paper,
 } from "@mui/material";
-import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import MyBadge from "../UI/MyBadge";
 import RowCell from "../UI/TableComponents/RowCell";
 
@@ -51,7 +51,7 @@ const CoinsListCompact: React.FC<Props> = ({sortType}) => {
 				<span>{setCurrency(coin.price)}</span>
 				<MyBadge 
 					text={`${Math.abs(Number(coin.change))}%`} 
-					icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? <FaArrowTrendUp/> : <FaArrowTrendDown/>)} 
+					icon={Math.abs(Number(coin.change)) === 0 ? null : (isIncrementalChange(coin) ? icons.TRAND_UP : icons.TRAND_DOWN)} 
 					classes={Math.abs(Number(coin.change)) === 0 ? 'border' : (isIncrementalChange(coin) ? 'success border' : 'danger border')}
 				/>
 			</RowCell>

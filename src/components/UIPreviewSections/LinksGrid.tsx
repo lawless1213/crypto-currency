@@ -1,5 +1,5 @@
 import s from './LinksGrid.module.scss';
-import { FaPlus } from "react-icons/fa6";
+import { icons } from 'components/Icons';
 
 const LinksGrid = () => {
 	const colorStyle = ['', 'primary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
@@ -18,7 +18,7 @@ const LinksGrid = () => {
 								{
 									sizes.map(size =>
 										<div className={`link ${style} ${size}`}>
-											<i className="icon"><FaPlus/></i>
+											<i className="icon">{ icons.PLUS }</i>
 											<span className="caption">{style ? style : 'default'}</span>
 										</div>
 									)

@@ -1,28 +1,26 @@
-import { MdSpaceDashboard } from "react-icons/md";
-import { TbAppsFilled } from "react-icons/tb";
-import { FaCoins, FaChartPie } from "react-icons/fa";
 
+import { icons } from "components/Icons";
 import { IAsideMenuItem } from "../models/IAside";
 
 export const menu: IAsideMenuItem[] = [
 	{
 		title: 'Main',
 		url: '/',
-		icon: MdSpaceDashboard
+		icon: icons.APPS
 	},
 	{
 		title: 'Market',
 		url: '/market',
-		icon: FaChartPie 
+		icon: icons.CHART_PIE
 	},
 	{
 		title: 'All Markets',
 		url: '/allmarkets',
-		icon: FaCoins
+		icon: icons.COINS
 	},
 	{
 		title: 'UI Components',
 		url: '/ui-components',
-		icon: TbAppsFilled
+		icon: icons.APPS_ADD
 	}
 ]
